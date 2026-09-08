@@ -18,54 +18,42 @@ type Line = {
   text: string;
 };
 
+function openingLines(market: MarketSnapshot): Line[] {
+  return [
+    { kind: "sys", text: "OIL RIG v69  ·  phosphor edition" },
+    { kind: "sys", text: "tape locked to Exxon." },
+    ...market.rows.map((row) => ({
+      kind: "sys" as const,
+      text: `  ${row.symbol.padEnd(5)} ${row.changePercent >= 0 ? "ok" : "cope"}`,
+    })),
+    {
+      kind: "sys",
+      text:
+        market.source === "live"
+          ? "peg locked. you are talking to live XOM."
+          : "yahoo blinked. using last known sludge.",
+    },
+    { kind: "sys", text: "" },
+    { kind: "cmd", text: "oil" },
+    { kind: "out", text: renderQuote(market) },
+    {
+      kind: "sys",
+      text: "type help. ape 69. sell 1000. poke the tape.",
+    },
+  ];
+}
+
 export function OilTerminal({
   initialMarket,
 }: {
   initialMarket: MarketSnapshot;
 }) {
   const [market, setMarket] = useState(initialMarket);
-  const [lines, setLines] = useState<Line[]>([]);
+  const [lines, setLines] = useState<Line[]>(() => openingLines(initialMarket));
   const [input, setInput] = useState("");
-  const [booted, setBooted] = useState(false);
   const router = useRouter();
   const scroller = useRef<HTMLDivElement>(null);
   const field = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const boot = [
-      "OIL RIG v69  ·  phosphor edition",
-      "spudding yahoo tape...",
-      ...initialMarket.rows.map(
-        (row) =>
-          `  ${row.symbol.padEnd(5)} ${row.changePercent >= 0 ? "ok" : "cope"}`,
-      ),
-      initialMarket.source === "live"
-        ? "peg locked. you are talking to live oil stocks."
-        : "yahoo blinked. using last known sludge.",
-      "",
-    ];
-    let i = 0;
-    const timer = window.setInterval(() => {
-      const next = boot[i];
-      i += 1;
-      if (next === undefined) {
-        window.clearInterval(timer);
-        setLines((current) => [
-          ...current,
-          { kind: "cmd", text: "oil" },
-          { kind: "out", text: renderQuote(initialMarket) },
-          {
-            kind: "sys",
-            text: "type help. ape 69. sell 1000. poke the tape.",
-          },
-        ]);
-        setBooted(true);
-        return;
-      }
-      setLines((current) => [...current, { kind: "sys", text: next }]);
-    }, 90);
-    return () => window.clearInterval(timer);
-  }, [initialMarket]);
 
   useEffect(() => {
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight });
@@ -156,12 +144,12 @@ export function OilTerminal({
 
   return (
     <div
-      className="crt relative flex min-h-full flex-1 flex-col bg-[#070604] text-[#f0b429]"
+      className="crt relative flex h-svh flex-col bg-[#070604] text-[#f0b429]"
       onClick={() => field.current?.focus()}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(rgba(18,16,8,0.12)_50%,transparent_50%)] bg-size-[100%_4px]" />
-      <header className="relative z-20 flex items-center justify-between border-b border-[#f0b429]/25 px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase">
-        <span>oil.exe · paired to oil stocks</span>
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(rgba(18,16,8,0.12)_50%,transparent_50%)] bg-size-[100%_4px]" />
+      <header className="relative z-10 flex shrink-0 items-center justify-between border-b border-[#f0b429]/25 px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase">
+        <span>oil.exe · paired to exxon</span>
         <span className="flex gap-4">
           <Link href="/" className="hover:text-[#ffe08a]">
             /field
@@ -173,17 +161,17 @@ export function OilTerminal({
       </header>
       <div
         ref={scroller}
-        className="relative z-20 min-h-0 flex-1 overflow-auto px-4 py-4 font-mono text-[13px] leading-6 sm:text-[14px]"
+        className="relative z-10 min-h-0 flex-1 overflow-auto px-4 py-4 font-mono text-[13px] leading-6 sm:text-[14px]"
       >
         {lines.map((line, index) => (
           <pre
-            key={`${line.kind}-${index}-${line.text.slice(0, 12)}`}
+            key={`${line.kind}-${index}-${line.text.slice(0, 24)}`}
             className={
               line.kind === "cmd"
                 ? "whitespace-pre-wrap text-[#ffe08a]"
                 : line.kind === "sys"
                   ? "whitespace-pre-wrap text-[#c48920]"
-                  : "whitespace-pre-wrap"
+                  : "whitespace-pre-wrap text-[#f0b429]"
             }
           >
             {line.kind === "cmd" ? `${prompt} ${line.text}` : line.text}
@@ -193,9 +181,6 @@ export function OilTerminal({
           className="mt-2 flex items-center gap-2"
           onSubmit={(event) => {
             event.preventDefault();
-            if (!booted) {
-              return;
-            }
             const value = input;
             setInput("");
             void run(value);
@@ -209,7 +194,6 @@ export function OilTerminal({
             autoFocus
             autoComplete="off"
             spellCheck={false}
-            disabled={!booted}
             className="min-w-0 flex-1 border-0 bg-transparent text-[#f0b429] caret-[#ffe08a] outline-none"
             aria-label="terminal command"
           />
