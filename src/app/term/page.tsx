@@ -1,9 +1,5 @@
-import { OilTerminal } from "@/components/oil-terminal";
-import { loadMarketSnapshot } from "@/lib/yahoo";
+import { redirect } from "next/navigation";
 
-export const dynamic = "force-dynamic";
-
-export default async function TermPage() {
-  const market = await loadMarketSnapshot();
-  return <OilTerminal initialMarket={market} />;
+export default function TermPage() {
+  redirect("/");
 }

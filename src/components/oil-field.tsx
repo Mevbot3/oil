@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { PAIR, TOKEN, type MarketSnapshot } from "@/lib/basket";
 import {
@@ -36,13 +35,11 @@ export function OilField({
   initialMarket: MarketSnapshot;
 }) {
   const [market, setMarket] = useState(initialMarket);
-  const [refreshing, setRefreshing] = useState(false);
 
   const pair = market.rows[0];
   const up = market.changePercent >= 0;
 
   const poke = useCallback(async () => {
-    setRefreshing(true);
     try {
       const response = await fetch("/api/market", { cache: "no-store" });
       const payload = (await response.json()) as MarketSnapshot & {
@@ -52,8 +49,8 @@ export function OilField({
         throw new Error(payload.error ?? "tape silent");
       }
       setMarket(payload);
-    } finally {
-      setRefreshing(false);
+    } catch {
+      // keep last print on the page
     }
   }, []);
 
@@ -88,35 +85,13 @@ export function OilField({
 
       <div className="hazard-bar relative z-10 h-2" />
 
-      <header className="relative z-10 flex items-center justify-between gap-4 px-4 py-4 sm:px-8">
+      <header className="relative z-10 flex items-center px-4 py-4 sm:px-8">
         <div className="flex items-center gap-2">
           <BarrelMark className="size-9" />
           <span className="font-heading text-lg tracking-[0.22em] text-[#ffe08a]">
             OIL
           </span>
         </div>
-        <nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 font-mono text-[11px] tracking-[0.22em] uppercase text-[#f0d7a0]/70">
-          <a href="#pair" className="text-[#f0b429]">
-            pair
-          </a>
-          <a href="#window" className="hover:text-[#fff1c2]">
-            window
-          </a>
-          <Link href="/term" className="hover:text-[#fff1c2]">
-            shell
-          </Link>
-          <Link href="/desk" className="hover:text-[#fff1c2]">
-            desk
-          </Link>
-          <button
-            type="button"
-            onClick={() => void poke()}
-            disabled={refreshing}
-            className="hover:text-[#fff1c2] disabled:opacity-50"
-          >
-            {refreshing ? "reading" : "refresh"}
-          </button>
-        </nav>
       </header>
 
       <div className="relative z-10 overflow-hidden border-y border-[#f0b429]/20 bg-black/40">

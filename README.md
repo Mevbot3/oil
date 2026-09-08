@@ -27,9 +27,7 @@ npm run share
 
 That prints an `https://*.trycloudflare.com` URL. Anyone with the link can open the site. The link dies when you stop the tunnel or this session.
 
-- `/` — the lot: hero, live pair, window, prints
-- `/term` — CRT shell
-- `/desk` — chrome meme desk
+One page. Live USO tape. Paper window.
 
 ```bash
 npm run oil
