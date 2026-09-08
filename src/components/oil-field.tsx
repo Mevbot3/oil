@@ -14,7 +14,7 @@ import { BarrelMark } from "@/components/logo";
 const STEPS = [
   {
     kicker: "01",
-    title: "Daddy prints",
+    title: "DRILL",
     body: "USO puts a number on the tape. That is the only input. No wheat. No gold. No fifty-four names.",
   },
   {
