@@ -8,7 +8,6 @@ import {
   formatTime,
   formatUsd,
 } from "@/lib/format";
-import { FieldTicket } from "@/components/field-ticket";
 import { BarrelMark } from "@/components/logo";
 
 const STEPS = [
@@ -118,14 +117,8 @@ export function OilField({
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a
-                href="#window"
-                className="bg-[#f0b429] px-5 py-2.5 font-heading tracking-wide text-[#1a1208]"
-              >
-                DRILL $OIL
-              </a>
-              <a
                 href="#pair"
-                className="border border-[#f0b429]/50 px-5 py-2.5 font-heading tracking-wide text-[#f0b429]"
+                className="bg-[#f0b429] px-5 py-2.5 font-heading tracking-wide text-[#1a1208]"
               >
                 SEE THE PAIR
               </a>
@@ -236,10 +229,7 @@ export function OilField({
           </div>
         </section>
 
-        <section
-          id="window"
-          className="scroll-mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start"
-        >
+        <section id="window" className="scroll-mt-8 space-y-6">
           <div>
             <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
               blotter
@@ -247,19 +237,17 @@ export function OilField({
             <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
               Window
             </h2>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#f0d7a0]/70">
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
               Their lot opens a new coin every minute. This lot has one window
-              and one barrel. Stamp a paper fill against the live peg.
+              and one barrel. The peg is the product. No paper fill on this
+              floor.
             </p>
-            <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
-              <Mini label="rail" value="40%" />
-              <Mini label="patch" value="25%" />
-              <Mini label="yard" value="20%" />
-              <Mini label="keepers" value="15%" />
-            </div>
           </div>
-          <div className="relative z-20 border border-[#f0b429]/40 bg-[#120e08]/90 p-5">
-            <FieldTicket price={market.price} />
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <Mini label="rail" value="40%" />
+            <Mini label="patch" value="25%" />
+            <Mini label="yard" value="20%" />
+            <Mini label="keepers" value="15%" />
           </div>
         </section>
 
