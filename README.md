@@ -17,7 +17,7 @@ npm run dev
 
 Open [http://127.0.0.1:43147](http://127.0.0.1:43147).
 
-- `/` — the pair machine
+- `/` — the lot: hero, live pair, window, prints
 - `/term` — CRT shell
 - `/desk` — chrome meme desk
 

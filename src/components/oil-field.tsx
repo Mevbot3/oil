@@ -3,16 +3,31 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { PAIR, TOKEN, type MarketSnapshot } from "@/lib/basket";
-import { formatPercent, formatUsd } from "@/lib/format";
+import {
+  formatCompactUsd,
+  formatPercent,
+  formatTime,
+  formatUsd,
+} from "@/lib/format";
 import { FieldTicket } from "@/components/field-ticket";
 import { BarrelMark } from "@/components/logo";
 
-const SHOUTS = [
-  "xom sneezed. $OIL caught a cold.",
-  "this is the most serious meme ever. it is called oil.",
-  "if daddy pumps we pump. that's not a bit. that's the pair.",
-  "wen refinery. wen dividend. wen barrel in the group chat.",
-  "you cannot fade Exxon. you can only become oil.",
+const STEPS = [
+  {
+    kicker: "01",
+    title: "Daddy prints",
+    body: "Exxon puts a number on the tape. That is the only input. No wheat. No gold. No fifty-four names.",
+  },
+  {
+    kicker: "02",
+    title: "We divide",
+    body: `$OIL is that print over ${TOKEN.divisor}. Same move, smaller sticker. Locked. No virtual curve.`,
+  },
+  {
+    kicker: "03",
+    title: "You ape paper",
+    body: "The window stamps a blotter fill. No wallet, no pool, no migrate. Just the joke with a live number.",
+  },
 ];
 
 export function OilField({
@@ -22,7 +37,6 @@ export function OilField({
 }) {
   const [market, setMarket] = useState(initialMarket);
   const [refreshing, setRefreshing] = useState(false);
-  const [shout, setShout] = useState(0);
 
   const pair = market.rows[0];
   const up = market.changePercent >= 0;
@@ -44,51 +58,55 @@ export function OilField({
   }, []);
 
   useEffect(() => {
-    const tape = window.setInterval(() => {
+    const timer = window.setInterval(() => {
       void poke();
     }, 60_000);
-    const chat = window.setInterval(() => {
-      setShout((index) => (index + 1) % SHOUTS.length);
-    }, 3800);
-    return () => {
-      window.clearInterval(tape);
-      window.clearInterval(chat);
-    };
+    return () => window.clearInterval(timer);
   }, [poke]);
+
+  const tape = [
+    `${TOKEN.symbol} ${formatUsd(market.price, true)}`,
+    `${formatPercent(market.changePercent)} today`,
+    `${PAIR.symbol} ${pair ? formatUsd(pair.price) : "—"}`,
+    `formula ${PAIR.symbol} / ${TOKEN.divisor}`,
+    market.source === "live" ? "tape open" : "tape held",
+    "one listing · paper only",
+    "no migrate · no curve",
+  ];
 
   return (
     <div className="field-skin flex min-h-svh flex-col text-[#f0d7a0]">
       <div className="field-grain pointer-events-none absolute inset-0 z-0" />
-      <div className="field-watermark" aria-hidden="true">
-        OIL OIL OIL OIL OIL OIL OIL OIL
+      <div className="field-watermark pointer-events-none" aria-hidden>
+        OIL OIL OIL OIL
       </div>
       <div className="oil-drip left-[8%]" />
       <div className="oil-drip oil-drip-2" />
       <div className="oil-drip oil-drip-3" />
-      <div className="oil-blob left-[12%] top-[20%] size-56 bg-[#f0b429]/15" />
-      <div className="oil-blob right-[8%] bottom-[18%] size-72 bg-[#3cb87a]/10" />
+      <div className="oil-blob left-[10%] top-[12%] size-64 bg-[#f0b429]/12" />
+      <div className="oil-blob right-[6%] top-[40%] size-72 bg-[#3cb87a]/8" />
 
-      <div className="relative z-10 overflow-hidden bg-[#f0b429] text-[#1a1208]">
-        <div className="animate-marquee flex w-max gap-16 py-2 font-heading text-base tracking-[0.22em] uppercase">
-          <Tape market={market} />
-          <Tape market={market} />
-        </div>
-      </div>
+      <div className="hazard-bar relative z-10 h-2" />
 
-      <header className="relative z-10 flex items-center justify-between px-4 py-3 sm:px-6">
+      <header className="relative z-10 flex items-center justify-between gap-4 px-4 py-4 sm:px-8">
         <div className="flex items-center gap-2">
-          <BarrelMark className="size-10" />
-          <span className="font-heading text-xl tracking-[0.2em] text-[#ffe08a]">
-            {TOKEN.symbol}
+          <BarrelMark className="size-9" />
+          <span className="font-heading text-lg tracking-[0.22em] text-[#ffe08a]">
+            OIL
           </span>
         </div>
-        <nav className="flex items-center gap-4 font-heading text-sm tracking-wide text-[#f0d7a0]/80">
-          <span className="text-[#f0b429]">FLOOR</span>
+        <nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 font-mono text-[11px] tracking-[0.22em] uppercase text-[#f0d7a0]/70">
+          <a href="#pair" className="text-[#f0b429]">
+            pair
+          </a>
+          <a href="#window" className="hover:text-[#fff1c2]">
+            window
+          </a>
           <Link href="/term" className="hover:text-[#fff1c2]">
-            SHELL
+            shell
           </Link>
           <Link href="/desk" className="hover:text-[#fff1c2]">
-            DESK
+            desk
           </Link>
           <button
             type="button"
@@ -96,92 +114,322 @@ export function OilField({
             disabled={refreshing}
             className="hover:text-[#fff1c2] disabled:opacity-50"
           >
-            {refreshing ? "POKING…" : "POKE"}
+            {refreshing ? "reading" : "refresh"}
           </button>
         </nav>
       </header>
 
-      <main className="relative z-10 grid flex-1 lg:grid-cols-[1.05fr_0.95fr]">
-        <section className="relative overflow-hidden px-5 py-6 sm:px-8 lg:border-r lg:border-[#f0b429]/25">
-          <Sticker className="top-4 right-6 rotate-12" text="OILMAXXING" />
-          <Sticker className="top-28 right-3 -rotate-6 hidden sm:block" text="BASED CRUDE" />
-          <Sticker className="bottom-24 left-6 rotate-[-8deg] hidden lg:block" text="WEN RIG" />
-          <p className="font-heading text-sm tracking-[0.35em] text-[#f0b429]">
-            PAIRED TO EXXON · NOBODY ELSE
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <span className="rotate-[-3deg] bg-[#f0b429] px-2 py-0.5 font-heading text-sm tracking-wide text-[#1a1208]">
-              {up ? "EUPHORIA" : "COPIUM"}
-            </span>
-            <span className="rotate-[4deg] border border-[#f0b429] px-2 py-0.5 font-heading text-sm tracking-wide text-[#f0b429]">
-              {market.source === "live" ? "LIVE TAPE" : "CACHED SLUDGE"}
-            </span>
+      <div className="relative z-10 overflow-hidden border-y border-[#f0b429]/20 bg-black/40">
+        <div className="animate-marquee flex w-max gap-10 py-2 font-mono text-[11px] tracking-[0.18em] text-[#f0b429] uppercase">
+          {[...tape, ...tape].map((item, index) => (
+            <span key={`${item}-${index}`}>{item}</span>
+          ))}
+        </div>
+      </div>
+
+      <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-10 sm:px-8">
+        <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
+          <div className="flex flex-col justify-end">
+            <p className="font-mono text-[11px] tracking-[0.32em] text-[#f0b429] uppercase">
+              one market · one major
+            </p>
+            <h1 className="font-heading mt-3 text-5xl leading-[0.9] tracking-tight text-[#ffe08a] sm:text-7xl">
+              A meme paired to Exxon.
+            </h1>
+            <p className="font-catalog mt-5 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
+              Other lots launch a coin for every barrel, bushel, and bad idea.
+              This lot has one name. $OIL is Exxon&apos;s last print, divided by{" "}
+              {TOKEN.divisor}. If daddy pumps, we pump.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#window"
+                className="bg-[#f0b429] px-5 py-2.5 font-heading tracking-wide text-[#1a1208]"
+              >
+                DRILL $OIL
+              </a>
+              <a
+                href="#pair"
+                className="border border-[#f0b429]/50 px-5 py-2.5 font-heading tracking-wide text-[#f0b429]"
+              >
+                SEE THE PAIR
+              </a>
+            </div>
           </div>
-          <h1 className="oil-stamp font-heading mt-2 text-[32vw] leading-[0.75] tracking-tight text-[#ffe08a] lg:text-[10rem]">
-            OIL
-          </h1>
-          <p className="font-heading mt-4 max-w-lg text-3xl leading-none tracking-wide text-[#fff1c2] sm:text-4xl">
-            IF DADDY {PAIR.symbol} PUMPS, WE PUMP.
-          </p>
-          <p className="mt-4 max-w-md text-lg text-[#f0d7a0]/80">
-            {TOKEN.symbol} is {PAIR.symbol} divided by {TOKEN.divisor}. that is
-            not a bit. that is the whole whitepaper.
-          </p>
-          <p className="font-heading mt-8 text-sm tracking-wide text-[#f0b429]">
-            {SHOUTS[shout]}
-          </p>
-          <div className="mt-8 grid max-w-md grid-cols-3 gap-2">
-            <Mini label="pair" value={PAIR.symbol} />
-            <Mini label="supply" value="1B" />
-            <Mini label="tax" value="0%" />
-          </div>
-          <pre className="mt-6 max-w-md overflow-x-auto border border-[#f0b429]/30 bg-black/40 px-3 py-2 font-mono text-[11px] text-[#c8f08a]">
-            {`OIL = ${PAIR.symbol} / ${TOKEN.divisor}`}
-          </pre>
+          <FeaturedCard market={market} />
         </section>
 
-        <section className="flex flex-col gap-5 bg-black/30 px-5 py-6 sm:px-8">
-          <div className="grid grid-cols-2 gap-3">
-            <Quote
-              label={TOKEN.symbol}
-              value={formatUsd(market.price, true)}
-              change={formatPercent(market.changePercent)}
-              up={up}
-              huge
-            />
-            <Quote
-              label={`DADDY ${PAIR.symbol}`}
-              value={pair ? formatUsd(pair.price) : "—"}
-              change={pair ? formatPercent(pair.changePercent) : "—"}
-              up={pair ? pair.changePercent >= 0 : false}
-            />
+        <section className="grid grid-cols-2 gap-px overflow-hidden border border-[#f0b429]/20 bg-[#f0b429]/20 sm:grid-cols-3 lg:grid-cols-6">
+          <Stat label="peg" value={formatUsd(market.price, true)} />
+          <Stat
+            label="today"
+            value={formatPercent(market.changePercent)}
+            hot={up}
+          />
+          <Stat
+            label={PAIR.symbol}
+            value={pair ? formatUsd(pair.price) : "—"}
+          />
+          <Stat label="paper cap" value={formatCompactUsd(market.marketCap)} />
+          <Stat label="supply" value="1B OIL" />
+          <Stat
+            label="tape"
+            value={market.source === "live" ? "open" : "held"}
+            hot={market.source === "live"}
+          />
+        </section>
+
+        <section id="pair" className="scroll-mt-8 space-y-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
+                the only listing
+              </p>
+              <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
+                Live pair
+              </h2>
+            </div>
+            <p className="font-mono text-[11px] text-[#f0d7a0]/45">
+              updated {formatTime(market.asOf)}
+            </p>
           </div>
-          <p className="font-heading text-sm tracking-wide text-[#f0b429]/80">
-            {PAIR.symbol} / {TOKEN.divisor} · 0% tax · paper oil only
-          </p>
-          <div className="relative z-20 border-2 border-[#f0b429] bg-[#120e08] p-5 shadow-[6px_6px_0_#f0b429]">
+          <div className="border border-[#f0b429]/25 bg-black/35 p-5 sm:p-6">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="font-heading text-4xl tracking-wide text-[#ffe08a]">
+                  {TOKEN.symbol}
+                </p>
+                <p className="mt-1 text-sm text-[#f0d7a0]/65">
+                  paired with {PAIR.name} · paper market · no migrate
+                </p>
+              </div>
+              <span
+                className={`font-mono text-[11px] tracking-[0.2em] uppercase ${
+                  up ? "text-[#8fbe6a]" : "text-[#ff6b4a]"
+                }`}
+              >
+                {up ? "euphoria" : "copium"} ·{" "}
+                {market.source === "live" ? "live" : "held"}
+              </span>
+            </div>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              <Row
+                label="token"
+                value={formatUsd(market.price, true)}
+                sub={formatPercent(market.changePercent)}
+              />
+              <Row
+                label="exxon"
+                value={pair ? formatUsd(pair.price) : "—"}
+                sub={pair ? formatPercent(pair.changePercent) : "—"}
+              />
+              <Row
+                label="formula"
+                value={`${PAIR.symbol} / ${TOKEN.divisor}`}
+                sub="one name. one peg."
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <div>
+            <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
+              how the pair holds
+            </p>
+            <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
+              Three moves. No curve.
+            </h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {STEPS.map((step) => (
+              <article
+                key={step.kicker}
+                className="border border-[#f0b429]/20 bg-black/30 p-5"
+              >
+                <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
+                  {step.kicker}
+                </p>
+                <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
+                  {step.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section
+          id="window"
+          className="scroll-mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start"
+        >
+          <div>
+            <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
+              blotter
+            </p>
+            <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
+              Window
+            </h2>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#f0d7a0]/70">
+              Their lot opens a new coin every minute. This lot has one window
+              and one daddy. Stamp a paper fill against the live peg.
+            </p>
+            <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <Mini label="rail" value="40%" />
+              <Mini label="patch" value="25%" />
+              <Mini label="yard" value="20%" />
+              <Mini label="keepers" value="15%" />
+            </div>
+          </div>
+          <div className="relative z-20 border border-[#f0b429]/40 bg-[#120e08]/90 p-5">
             <FieldTicket price={market.price} />
           </div>
-          <div className="grid grid-cols-2 gap-2 font-heading text-xs tracking-wide text-[#f0d7a0]/70 sm:grid-cols-4">
-            <Mini label="rail" value="40%" />
-            <Mini label="patch" value="25%" />
-            <Mini label="yard" value="20%" />
-            <Mini label="keepers" value="15%" />
-          </div>
-          <p className="font-heading text-xs tracking-wide text-[#f0d7a0]/40">
-            not a barrel. not advice. you are oil now.
-          </p>
         </section>
+
+        <section className="space-y-4">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
+                tape
+              </p>
+              <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
+                Prints
+              </h2>
+            </div>
+            <p className="font-mono text-[11px] tracking-[0.18em] text-[#f0d7a0]/40 uppercase">
+              all 1 · new 0 · migrated 0
+            </p>
+          </div>
+          <ul className="divide-y divide-[#f0b429]/15 border border-[#f0b429]/20 bg-black/30">
+            <Print
+              who={TOKEN.symbol}
+              what={`peg ${formatUsd(market.price, true)}`}
+              meta={formatPercent(market.changePercent)}
+            />
+            <Print
+              who={PAIR.symbol}
+              what={pair ? formatUsd(pair.price) : "—"}
+              meta={pair ? formatPercent(pair.changePercent) : "—"}
+            />
+            <Print
+              who="formula"
+              what={`${PAIR.symbol} / ${TOKEN.divisor}`}
+              meta="locked"
+            />
+            <Print who="window" what="paper fills only" meta="0% tax" />
+          </ul>
+        </section>
+
+        <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
+          Experimental paper market. One listing, paired to {PAIR.name}. Quotes
+          from the public tape. Not a launchpad, not a security, not advice.
+        </footer>
       </main>
-      <div className="hazard-bar relative z-10 h-3" />
+    </div>
+  );
+}
+
+function FeaturedCard({ market }: { market: MarketSnapshot }) {
+  const pair = market.rows[0];
+  const up = market.changePercent >= 0;
+  return (
+    <article className="relative flex flex-col justify-between overflow-hidden border border-[#f0b429]/35 bg-black/45 p-5">
+      <div className="hazard-bar absolute inset-x-0 top-0 h-1.5" />
+      <div>
+        <p className="font-mono text-[10px] tracking-[0.28em] text-[#f0b429] uppercase">
+          well permit
+        </p>
+        <p className="font-heading mt-3 text-5xl tracking-wide text-[#ffe08a]">
+          {TOKEN.symbol}
+        </p>
+        <p className="mt-1 text-sm text-[#f0d7a0]/60">
+          {PAIR.name} · never graduating
+        </p>
+      </div>
+      <div className="mt-8">
+        <p className="phosphor font-heading text-5xl text-[#c8f08a] sm:text-6xl">
+          {formatUsd(market.price, true)}
+        </p>
+        <p
+          className={`mt-1 font-heading text-xl ${
+            up ? "text-[#8fbe6a]" : "text-[#ff6b4a]"
+          }`}
+        >
+          {formatPercent(market.changePercent)}
+        </p>
+      </div>
+      <div className="mt-6 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.16em] uppercase">
+        <span className="border border-[#f0b429]/30 px-2 py-1">
+          {PAIR.symbol} / {TOKEN.divisor}
+        </span>
+        <span className="border border-[#f0b429]/30 px-2 py-1">
+          {pair ? formatUsd(pair.price) : "—"}
+        </span>
+        <span
+          className={`border px-2 py-1 ${
+            market.source === "live"
+              ? "border-[#8fbe6a]/40 text-[#8fbe6a]"
+              : "border-[#f0b429]/30 text-[#f0d7a0]/60"
+          }`}
+        >
+          {market.source === "live" ? "tape open" : "tape held"}
+        </span>
+      </div>
+    </article>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  hot,
+}: {
+  label: string;
+  value: string;
+  hot?: boolean;
+}) {
+  return (
+    <div className="bg-[#0c0a07] px-3 py-3">
+      <p className="font-mono text-[10px] tracking-[0.2em] text-[#f0d7a0]/40 uppercase">
+        {label}
+      </p>
+      <p
+        className={`mt-1 font-heading text-lg ${
+          hot ? "text-[#8fbe6a]" : "text-[#ffe08a]"
+        }`}
+      >
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function Row({
+  label,
+  value,
+  sub,
+}: {
+  label: string;
+  value: string;
+  sub: string;
+}) {
+  return (
+    <div>
+      <p className="font-mono text-[10px] tracking-[0.2em] text-[#f0d7a0]/40 uppercase">
+        {label}
+      </p>
+      <p className="mt-1 font-heading text-2xl text-[#ffe08a]">{value}</p>
+      <p className="text-xs text-[#f0d7a0]/50">{sub}</p>
     </div>
   );
 }
 
 function Mini({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border border-[#f0b429]/25 bg-black/35 px-2 py-2">
-      <p className="font-heading text-[10px] tracking-widest text-[#f0b429]/70 uppercase">
+    <div className="border border-[#f0b429]/20 bg-black/30 px-2 py-2">
+      <p className="font-mono text-[10px] tracking-widest text-[#f0b429]/70 uppercase">
         {label}
       </p>
       <p className="font-heading text-lg text-[#ffe08a]">{value}</p>
@@ -189,65 +437,20 @@ function Mini({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Tape({ market }: { market: MarketSnapshot }) {
-  const pair = market.rows[0];
-  const text = [
-    "OIL",
-    formatUsd(market.price, true),
-    formatPercent(market.changePercent),
-    "DADDY XOM",
-    pair ? formatUsd(pair.price) : "",
-    "IF EXXON PUMPS WE PUMP",
-    "OILMAXXING",
-    "DRILL BABY DRILL",
-    "WEN REFINERY",
-    "TOUCH OIL",
-  ]
-    .filter(Boolean)
-    .join("   ·   ");
-  return <span>{text}</span>;
-}
-
-function Quote({
-  label,
-  value,
-  change,
-  up,
-  huge,
+function Print({
+  who,
+  what,
+  meta,
 }: {
-  label: string;
-  value: string;
-  change: string;
-  up: boolean;
-  huge?: boolean;
+  who: string;
+  what: string;
+  meta: string;
 }) {
   return (
-    <div className="border-2 border-[#f0b429]/40 bg-[#0c0a07] p-4">
-      <p className="font-heading text-sm tracking-wide text-[#f0b429]">{label}</p>
-      <p
-        className={`phosphor mt-1 font-heading tracking-wide text-[#c8f08a] ${
-          huge ? "text-4xl sm:text-5xl" : "text-3xl"
-        }`}
-      >
-        {value}
-      </p>
-      <p
-        className={`mt-1 font-heading text-lg ${
-          up ? "text-[#8fbe6a]" : "text-[#ff6b4a]"
-        }`}
-      >
-        {change}
-      </p>
-    </div>
-  );
-}
-
-function Sticker({ className, text }: { className?: string; text: string }) {
-  return (
-    <div
-      className={`pointer-events-none absolute border-2 border-[#1a1208] bg-[#f0b429] px-2 py-1 font-heading text-xs tracking-widest text-[#1a1208] shadow-[3px_3px_0_#1a1208] ${className ?? ""}`}
-    >
-      {text}
-    </div>
+    <li className="flex flex-wrap items-center justify-between gap-2 px-4 py-3">
+      <span className="font-heading text-[#ffe08a]">{who}</span>
+      <span className="font-mono text-sm text-[#c8f08a]">{what}</span>
+      <span className="font-mono text-[11px] text-[#f0d7a0]/45">{meta}</span>
+    </li>
   );
 }
