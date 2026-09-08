@@ -60,19 +60,20 @@ export function renderWhitepaper(): string {
     "",
     `OIL = ${PAIR.symbol} / ${TOKEN.divisor}`,
     "",
+    "3/3 fees. 3/3 redirects to holders.",
+    "automatically, through the ponds, paid in USO.",
     "if the fund pumps, we pump.",
-    "if the fund dumps, we post through it.",
   ].join("\n");
 }
 
 export function renderOilnomics(): string {
   return [
     "OILNOMICS",
-    "  40%   rail so the peg has a floor",
-    "  25%   patch list",
-    "  20%   yard reserve",
-    "  15%   keepers, locked",
+    "  3%    buy tax",
+    "  3%    sell tax",
+    "  3/3   redirect to holders",
     "  ---",
+    "  paid  USO, automatic, through the ponds",
     "  1B    $OIL. one pair. USO.",
   ].join("\n");
 }

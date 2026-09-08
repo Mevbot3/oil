@@ -14,17 +14,17 @@ const STEPS = [
   {
     kicker: "01",
     title: "DRILL",
-    body: "USO puts a number on the tape. That is the only input. No wheat. No gold. No fifty-four names.",
+    body: "Paired to oil. USO puts a number on the tape. $OIL is that print over 69. If the barrel pumps, we pump.",
   },
   {
     kicker: "02",
-    title: "We divide",
-    body: `$OIL is that print over ${TOKEN.divisor}. Same move, smaller sticker. Locked. No virtual curve.`,
+    title: "3/3",
+    body: "The coin takes a 3/3 fee. Three in. Three out. That cut belongs to the token, not a team wallet.",
   },
   {
     kicker: "03",
-    title: "You ape paper",
-    body: "The window stamps a blotter fill. No wallet, no pool, no migrate. Just the joke with a live number.",
+    title: "USO",
+    body: "3/3 of those fees redirect to holders. Automatically, through the ponds. You hold $OIL. You end up getting USO.",
   },
 ];
 
@@ -66,8 +66,8 @@ export function OilField({
     `${PAIR.symbol} ${pair ? formatUsd(pair.price) : "—"}`,
     `formula ${PAIR.symbol} / ${TOKEN.divisor}`,
     market.source === "live" ? "tape open" : "tape held",
-    "one listing · paper only",
-    "no migrate · no curve",
+    "3/3 fees · holders get USO",
+    "auto ponds · no team cut",
   ];
 
   return (
@@ -111,9 +111,9 @@ export function OilField({
               A meme paired to USO.
             </h1>
             <p className="font-catalog mt-5 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
-              Other lots launch a coin for every barrel, bushel, and bad idea.
-              This lot has one name. $OIL is USO&apos;s last print, divided by{" "}
-              {TOKEN.divisor}. If the fund pumps, we pump.
+              $OIL is paired to oil. The peg is USO over {TOKEN.divisor}. The
+              coin takes a 3/3 fee and redirects all of it to holders,
+              automatically, in USO. You hold the meme. You get the barrel.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a
@@ -168,7 +168,7 @@ export function OilField({
                   {TOKEN.symbol}
                 </p>
                 <p className="mt-1 text-sm text-[#f0d7a0]/65">
-                  paired with {PAIR.name} · paper market · no migrate
+                  paired with {PAIR.name} · 3/3 to holders in USO
                 </p>
               </div>
               <span
@@ -203,10 +203,10 @@ export function OilField({
         <section className="space-y-6">
           <div>
             <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
-              how the pair holds
+              how the coin pays
             </p>
             <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
-              Three moves. No curve.
+              Pair. Tax. USO.
             </h2>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
@@ -232,22 +232,22 @@ export function OilField({
         <section id="window" className="scroll-mt-8 space-y-6">
           <div>
             <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
-              blotter
+              the cut
             </p>
             <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
-              Window
+              Fees
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
-              Their lot opens a new coin every minute. This lot has one window
-              and one barrel. The peg is the product. No paper fill on this
-              floor.
+              3/3 on the coin. 3/3 of that fee redirects to holders. No team
+              slice. No burn theater. The ponds pay it automatically, and it
+              lands as USO.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <Mini label="rail" value="40%" />
-            <Mini label="patch" value="25%" />
-            <Mini label="yard" value="20%" />
-            <Mini label="keepers" value="15%" />
+            <Mini label="buy tax" value="3%" />
+            <Mini label="sell tax" value="3%" />
+            <Mini label="to holders" value="3/3" />
+            <Mini label="paid in" value="USO" />
           </div>
         </section>
 
@@ -281,13 +281,14 @@ export function OilField({
               what={`${PAIR.symbol} / ${TOKEN.divisor}`}
               meta="locked"
             />
-            <Print who="window" what="paper fills only" meta="0% tax" />
+            <Print who="fees" what="3/3 redirect" meta="holders get USO" />
           </ul>
         </section>
 
         <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
-          Experimental paper market. One listing, paired to {PAIR.name}. Quotes
-          from the public tape. Not a launchpad, not a security, not advice.
+          Experimental paper market. One listing, paired to {PAIR.name}. 3/3
+          fees redirect to holders in USO. Quotes from the public tape. Not a
+          security, not advice.
         </footer>
       </main>
     </div>
@@ -308,7 +309,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
           {TOKEN.symbol}
         </p>
         <p className="mt-1 text-sm text-[#f0d7a0]/60">
-          {PAIR.name} · never graduating
+          {PAIR.name} · 3/3 to holders in USO
         </p>
       </div>
       <div className="mt-8">
@@ -325,7 +326,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
       </div>
       <div className="mt-6 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.16em] uppercase">
         <span className="border border-[#f0b429]/30 px-2 py-1">
-          {PAIR.symbol} / {TOKEN.divisor}
+          3/3 · {PAIR.symbol}
         </span>
         <span className="border border-[#f0b429]/30 px-2 py-1">
           {pair ? formatUsd(pair.price) : "—"}

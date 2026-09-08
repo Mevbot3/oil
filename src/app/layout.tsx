@@ -26,7 +26,7 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   title: "OIL — paired to USO",
   description:
-    "$OIL is a paper token paired to United States Oil Fund. If USO prints, OIL prints.",
+    "$OIL is paired to USO. 3/3 fees redirect to holders, paid automatically in USO.",
   icons: {
     icon: "/favicon.svg",
   },

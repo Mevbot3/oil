@@ -6,7 +6,7 @@ A paper token paired to USO.
 OIL = USO / 69
 ```
 
-If the oil fund pumps, $OIL pumps. That is the whole desk.
+If the oil fund pumps, $OIL pumps. The coin takes a 3/3 fee. All of it redirects to holders, automatically, in USO.
 
 ## Run it
 
@@ -27,7 +27,7 @@ npm run share
 
 That prints an `https://*.trycloudflare.com` URL. Anyone with the link can open the site. The link dies when you stop the tunnel or this session.
 
-One page. Live USO tape. Paper window.
+One page. Live USO tape. 3/3 fees to holders, paid in USO.
 
 ```bash
 npm run oil

@@ -41,7 +41,7 @@ export const TOKEN = {
   symbol: "$OIL",
   supply: 1_000_000_000,
   divisor: 69,
-  tagline: "if USO pumps, we pump. that's the whitepaper.",
+  tagline: "if USO pumps, we pump. 3/3 to holders, paid in USO.",
 } as const;
 
 export const PAIR = {
