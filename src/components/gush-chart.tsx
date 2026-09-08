@@ -20,7 +20,7 @@ import type { HistoryPoint } from "@/lib/basket";
 import { formatUsd } from "@/lib/format";
 
 const chartConfig = {
-  gush: { label: "$GUSH", color: "#E8B84A" },
+  oil: { label: "$OIL", color: "#E8B84A" },
   wti: { label: "WTI", color: "#7C9A6A" },
 } satisfies ChartConfig;
 
@@ -43,7 +43,7 @@ export function GushChart({ history }: { history: HistoryPoint[] }) {
   if (data.length === 0) {
     return (
       <div className="flex h-64 items-center justify-center rounded-xl border border-dashed border-border text-sm text-muted-foreground">
-        No field history yet. The rig is still warming up.
+        chart still in the ground. come back after the next close.
       </div>
     );
   }
@@ -52,7 +52,7 @@ export function GushChart({ history }: { history: HistoryPoint[] }) {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-muted-foreground">
-          $GUSH rebuilt each session from the oil-major close.
+          $OIL rebuilt every session from the oil daddies&apos; close.
         </p>
         <div className="flex gap-1">
           {(["1M", "3M"] as const).map((key) => (
@@ -123,7 +123,7 @@ export function GushChart({ history }: { history: HistoryPoint[] }) {
                   }
                   return (
                     <span className="font-mono">
-                      $GUSH{" "}
+                      $OIL{" "}
                       {Number.isFinite(amount) ? formatUsd(amount, true) : "—"}
                     </span>
                   );
@@ -132,10 +132,10 @@ export function GushChart({ history }: { history: HistoryPoint[] }) {
             }
           />
           <Area
-            dataKey="gush"
+            dataKey="oil"
             type="monotone"
-            stroke="var(--color-gush)"
-            fill="var(--color-gush)"
+            stroke="var(--color-oil)"
+            fill="var(--color-oil)"
             fillOpacity={0.18}
             strokeWidth={2}
           />

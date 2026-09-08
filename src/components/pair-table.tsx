@@ -10,11 +10,20 @@ import {
 import type { BasketRow } from "@/lib/basket";
 import { formatPercent, formatUsd, formatWeight } from "@/lib/format";
 
+const NICKNAMES: Record<string, string> = {
+  XOM: "daddy",
+  CVX: "the other daddy",
+  COP: "conoco degen",
+  SHEL: "shell yeah",
+  BP: "british petroleum (real)",
+  OXY: "permian gremlin",
+};
+
 export function PairTable({ rows }: { rows: BasketRow[] }) {
   if (rows.length === 0) {
     return (
       <div className="flex h-40 items-center justify-center rounded-xl border border-dashed border-border text-sm text-muted-foreground">
-        No oil majors in the barrel. Check the field report.
+        no oil daddies in the barrel. refresh the tape.
       </div>
     );
   }
@@ -23,11 +32,11 @@ export function PairTable({ rows }: { rows: BasketRow[] }) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Stock</TableHead>
-          <TableHead className="text-right">Weight</TableHead>
-          <TableHead className="text-right">Share price</TableHead>
-          <TableHead className="text-right">Day</TableHead>
-          <TableHead className="text-right">$GUSH slice</TableHead>
+          <TableHead>oil daddy</TableHead>
+          <TableHead className="text-right">bag</TableHead>
+          <TableHead className="text-right">stock</TableHead>
+          <TableHead className="text-right">today</TableHead>
+          <TableHead className="text-right">$OIL juice</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -37,8 +46,12 @@ export function PairTable({ rows }: { rows: BasketRow[] }) {
             <TableRow key={row.symbol}>
               <TableCell>
                 <div className="flex flex-col gap-0.5">
-                  <span className="font-mono font-semibold">{row.symbol}</span>
-                  <span className="text-xs text-muted-foreground">{row.name}</span>
+                  <span className="font-heading text-base tracking-wide">
+                    {row.symbol}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {NICKNAMES[row.symbol] ?? row.name}
+                  </span>
                 </div>
               </TableCell>
               <TableCell className="text-right font-mono">

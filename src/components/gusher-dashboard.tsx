@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Droplets, Fuel, RefreshCw, TrendingDown, TrendingUp } from "lucide-react";
+import { RefreshCw, TrendingDown, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { GushChart } from "@/components/gush-chart";
 import { BarrelMark } from "@/components/logo";
 import { PairTable } from "@/components/pair-table";
@@ -20,9 +19,7 @@ import { TOKEN, type MarketSnapshot } from "@/lib/basket";
 import {
   formatCompactUsd,
   formatPercent,
-  formatTime,
   formatUsd,
-  formatWeight,
 } from "@/lib/format";
 
 type LoadState =
@@ -30,11 +27,35 @@ type LoadState =
   | { status: "error"; message: string }
   | { status: "ready"; market: MarketSnapshot };
 
-const TOKENOMICS = [
-  { label: "Liquidity peg reserve", share: "40%" },
-  { label: "Community airdrop", share: "25%" },
-  { label: "Oil-field treasury", share: "20%" },
-  { label: "Team, 18-month lock", share: "15%" },
+const MARQUEE = [
+  "OIL",
+  "paired to XOM",
+  "paired to CVX",
+  "paired to COP",
+  "paired to SHEL",
+  "paired to BP",
+  "paired to OXY",
+  "drill baby drill",
+  "touch oil",
+  "wen refinery",
+  "only up if they are",
+  "this is the ticker",
+  "not a stablecoin a feralcoin",
+];
+
+const OILNOMICS = [
+  { label: "LP so we don't eat sand", share: "40%" },
+  { label: "airdrop for oilmaxxis", share: "25%" },
+  { label: "strategic petroleum group chat", share: "20%" },
+  { label: "devs (locked, we have jobs)", share: "15%" },
+];
+
+const SHOUTS = [
+  "anon just drilled 4,200 OIL and now talks like a wildcatter",
+  "xom sneezed. $OIL caught a cold. that's the pair baby",
+  "chevron up? we up. chevron down? we journal about it",
+  "this is the most serious meme ever. it is literally called oil",
+  "wti is the weather. the oil daddies are the climate",
 ];
 
 export function GusherDashboard({
@@ -47,6 +68,7 @@ export function GusherDashboard({
     market: initialMarket,
   });
   const [refreshing, setRefreshing] = useState(false);
+  const [shout, setShout] = useState(0);
 
   const load = useCallback(async (silent = true) => {
     if (silent) {
@@ -60,7 +82,7 @@ export function GusherDashboard({
         error?: string;
       };
       if (!response.ok) {
-        throw new Error(payload.error ?? "Field report failed");
+        throw new Error(payload.error ?? "the tape died");
       }
       setState({ status: "ready", market: payload });
     } catch (error) {
@@ -73,7 +95,7 @@ export function GusherDashboard({
           message:
             error instanceof Error
               ? error.message
-              : "Could not reach the oil-stock tape.",
+              : "could not reach the oil daddies.",
         };
       });
     } finally {
@@ -82,16 +104,23 @@ export function GusherDashboard({
   }, []);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    const tape = window.setInterval(() => {
       void load(true);
     }, 60_000);
-    return () => window.clearInterval(timer);
+    const chat = window.setInterval(() => {
+      setShout((index) => (index + 1) % SHOUTS.length);
+    }, 4500);
+    return () => {
+      window.clearInterval(tape);
+      window.clearInterval(chat);
+    };
   }, [load]);
 
   return (
     <div className="relative min-h-full overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(232,184,74,0.16),_transparent_42%),radial-gradient(circle_at_80%_20%,_rgba(80,40,8,0.45),_transparent_36%)]" />
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(232,184,74,0.22),_transparent_36%),radial-gradient(circle_at_90%_10%,_rgba(120,40,8,0.35),_transparent_32%)]" />
+      <Marquee />
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
         <Header
           market={state.status === "ready" ? state.market : null}
           refreshing={refreshing}
@@ -100,19 +129,40 @@ export function GusherDashboard({
 
         {state.status === "loading" ? <LoadingState /> : null}
         {state.status === "error" ? (
-          <ErrorState message={state.message} onRetry={() => void load()} />
+          <ErrorState message={state.message} onRetry={() => void load(false)} />
         ) : null}
-        {state.status === "ready" ? <ReadyState market={state.market} /> : null}
+        {state.status === "ready" ? (
+          <ReadyState market={state.market} shout={SHOUTS[shout]} />
+        ) : null}
 
-        <footer className="space-y-2 pb-8 text-xs leading-relaxed text-muted-foreground">
+        <footer className="space-y-2 pb-20 text-xs leading-relaxed text-muted-foreground sm:pb-8">
           <p>
-            $GUSH is a demo meme token. The price is a paper peg against a
-            weighted basket of oil-major equities, not a live on-chain market.
-            Quotes come from Yahoo Finance when the tape is reachable; otherwise
-            the last known field prices are used. This is not financial advice
-            and not an offer to sell securities or tokens.
+            $OIL is a demo meme coin. the price is a paper peg against a
+            weighted basket of oil-major stocks, not a live on-chain market.
+            quotes come from yahoo finance when the tape is up. this is not
+            financial advice. it is oil.
           </p>
         </footer>
+      </div>
+      {state.status === "ready" ? (
+        <a
+          href="#ape"
+          className="fixed right-4 bottom-4 z-20 rounded-full bg-amber-400 px-5 py-3 font-heading text-lg tracking-widest text-zinc-950 shadow-[0_0_24px_rgba(232,184,74,0.45)] sm:hidden"
+        >
+          APE OIL
+        </a>
+      ) : null}
+    </div>
+  );
+}
+
+function Marquee() {
+  const text = MARQUEE.join("  ·  ");
+  return (
+    <div className="relative overflow-hidden border-b border-amber-400/30 bg-amber-400 text-zinc-950">
+      <div className="animate-marquee flex w-max gap-16 py-1.5 font-heading text-sm tracking-[0.22em] uppercase">
+        <span>{text}</span>
+        <span>{text}</span>
       </div>
     </div>
   );
@@ -130,20 +180,22 @@ function Header({
   return (
     <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-3">
-        <BarrelMark className="size-12 shrink-0" />
+        <BarrelMark className="size-14 shrink-0" />
         <div>
           <div className="flex items-center gap-2">
-            <p className="font-heading text-2xl tracking-tight text-amber-100">
-              GUSHER
+            <p className="font-heading text-4xl tracking-widest text-amber-200">
+              OIL
             </p>
-            <Badge className="bg-amber-400 text-zinc-950">{TOKEN.symbol}</Badge>
+            <Badge className="rotate-[-6deg] bg-amber-400 text-zinc-950">
+              {TOKEN.symbol}
+            </Badge>
           </div>
           <p className="text-sm text-muted-foreground">{TOKEN.tagline}</p>
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-3">
         {market ? (
-          <p className="font-mono text-sm text-amber-100/90">
+          <p className="font-heading text-lg tracking-wide text-amber-100">
             {TOKEN.symbol} {formatUsd(market.price, true)}
           </p>
         ) : null}
@@ -154,118 +206,114 @@ function Header({
           disabled={refreshing}
         >
           <RefreshCw className={refreshing ? "animate-spin" : ""} />
-          Refresh tape
+          poke the tape
         </Button>
       </div>
     </header>
   );
 }
 
-function ReadyState({ market }: { market: MarketSnapshot }) {
+function ReadyState({
+  market,
+  shout,
+}: {
+  market: MarketSnapshot;
+  shout: string;
+}) {
   const up = market.changePercent >= 0;
 
   return (
     <>
-      <section className="grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
-        <Card className="border-amber-400/20 bg-zinc-950/60">
-          <CardHeader>
+      <section className="relative overflow-hidden rounded-3xl border border-amber-400/30 bg-zinc-950/70 px-5 py-8 sm:px-8">
+        <Sticker className="-top-2 right-6 rotate-12" text="OILMAXXING" />
+        <Sticker className="top-16 right-2 -rotate-6 hidden sm:block" text="BASED CRUDE" />
+        <div className="flex flex-col items-start gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="outline" className="border-amber-400/40 text-amber-200">
-                Paired to oil stocks
+              <Badge className="bg-amber-400 text-zinc-950">
+                paired to oil stocks
               </Badge>
               <Badge
                 variant="outline"
                 className={
                   market.source === "live"
-                    ? "border-emerald-500/30 text-emerald-300"
-                    : "border-amber-500/30 text-amber-200"
+                    ? "border-emerald-500/40 text-emerald-300"
+                    : "border-amber-500/40 text-amber-200"
                 }
               >
-                {market.source === "live" ? "Live tape" : "Fallback field prices"}
+                {market.source === "live" ? "LIVE TAPE" : "CACHED SLUDGE"}
+              </Badge>
+              <Badge variant="outline" className="border-amber-400/40 text-amber-100">
+                {up ? "EUPHORIA" : "COPIUM"}
               </Badge>
             </div>
-            <CardTitle className="font-heading mt-4 text-5xl tracking-tight text-amber-100 sm:text-7xl">
+            <h1 className="font-heading text-[22vw] leading-[0.8] tracking-tight text-amber-300 drop-shadow-[0_8px_0_#5a3d0a] sm:text-[9rem]">
+              OIL
+            </h1>
+            <p className="max-w-xl text-lg text-amber-50/80">
+              the meme coin named oil. price is a slice of Exxon, Chevron,
+              Conoco, Shell, BP, and Occidental. if they pump, $OIL pumps.
+              if they dump, we post through it.
+            </p>
+          </div>
+          <div className="min-w-[220px] rounded-2xl border border-amber-400/30 bg-black/40 p-5">
+            <p className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
+              live peg
+            </p>
+            <p className="font-heading mt-1 text-5xl tracking-wide text-amber-200">
               {formatUsd(market.price, true)}
-            </CardTitle>
-            <CardDescription className="flex flex-wrap items-center gap-3 text-base">
-              <span
-                className={`inline-flex items-center gap-1 font-medium ${
-                  up ? "text-emerald-300" : "text-red-300"
-                }`}
-              >
-                {up ? (
-                  <TrendingUp className="size-4" />
-                ) : (
-                  <TrendingDown className="size-4" />
-                )}
-                {formatPercent(market.changePercent)} today
-              </span>
-              <span>Updated {formatTime(market.asOf)}</span>
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-3 sm:grid-cols-3">
-            <Stat
-              label="Paper market cap"
-              value={formatCompactUsd(market.marketCap)}
-            />
-            <Stat
-              label="Oil-stock basket"
-              value={formatUsd(market.basketValue)}
-            />
-            <Stat label="Supply" value="1.0B GUSH" />
-          </CardContent>
-        </Card>
-
-        <Card className="border-amber-400/15 bg-zinc-950/60">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Fuel className="size-4 text-amber-300" />
-              Field report
-            </CardTitle>
-            <CardDescription>
-              WTI sits next to the peg as a crude check, not inside the
-              formula.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {market.wti ? (
-              <div className="rounded-xl border border-border bg-black/20 p-4">
-                <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                  {market.wti.name}
-                </p>
-                <p className="mt-1 font-mono text-3xl text-amber-100">
-                  {formatUsd(market.wti.price)}
-                </p>
-                <p
-                  className={
-                    market.wti.changePercent >= 0
-                      ? "mt-1 text-sm text-emerald-300"
-                      : "mt-1 text-sm text-red-300"
-                  }
-                >
-                  {formatPercent(market.wti.changePercent)} on the barrel
+            </p>
+            <p
+              className={`mt-2 inline-flex items-center gap-1 font-heading text-xl ${
+                up ? "text-emerald-300" : "text-red-300"
+              }`}
+            >
+              {up ? (
+                <TrendingUp className="size-5" />
+              ) : (
+                <TrendingDown className="size-5" />
+              )}
+              {formatPercent(market.changePercent)}
+            </p>
+            <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+              <div>
+                <p className="text-xs text-muted-foreground">fake mcap</p>
+                <p className="font-mono text-amber-100">
+                  {formatCompactUsd(market.marketCap)}
                 </p>
               </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">
-                WTI tape is dark. The stock basket is still live.
-              </p>
-            )}
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              $GUSH = weighted oil majors ÷ {TOKEN.divisor}. When Exxon and
-              Chevron move, the token moves with them.
-            </p>
-          </CardContent>
-        </Card>
+              <div>
+                <p className="text-xs text-muted-foreground">supply</p>
+                <p className="font-mono text-amber-100">1B OIL</p>
+              </div>
+            </div>
+            <Button
+              className="mt-5 h-11 w-full font-heading text-lg tracking-widest"
+              onClick={() => {
+                document.getElementById("ape")?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
+            >
+              APE $OIL
+            </Button>
+          </div>
+        </div>
+        <p className="mt-6 border-t border-amber-400/20 pt-4 font-heading text-sm tracking-wide text-amber-100/80">
+          {shout}
+        </p>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <Card className="border-amber-400/10 bg-zinc-950/60">
+        <Card className="border-amber-400/20 bg-zinc-950/70">
           <CardHeader>
-            <CardTitle>Oil-stock pair book</CardTitle>
+            <CardTitle className="font-heading text-2xl tracking-wide">
+              the oil daddies
+            </CardTitle>
             <CardDescription>
-              Each major owns a fixed weight. The $GUSH slice is that weight
-              times the share price, divided by {TOKEN.divisor}.
+              $OIL is just these six, blended and divided by {TOKEN.divisor}.
+              that is not a bit. that is the formula.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -273,12 +321,14 @@ function ReadyState({ market }: { market: MarketSnapshot }) {
           </CardContent>
         </Card>
 
-        <Card className="border-amber-400/10 bg-zinc-950/60">
+        <Card id="ape" className="border-amber-400/20 bg-zinc-950/70">
           <CardHeader>
-            <CardTitle>Rig desk</CardTitle>
+            <CardTitle className="font-heading text-2xl tracking-wide">
+              ape machine
+            </CardTitle>
             <CardDescription>
-              Paper swap at the live peg. No chain, no wallet, just the oil
-              tape.
+              paper swap at the live peg. no wallet. no chain. just vibes and
+              Exxon.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -287,11 +337,14 @@ function ReadyState({ market }: { market: MarketSnapshot }) {
         </Card>
       </section>
 
-      <Card className="border-amber-400/10 bg-zinc-950/60">
+      <Card className="border-amber-400/20 bg-zinc-950/70">
         <CardHeader>
-          <CardTitle>Peg history</CardTitle>
+          <CardTitle className="font-heading text-2xl tracking-wide">
+            did we pump
+          </CardTitle>
           <CardDescription>
-            Daily $GUSH rebuilt from Yahoo closes, with WTI on the right axis.
+            daily $OIL vs WTI. gold line is us. green line is the barrel they
+            put on TV.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -300,54 +353,56 @@ function ReadyState({ market }: { market: MarketSnapshot }) {
       </Card>
 
       <section className="grid gap-6 md:grid-cols-2">
-        <Card className="border-amber-400/10 bg-zinc-950/60">
+        <Card className="border-amber-400/20 bg-zinc-950/70">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Droplets className="size-4 text-amber-300" />
-              How the pair works
+            <CardTitle className="font-heading text-2xl tracking-wide">
+              the whole whitepaper
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
             <p>
-              $GUSH is not a stablecoin and not a claim on barrels. It is a
-              meme index: six oil-major stocks, fixed weights, one divisor.
+              $OIL is not a claim on barrels. it is a meme index. six oil
+              stocks. fixed weights. one cursed divisor.
             </p>
-            <p className="font-mono text-amber-100/90">
-              GUSH = (0.24 XOM + 0.20 CVX + 0.16 COP + 0.16 SHEL + 0.12 BP +
+            <p className="font-mono text-amber-100">
+              OIL = (0.24 XOM + 0.20 CVX + 0.16 COP + 0.16 SHEL + 0.12 BP +
               0.12 OXY) / {TOKEN.divisor}
             </p>
             <p>
-              Daily change is the same weighted blend of each stock&apos;s
-              percent move. WTI crude is shown as a weather report for the
-              patch, not a seventh weight.
+              daily % = the same blend of their daily %. WTI is just the
+              weather report. we do not pair to the weather. we pair to the
+              daddies.
             </p>
+            {market.wti ? (
+              <p className="rounded-xl border border-amber-400/20 bg-black/30 px-3 py-2 font-heading text-amber-100">
+                WTI {formatUsd(market.wti.price)} ·{" "}
+                {formatPercent(market.wti.changePercent)} on the actual barrel
+              </p>
+            ) : null}
           </CardContent>
         </Card>
 
-        <Card className="border-amber-400/10 bg-zinc-950/60">
+        <Card className="border-amber-400/20 bg-zinc-950/70">
           <CardHeader>
-            <CardTitle>Tokenomics</CardTitle>
+            <CardTitle className="font-heading text-2xl tracking-wide">
+              oilnomics
+            </CardTitle>
             <CardDescription>
-              One billion tokens. The float is a story; the peg is the product.
+              one billion $OIL. the float is a story. the peg is the product.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
-            {TOKENOMICS.map((row) => (
+            {OILNOMICS.map((row) => (
               <div
                 key={row.label}
                 className="flex items-center justify-between gap-3 text-sm"
               >
                 <span className="text-muted-foreground">{row.label}</span>
-                <span className="font-mono text-amber-100">{row.share}</span>
+                <span className="font-heading text-lg text-amber-100">
+                  {row.share}
+                </span>
               </div>
             ))}
-            <Separator />
-            <p className="text-xs text-muted-foreground">
-              Weights on the pair book:{" "}
-              {market.rows
-                .map((row) => `${row.symbol} ${formatWeight(row.weight)}`)
-                .join(" · ")}
-            </p>
           </CardContent>
         </Card>
       </section>
@@ -355,13 +410,12 @@ function ReadyState({ market }: { market: MarketSnapshot }) {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Sticker({ className, text }: { className?: string; text: string }) {
   return (
-    <div className="rounded-xl border border-border bg-black/20 px-3 py-3">
-      <p className="text-xs tracking-wide text-muted-foreground uppercase">
-        {label}
-      </p>
-      <p className="mt-1 font-mono text-lg text-amber-50">{value}</p>
+    <div
+      className={`pointer-events-none absolute rounded-md border-2 border-zinc-950 bg-amber-300 px-2 py-1 font-heading text-xs tracking-widest text-zinc-950 shadow-[3px_3px_0_#111] ${className ?? ""}`}
+    >
+      {text}
     </div>
   );
 }
@@ -369,13 +423,9 @@ function Stat({ label, value }: { label: string; value: string }) {
 function LoadingState() {
   return (
     <div className="grid gap-6">
-      <div className="h-64 animate-pulse rounded-xl bg-muted/30" />
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div className="h-80 animate-pulse rounded-xl bg-muted/20" />
-        <div className="h-80 animate-pulse rounded-xl bg-muted/20" />
-      </div>
-      <p className="text-center text-sm text-muted-foreground">
-        Spudding the well and pulling the oil-stock tape…
+      <div className="h-64 animate-pulse rounded-3xl bg-muted/30" />
+      <p className="text-center font-heading tracking-widest text-muted-foreground">
+        SPUDDING THE MEME…
       </p>
     </div>
   );
@@ -391,11 +441,11 @@ function ErrorState({
   return (
     <Card className="border-destructive/40 bg-zinc-950/70">
       <CardHeader>
-        <CardTitle>The tape went dark</CardTitle>
+        <CardTitle className="font-heading text-2xl">tape went dark</CardTitle>
         <CardDescription>{message}</CardDescription>
       </CardHeader>
       <CardContent>
-        <Button onClick={onRetry}>Try the field again</Button>
+        <Button onClick={onRetry}>kick the rig</Button>
       </CardContent>
     </Card>
   );

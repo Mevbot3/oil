@@ -11,7 +11,7 @@ type Side = "buy" | "sell";
 
 export function SwapDesk({ price }: { price: number }) {
   const [side, setSide] = useState<Side>("buy");
-  const [amount, setAmount] = useState("250");
+  const [amount, setAmount] = useState("69");
   const [fill, setFill] = useState<string | null>(null);
 
   const parsed = Number(amount);
@@ -23,26 +23,22 @@ export function SwapDesk({ price }: { price: number }) {
     }
     if (side === "buy") {
       return {
-        pay: formatUsd(parsed),
         receive: `${formatCompact(parsed / price)} ${TOKEN.ticker}`,
-        rawReceive: parsed / price,
       };
     }
     return {
-      pay: `${formatCompact(parsed)} ${TOKEN.ticker}`,
       receive: formatUsd(parsed * price),
-      rawReceive: parsed * price,
     };
   }, [parsed, price, side, valid]);
 
-  function drill() {
+  function ape() {
     if (!quote) {
       return;
     }
     setFill(
       side === "buy"
-        ? `Filled. ${quote.receive} printed against the oil-stock peg.`
-        : `Filled. ${quote.receive} flowed back out of the barrel.`,
+        ? `filled. ${quote.receive} just got slathered on you. you are oil now.`
+        : `filled. ${quote.receive} back. coward. come back when xom rips.`,
     );
   }
 
@@ -51,29 +47,29 @@ export function SwapDesk({ price }: { price: number }) {
       <div className="flex gap-2">
         <Button
           variant={side === "buy" ? "default" : "outline"}
-          className="flex-1"
+          className="flex-1 font-heading text-base tracking-wide"
           onClick={() => {
             setSide("buy");
             setFill(null);
           }}
         >
-          Buy $GUSH
+          APE $OIL
         </Button>
         <Button
           variant={side === "sell" ? "default" : "outline"}
-          className="flex-1"
+          className="flex-1 font-heading text-base tracking-wide"
           onClick={() => {
             setSide("sell");
             setFill(null);
           }}
         >
-          Sell $GUSH
+          SELL (COPE)
         </Button>
       </div>
 
       <label className="block space-y-2">
         <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-          {side === "buy" ? "You pay (USD)" : "You sell ($GUSH)"}
+          {side === "buy" ? "dump dollars in" : "peel $OIL off"}
         </span>
         <Input
           inputMode="decimal"
@@ -83,46 +79,46 @@ export function SwapDesk({ price }: { price: number }) {
             setFill(null);
           }}
           className="h-12 font-mono text-lg"
-          placeholder={side === "buy" ? "250" : "1000"}
+          placeholder={side === "buy" ? "69" : "1000"}
         />
       </label>
 
       <div className="flex justify-center">
-        <div className="flex size-9 items-center justify-center rounded-full border border-border bg-muted/40 text-amber-200">
+        <div className="flex size-9 items-center justify-center rounded-full border border-amber-400/40 bg-amber-400/10 text-amber-200">
           <ArrowDownUp className="size-4" />
         </div>
       </div>
 
-      <div className="rounded-xl border border-border bg-black/20 px-4 py-3">
+      <div className="rounded-xl border border-amber-400/30 bg-black/30 px-4 py-3">
         <p className="text-xs tracking-wide text-muted-foreground uppercase">
-          You receive
+          you get
         </p>
-        <p className="mt-1 font-mono text-2xl text-amber-200">
-          {quote ? quote.receive : "Enter an amount"}
+        <p className="mt-1 font-heading text-3xl tracking-wide text-amber-200">
+          {quote ? quote.receive : "type a number coward"}
         </p>
         <p className="mt-2 text-xs text-muted-foreground">
-          Peg {formatUsd(price, true)} · 0% protocol spread · paper fill only
+          peg {formatUsd(price, true)} · 0% tax · paper oil only
         </p>
       </div>
 
       <Button
         size="lg"
-        className="h-11 w-full text-base"
+        className="h-12 w-full font-heading text-lg tracking-widest"
         disabled={!valid}
-        onClick={drill}
+        onClick={ape}
       >
-        {side === "buy" ? "Drill $GUSH" : "Dump the barrel"}
+        {side === "buy" ? "DRILL $OIL" : "I NEED RENT"}
       </Button>
 
       {fill ? (
-        <p className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200">
+        <p className="rotate-[-1deg] rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-200">
           {fill}
         </p>
       ) : null}
 
       {!valid && amount.length > 0 ? (
         <p className="text-sm text-destructive">
-          Enter a number above zero to size the fill.
+          more than zero. this is not that kind of bit.
         </p>
       ) : null}
     </div>

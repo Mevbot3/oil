@@ -19,7 +19,7 @@ export type BasketRow = StockQuote & {
 
 export type HistoryPoint = {
   date: string;
-  gush: number;
+  oil: number;
   wti: number | null;
 };
 
@@ -36,12 +36,12 @@ export type MarketSnapshot = {
 };
 
 export const TOKEN = {
-  name: "Gusher",
-  ticker: "GUSH",
-  symbol: "$GUSH",
+  name: "OIL",
+  ticker: "OIL",
+  symbol: "$OIL",
   supply: 1_000_000_000,
   divisor: 69,
-  tagline: "The meme coin that pumps when Big Oil pumps.",
+  tagline: "if Exxon pumps, we pump. that's the whitepaper.",
 } as const;
 
 export const OIL_MAJORS: OilMajor[] = [
@@ -123,11 +123,11 @@ export function computeBasketValue(quotes: StockQuote[]): number {
   }, 0);
 }
 
-export function computeGushPrice(quotes: StockQuote[]): number {
+export function computeOilPrice(quotes: StockQuote[]): number {
   return computeBasketValue(quotes) / TOKEN.divisor;
 }
 
-export function computeGushChangePercent(quotes: StockQuote[]): number {
+export function computeOilChangePercent(quotes: StockQuote[]): number {
   const bySymbol = quoteMap(quotes);
   return OIL_MAJORS.reduce((sum, major) => {
     const quote = bySymbol.get(major.symbol);
@@ -160,10 +160,10 @@ export function snapshotFromQuotes(
   history: HistoryPoint[],
   source: "live" | "fallback",
 ): MarketSnapshot {
-  const price = computeGushPrice(quotes);
+  const price = computeOilPrice(quotes);
   return {
     price,
-    changePercent: computeGushChangePercent(quotes),
+    changePercent: computeOilChangePercent(quotes),
     marketCap: price * TOKEN.supply,
     basketValue: computeBasketValue(quotes),
     rows: buildBasketRows(quotes),
@@ -175,7 +175,7 @@ export function snapshotFromQuotes(
 }
 
 export function fallbackHistory(): HistoryPoint[] {
-  const seedPrice = computeGushPrice(FALLBACK_QUOTES);
+  const seedPrice = computeOilPrice(FALLBACK_QUOTES);
   const days = 90;
   const points: HistoryPoint[] = [];
   for (let i = days; i >= 0; i -= 1) {
@@ -186,7 +186,7 @@ export function fallbackHistory(): HistoryPoint[] {
     const drift = (days - i) * 0.0008;
     points.push({
       date: date.toISOString().slice(0, 10),
-      gush: Number((seedPrice * (0.92 + drift + wave)).toFixed(4)),
+      oil: Number((seedPrice * (0.92 + drift + wave)).toFixed(4)),
       wti: Number((FALLBACK_WTI.price * (0.9 + drift * 0.4 + wave * 0.5)).toFixed(2)),
     });
   }

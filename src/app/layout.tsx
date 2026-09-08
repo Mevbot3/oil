@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Oswald } from "next/font/google";
+import { Anton, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,15 +12,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const oswald = Oswald({
-  variable: "--font-oswald",
+const anton = Anton({
+  weight: "400",
+  variable: "--font-anton",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "GUSHER ($GUSH) — oil meme coin paired to Big Oil",
+  title: "OIL ($OIL) — meme coin paired to oil stocks",
   description:
-    "GUSHER is a meme token whose paper price is a weighted peg to Exxon, Chevron, ConocoPhillips, Shell, BP, and Occidental.",
+    "OIL is a meme token whose paper price is a weighted peg to Exxon, Chevron, ConocoPhillips, Shell, BP, and Occidental.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -30,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${geistMono.variable} ${oswald.variable} h-full antialiased`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${anton.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         {children}

@@ -1,34 +1,50 @@
 export function BarrelMark({ className }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 48 48"
+      viewBox="0 0 72 72"
       fill="none"
       aria-hidden="true"
       className={className}
     >
-      <ellipse cx="24" cy="10" rx="14" ry="5" fill="#E8B84A" />
+      <ellipse cx="36" cy="20" rx="20" ry="8" fill="#F3D27A" />
       <path
-        d="M10 10v26c0 3 6.3 6 14 6s14-3 14-6V10"
+        d="M16 20v34c0 5 9 9 20 9s20-4 20-9V20"
         fill="#C4922A"
       />
       <path
-        d="M10 18c0 3 6.3 5 14 5s14-2 14-5"
+        d="M16 32c0 4 9 7 20 7s20-3 20-7"
         stroke="#8A6414"
-        strokeWidth="1.4"
+        strokeWidth="2"
       />
       <path
-        d="M10 26c0 3 6.3 5 14 5s14-2 14-5"
+        d="M16 44c0 4 9 7 20 7s20-3 20-7"
         stroke="#8A6414"
-        strokeWidth="1.4"
+        strokeWidth="2"
       />
-      <ellipse cx="24" cy="10" rx="14" ry="5" fill="#F3D27A" />
+      <ellipse cx="36" cy="20" rx="20" ry="8" fill="#F6D56A" />
+      <rect
+        x="18"
+        y="22"
+        width="36"
+        height="10"
+        rx="5"
+        fill="#111"
+      />
+      <circle cx="29" cy="27" r="3.4" fill="#F3D27A" />
+      <circle cx="43" cy="27" r="3.4" fill="#F3D27A" />
       <path
-        d="M22 8c1-6 7-8 11-4 2 2-1 5-5 4"
-        stroke="#F5C451"
+        d="M28 48c3 3 13 3 16 0"
+        stroke="#3a2a10"
         strokeWidth="2"
         strokeLinecap="round"
       />
-      <circle cx="31" cy="5" r="1.6" fill="#F8E19A" />
+      <path
+        d="M34 10c1-8 10-10 14-5 2 3-2 6-6 5"
+        stroke="#F5C451"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <circle cx="47" cy="6" r="2.2" fill="#F8E19A" />
     </svg>
   );
 }

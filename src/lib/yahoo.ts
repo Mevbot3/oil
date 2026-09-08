@@ -14,7 +14,7 @@ import {
 const YAHOO_HEADERS = {
   Accept: "application/json",
   "User-Agent":
-    "Mozilla/5.0 (compatible; GusherBot/1.0; +https://gusher.local)",
+    "Mozilla/5.0 (compatible; OilMemeBot/1.0; +https://oil.local)",
 };
 
 type YahooChart = {
@@ -138,7 +138,7 @@ export function buildHistory(
     }, 0);
     return {
       date,
-      gush: Number((basket / TOKEN.divisor).toFixed(4)),
+      oil: Number((basket / TOKEN.divisor).toFixed(4)),
       wti: wtiCloses.get(date) ?? null,
     };
   });
