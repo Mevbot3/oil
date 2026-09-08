@@ -171,6 +171,73 @@
   animation: slick 18s ease-in-out infinite alternate;
 }
 
+.field-watermark {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.07;
+  font-family: var(--font-anton), sans-serif;
+  font-size: 18vw;
+  line-height: 0.85;
+  letter-spacing: 0.08em;
+  color: #f0b429;
+  word-break: break-all;
+}
+
+.oil-drip {
+  position: absolute;
+  top: -8%;
+  width: 28px;
+  height: 42%;
+  border-radius: 0 0 40px 40px;
+  background: linear-gradient(180deg, #1a1008 0%, #3a220c 40%, #c4922a 100%);
+  opacity: 0.55;
+  filter: blur(0.4px);
+  animation: drip 7s ease-in-out infinite;
+}
+
+.oil-drip-2 {
+  left: 18%;
+  width: 18px;
+  height: 28%;
+  animation-delay: -2.4s;
+}
+
+.oil-drip-3 {
+  left: 72%;
+  width: 22px;
+  height: 36%;
+  animation-delay: -4.1s;
+}
+
+.oil-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(18px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.hazard-bar {
+  background: repeating-linear-gradient(
+    -45deg,
+    #f0b429 0 14px,
+    #1a1208 14px 28px
+  );
+}
+
+@keyframes drip {
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(6%) scaleY(1.08);
+  }
+}
+
 @keyframes slick {
   from {
     transform: translate3d(0, 0, 0) scale(1);

@@ -59,6 +59,14 @@ export function OilField({
   return (
     <div className="field-skin flex min-h-svh flex-col text-[#f0d7a0]">
       <div className="field-grain pointer-events-none absolute inset-0 z-0" />
+      <div className="field-watermark" aria-hidden="true">
+        OIL OIL OIL OIL OIL OIL OIL OIL
+      </div>
+      <div className="oil-drip left-[8%]" />
+      <div className="oil-drip oil-drip-2" />
+      <div className="oil-drip oil-drip-3" />
+      <div className="oil-blob left-[12%] top-[20%] size-56 bg-[#f0b429]/15" />
+      <div className="oil-blob right-[8%] bottom-[18%] size-72 bg-[#3cb87a]/10" />
 
       <div className="relative z-10 overflow-hidden bg-[#f0b429] text-[#1a1208]">
         <div className="animate-marquee flex w-max gap-16 py-2 font-heading text-base tracking-[0.22em] uppercase">
@@ -97,6 +105,7 @@ export function OilField({
         <section className="relative overflow-hidden px-5 py-6 sm:px-8 lg:border-r lg:border-[#f0b429]/25">
           <Sticker className="top-4 right-6 rotate-12" text="OILMAXXING" />
           <Sticker className="top-28 right-3 -rotate-6 hidden sm:block" text="BASED CRUDE" />
+          <Sticker className="bottom-24 left-6 rotate-[-8deg] hidden lg:block" text="WEN RIG" />
           <p className="font-heading text-sm tracking-[0.35em] text-[#f0b429]">
             PAIRED TO EXXON · NOBODY ELSE
           </p>
@@ -121,6 +130,14 @@ export function OilField({
           <p className="font-heading mt-8 text-sm tracking-wide text-[#f0b429]">
             {SHOUTS[shout]}
           </p>
+          <div className="mt-8 grid max-w-md grid-cols-3 gap-2">
+            <Mini label="pair" value={PAIR.symbol} />
+            <Mini label="supply" value="1B" />
+            <Mini label="tax" value="0%" />
+          </div>
+          <pre className="mt-6 max-w-md overflow-x-auto border border-[#f0b429]/30 bg-black/40 px-3 py-2 font-mono text-[11px] text-[#c8f08a]">
+            {`OIL = ${PAIR.symbol} / ${TOKEN.divisor}`}
+          </pre>
         </section>
 
         <section className="flex flex-col gap-5 bg-black/30 px-5 py-6 sm:px-8">
@@ -145,11 +162,29 @@ export function OilField({
           <div className="border-2 border-[#f0b429] bg-[#120e08] p-5 shadow-[6px_6px_0_#f0b429]">
             <FieldTicket price={market.price} />
           </div>
+          <div className="grid grid-cols-2 gap-2 font-heading text-xs tracking-wide text-[#f0d7a0]/70 sm:grid-cols-4">
+            <Mini label="rail" value="40%" />
+            <Mini label="patch" value="25%" />
+            <Mini label="yard" value="20%" />
+            <Mini label="keepers" value="15%" />
+          </div>
           <p className="font-heading text-xs tracking-wide text-[#f0d7a0]/40">
             not a barrel. not advice. you are oil now.
           </p>
         </section>
       </main>
+      <div className="hazard-bar relative z-10 h-3" />
+    </div>
+  );
+}
+
+function Mini({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="border border-[#f0b429]/25 bg-black/35 px-2 py-2">
+      <p className="font-heading text-[10px] tracking-widest text-[#f0b429]/70 uppercase">
+        {label}
+      </p>
+      <p className="font-heading text-lg text-[#ffe08a]">{value}</p>
     </div>
   );
 }
