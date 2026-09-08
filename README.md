@@ -23,10 +23,9 @@ The tape is pulled from Yahoo Finance. If the quote feed is down, the last known
 
 ## On the desk
 
-- Live $OIL peg, copium/euphoria, fake market cap
+- Live $OIL peg and copium/euphoria
 - The oil daddies pair book
 - Paper ape machine at the live peg
-- Daily chart vs WTI
 - Oilnomics
 
 This is a demo. Not financial advice. It is oil.

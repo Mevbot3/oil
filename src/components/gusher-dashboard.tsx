@@ -11,16 +11,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { GushChart } from "@/components/gush-chart";
 import { BarrelMark } from "@/components/logo";
 import { PairTable } from "@/components/pair-table";
 import { SwapDesk } from "@/components/swap-desk";
 import { TOKEN, type MarketSnapshot } from "@/lib/basket";
-import {
-  formatCompactUsd,
-  formatPercent,
-  formatUsd,
-} from "@/lib/format";
+import { formatPercent, formatUsd } from "@/lib/format";
 
 type LoadState =
   | { status: "loading" }
@@ -227,78 +222,57 @@ function ReadyState({
       <section className="relative overflow-hidden rounded-3xl border border-amber-400/30 bg-zinc-950/70 px-5 py-8 sm:px-8">
         <Sticker className="-top-2 right-6 rotate-12" text="OILMAXXING" />
         <Sticker className="top-16 right-2 -rotate-6 hidden sm:block" text="BASED CRUDE" />
-        <div className="flex flex-col items-start gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div className="space-y-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge className="bg-amber-400 text-zinc-950">
-                paired to oil stocks
-              </Badge>
-              <Badge
-                variant="outline"
-                className={
-                  market.source === "live"
-                    ? "border-emerald-500/40 text-emerald-300"
-                    : "border-amber-500/40 text-amber-200"
-                }
-              >
-                {market.source === "live" ? "LIVE TAPE" : "CACHED SLUDGE"}
-              </Badge>
-              <Badge variant="outline" className="border-amber-400/40 text-amber-100">
-                {up ? "EUPHORIA" : "COPIUM"}
-              </Badge>
-            </div>
-            <h1 className="font-heading text-[22vw] leading-[0.8] tracking-tight text-amber-300 drop-shadow-[0_8px_0_#5a3d0a] sm:text-[9rem]">
-              OIL
-            </h1>
-            <p className="max-w-xl text-lg text-amber-50/80">
-              the meme coin named oil. price is a slice of Exxon, Chevron,
-              Conoco, Shell, BP, and Occidental. if they pump, $OIL pumps.
-              if they dump, we post through it.
-            </p>
-          </div>
-          <div className="min-w-[220px] rounded-2xl border border-amber-400/30 bg-black/40 p-5">
-            <p className="text-xs tracking-[0.2em] text-muted-foreground uppercase">
-              live peg
-            </p>
-            <p className="font-heading mt-1 text-5xl tracking-wide text-amber-200">
-              {formatUsd(market.price, true)}
-            </p>
-            <p
-              className={`mt-2 inline-flex items-center gap-1 font-heading text-xl ${
-                up ? "text-emerald-300" : "text-red-300"
-              }`}
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge className="bg-amber-400 text-zinc-950">
+              paired to oil stocks
+            </Badge>
+            <Badge
+              variant="outline"
+              className={
+                market.source === "live"
+                  ? "border-emerald-500/40 text-emerald-300"
+                  : "border-amber-500/40 text-amber-200"
+              }
             >
-              {up ? (
-                <TrendingUp className="size-5" />
-              ) : (
-                <TrendingDown className="size-5" />
-              )}
-              {formatPercent(market.changePercent)}
-            </p>
-            <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-              <div>
-                <p className="text-xs text-muted-foreground">fake mcap</p>
-                <p className="font-mono text-amber-100">
-                  {formatCompactUsd(market.marketCap)}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">supply</p>
-                <p className="font-mono text-amber-100">1B OIL</p>
-              </div>
-            </div>
-            <Button
-              className="mt-5 h-11 w-full font-heading text-lg tracking-widest"
-              onClick={() => {
-                document.getElementById("ape")?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }}
-            >
-              APE $OIL
-            </Button>
+              {market.source === "live" ? "LIVE TAPE" : "CACHED SLUDGE"}
+            </Badge>
+            <Badge variant="outline" className="border-amber-400/40 text-amber-100">
+              {up ? "EUPHORIA" : "COPIUM"}
+            </Badge>
           </div>
+          <h1 className="font-heading text-[22vw] leading-[0.8] tracking-tight text-amber-300 drop-shadow-[0_8px_0_#5a3d0a] sm:text-[9rem]">
+            OIL
+          </h1>
+          <p
+            className={`inline-flex items-center gap-2 font-heading text-3xl tracking-wide ${
+              up ? "text-emerald-300" : "text-red-300"
+            }`}
+          >
+            {formatUsd(market.price, true)}
+            {up ? (
+              <TrendingUp className="size-6" />
+            ) : (
+              <TrendingDown className="size-6" />
+            )}
+            {formatPercent(market.changePercent)}
+          </p>
+          <p className="max-w-xl text-lg text-amber-50/80">
+            the meme coin named oil. price is a slice of Exxon, Chevron,
+            Conoco, Shell, BP, and Occidental. if they pump, $OIL pumps.
+            if they dump, we post through it.
+          </p>
+          <Button
+            className="h-11 font-heading text-lg tracking-widest"
+            onClick={() => {
+              document.getElementById("ape")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
+          >
+            APE $OIL
+          </Button>
         </div>
         <p className="mt-6 border-t border-amber-400/20 pt-4 font-heading text-sm tracking-wide text-amber-100/80">
           {shout}
@@ -336,21 +310,6 @@ function ReadyState({
           </CardContent>
         </Card>
       </section>
-
-      <Card className="border-amber-400/20 bg-zinc-950/70">
-        <CardHeader>
-          <CardTitle className="font-heading text-2xl tracking-wide">
-            did we pump
-          </CardTitle>
-          <CardDescription>
-            daily $OIL vs WTI. gold line is us. green line is the barrel they
-            put on TV.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <GushChart history={market.history} />
-        </CardContent>
-      </Card>
 
       <section className="grid gap-6 md:grid-cols-2">
         <Card className="border-amber-400/20 bg-zinc-950/70">
