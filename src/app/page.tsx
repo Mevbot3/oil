@@ -1,9 +1,9 @@
-import { OilTerminal } from "@/components/oil-terminal";
+import { OilField } from "@/components/oil-field";
 import { loadMarketSnapshot } from "@/lib/yahoo";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const market = await loadMarketSnapshot();
-  return <OilTerminal initialMarket={market} />;
+  return <OilField initialMarket={market} />;
 }

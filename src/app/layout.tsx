@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Geist, Geist_Mono } from "next/font/google";
+import { Anton, Geist, Geist_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,10 +18,15 @@ const anton = Anton({
   subsets: ["latin"],
 });
 
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "OIL ($OIL) — terminal · meme coin paired to oil stocks",
+  title: "OIL — field terminal paired to oil stocks",
   description:
-    "OIL is a meme token whose paper price is a weighted peg to Exxon, Chevron, ConocoPhillips, Shell, BP, and Occidental.",
+    "Six pumps reading Exxon, Chevron, ConocoPhillips, Shell, BP, and Occidental. $OIL is a paper blend of those names.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -31,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${geistMono.variable} ${anton.variable} h-full antialiased`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${anton.variable} ${newsreader.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         {children}

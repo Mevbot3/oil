@@ -33,6 +33,7 @@ export function renderHelp(): string {
     "  poke           refresh the yahoo tape",
     "  whitepaper     the whole joke",
     "  oilnomics      how the bag is split",
+    "  field          open the field terminal",
     "  desk           open the chrome version",
     "  clear          wipe the phosphor",
     "  help           this sludge",

@@ -132,6 +132,11 @@ export function OilTerminal({
       }
       return;
     }
+    if (command === "field") {
+      pushOut("opening the field terminal...");
+      router.push("/");
+      return;
+    }
     if (command === "desk") {
       pushOut("opening the chrome desk...");
       router.push("/desk");
@@ -157,9 +162,14 @@ export function OilTerminal({
       <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(rgba(18,16,8,0.12)_50%,transparent_50%)] bg-size-[100%_4px]" />
       <header className="relative z-20 flex items-center justify-between border-b border-[#f0b429]/25 px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase">
         <span>oil.exe · paired to oil stocks</span>
-        <Link href="/desk" className="hover:text-[#ffe08a]">
-          /desk
-        </Link>
+        <span className="flex gap-4">
+          <Link href="/" className="hover:text-[#ffe08a]">
+            /field
+          </Link>
+          <Link href="/desk" className="hover:text-[#ffe08a]">
+            /desk
+          </Link>
+        </span>
       </header>
       <div
         ref={scroller}

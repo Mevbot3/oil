@@ -199,6 +199,12 @@ function Header({
           href="/"
           className="font-heading text-sm tracking-wide text-amber-200/80 underline-offset-4 hover:underline"
         >
+          /field
+        </Link>
+        <Link
+          href="/term"
+          className="font-heading text-sm tracking-wide text-amber-200/80 underline-offset-4 hover:underline"
+        >
           /term
         </Link>
         <Button
