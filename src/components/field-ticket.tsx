@@ -25,46 +25,45 @@ export function FieldTicket({ price }: { price: number }) {
 
   return (
     <div className="space-y-4">
-      <p className="font-heading text-xl tracking-wide text-[#ffe08a]">
-        ape the peg
+      <p className="font-heading text-3xl tracking-wide text-[#ffe08a]">
+        APE MACHINE
       </p>
-      <p className="text-sm text-[#f0d7a0]/65">
-        Paper fill against Exxon. No wallet. No chain. Just daddy&apos;s last
-        print.
+      <p className="text-sm text-[#f0d7a0]/70">
+        dump dollars. become oil. no wallet. no chain. just Exxon.
       </p>
-      <div className="flex gap-2 font-mono text-[10px] tracking-[0.18em] uppercase">
+      <div className="flex gap-2">
         <button
           type="button"
-          className={`border px-3 py-1.5 ${
+          className={`flex-1 py-2 font-heading tracking-wide ${
             side === "buy"
-              ? "border-[#8fbe6a] text-[#8fbe6a]"
-              : "border-[#cfc3a6]/20 text-[#cfc3a6]/55"
+              ? "bg-[#f0b429] text-[#1a1208]"
+              : "border border-[#f0b429]/40 text-[#f0d7a0]"
           }`}
           onClick={() => {
             setSide("buy");
             setFill(null);
           }}
         >
-          take
+          APE $OIL
         </button>
         <button
           type="button"
-          className={`border px-3 py-1.5 ${
+          className={`flex-1 py-2 font-heading tracking-wide ${
             side === "sell"
-              ? "border-[#c45c3a] text-[#c45c3a]"
-              : "border-[#cfc3a6]/20 text-[#cfc3a6]/55"
+              ? "bg-[#ff6b4a] text-[#1a1208]"
+              : "border border-[#f0b429]/40 text-[#f0d7a0]"
           }`}
           onClick={() => {
             setSide("sell");
             setFill(null);
           }}
         >
-          lift
+          SELL (COPE)
         </button>
       </div>
       <label className="block space-y-2">
-        <span className="font-mono text-[10px] tracking-[0.2em] text-[#cfc3a6]/45 uppercase">
-          {side === "buy" ? "dollars" : TOKEN.ticker}
+        <span className="font-heading text-xs tracking-wide text-[#f0b429]">
+          {side === "buy" ? "DOLLARS IN" : `${TOKEN.ticker} OUT`}
         </span>
         <input
           inputMode="decimal"
@@ -73,14 +72,11 @@ export function FieldTicket({ price }: { price: number }) {
             setAmount(event.target.value);
             setFill(null);
           }}
-          className="h-11 w-full border border-[#cfc3a6]/15 bg-transparent px-3 font-mono text-[#efe4c4] outline-none focus:border-[#8fbe6a]"
+          className="h-12 w-full border-2 border-[#f0b429]/40 bg-transparent px-3 font-heading text-2xl text-[#ffe08a] outline-none focus:border-[#f0b429]"
         />
       </label>
-      <p className="font-mono text-sm text-[#8fbe6a]">
-        {quote ?? "enter a size"}
-        <span className="ml-3 text-[10px] text-[#cfc3a6]/40">
-          @ {formatUsd(price, true)}
-        </span>
+      <p className="font-heading text-2xl text-[#c8f08a]">
+        {quote ?? "TYPE A NUMBER COWARD"}
       </p>
       <button
         type="button"
@@ -91,19 +87,23 @@ export function FieldTicket({ price }: { price: number }) {
           }
           setFill(
             side === "buy"
-              ? `stamped. ${quote} on the blotter.`
-              : `lifted. ${quote} back on the rail.`,
+              ? `FILLED. ${quote} just got slathered on you. you are oil now.`
+              : `FILLED. ${quote} back. coward. come back when xom rips.`,
           );
         }}
-        className="h-10 border border-[#8fbe6a]/70 px-4 font-mono text-[10px] tracking-[0.28em] text-[#8fbe6a] uppercase disabled:opacity-40"
+        className="h-12 w-full bg-[#f0b429] font-heading text-xl tracking-[0.2em] text-[#1a1208] disabled:opacity-40"
       >
-        {side === "buy" ? "stamp" : "lift"}
+        {side === "buy" ? "DRILL $OIL" : "I NEED RENT"}
       </button>
       {fill ? (
-        <p className="font-mono text-xs text-[#8fbe6a]">{fill}</p>
+        <p className="rotate-[-1deg] border border-[#8fbe6a] bg-[#8fbe6a]/10 px-3 py-2 font-heading text-sm text-[#8fbe6a]">
+          {fill}
+        </p>
       ) : null}
       {!valid && amount.length > 0 ? (
-        <p className="font-mono text-xs text-[#c45c3a]">size above zero.</p>
+        <p className="font-heading text-sm text-[#ff6b4a]">
+          more than zero. this is not that kind of bit.
+        </p>
       ) : null}
     </div>
   );
