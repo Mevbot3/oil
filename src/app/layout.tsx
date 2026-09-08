@@ -24,9 +24,9 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "OIL — field terminal paired to oil stocks",
+  title: "OIL — paired to Exxon",
   description:
-    "Six pumps reading Exxon, Chevron, ConocoPhillips, Shell, BP, and Occidental. $OIL is a paper blend of those names.",
+    "$OIL is a paper token paired to Exxon Mobil. If XOM prints, OIL prints.",
   icons: {
     icon: "/favicon.svg",
   },

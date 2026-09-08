@@ -26,17 +26,12 @@ type LoadState =
 const MARQUEE = [
   "OIL",
   "paired to XOM",
-  "paired to CVX",
-  "paired to COP",
-  "paired to SHEL",
-  "paired to BP",
-  "paired to OXY",
+  "paired to Exxon",
+  "if daddy pumps we pump",
   "drill baby drill",
   "touch oil",
-  "wen refinery",
-  "only up if they are",
+  "one stock one token",
   "this is the ticker",
-  "not a stablecoin a feralcoin",
 ];
 
 const OILNOMICS = [
@@ -49,9 +44,8 @@ const OILNOMICS = [
 const SHOUTS = [
   "anon just drilled 4,200 OIL and now talks like a wildcatter",
   "xom sneezed. $OIL caught a cold. that's the pair baby",
-  "chevron up? we up. chevron down? we journal about it",
+  "exxon up? we up. exxon down? we journal about it",
   "this is the most serious meme ever. it is literally called oil",
-  "wti is the weather. the oil daddies are the climate",
 ];
 
 export function GusherDashboard({
@@ -271,9 +265,8 @@ function ReadyState({
             {formatPercent(market.changePercent)}
           </p>
           <p className="max-w-xl text-lg text-amber-50/80">
-            the meme coin named oil. price is a slice of Exxon, Chevron,
-            Conoco, Shell, BP, and Occidental. if they pump, $OIL pumps.
-            if they dump, we post through it.
+            the meme coin named oil. paired to Exxon. if daddy pumps,
+            $OIL pumps. if daddy dumps, we post through it.
           </p>
           <Button
             className="h-11 font-heading text-lg tracking-widest"
@@ -296,11 +289,10 @@ function ReadyState({
         <Card className="border-amber-400/20 bg-zinc-950/70">
           <CardHeader>
             <CardTitle className="font-heading text-2xl tracking-wide">
-              the oil daddies
+              the pair
             </CardTitle>
             <CardDescription>
-              $OIL is just these six, blended and divided by {TOKEN.divisor}.
-              that is not a bit. that is the formula.
+              $OIL is Exxon divided by {TOKEN.divisor}. that is the whole bit.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -333,24 +325,14 @@ function ReadyState({
           </CardHeader>
           <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
             <p>
-              $OIL is not a claim on barrels. it is a meme index. six oil
-              stocks. fixed weights. one cursed divisor.
+              $OIL is not a claim on barrels. it is Exxon, divided.
             </p>
             <p className="font-mono text-amber-100">
-              OIL = (0.24 XOM + 0.20 CVX + 0.16 COP + 0.16 SHEL + 0.12 BP +
-              0.12 OXY) / {TOKEN.divisor}
+              OIL = XOM / {TOKEN.divisor}
             </p>
             <p>
-              daily % = the same blend of their daily %. WTI is just the
-              weather report. we do not pair to the weather. we pair to the
-              daddies.
+              if daddy pumps, we pump. if daddy dumps, we post through it.
             </p>
-            {market.wti ? (
-              <p className="rounded-xl border border-amber-400/20 bg-black/30 px-3 py-2 font-heading text-amber-100">
-                WTI {formatUsd(market.wti.price)} ·{" "}
-                {formatPercent(market.wti.changePercent)} on the actual barrel
-              </p>
-            ) : null}
           </CardContent>
         </Card>
 

@@ -1,6 +1,5 @@
 import {
   FALLBACK_QUOTES,
-  FALLBACK_WTI,
   OIL_MAJORS,
   TOKEN,
   WTI_SYMBOL,
@@ -152,7 +151,7 @@ export async function loadMarketSnapshot(): Promise<MarketSnapshot> {
     return cached.snapshot;
   }
 
-  const symbols = [...OIL_MAJORS.map((major) => major.symbol), WTI_SYMBOL];
+  const symbols = OIL_MAJORS.map((major) => major.symbol);
   const results = await Promise.allSettled(
     symbols.map((symbol) => fetchYahooSeries(symbol)),
   );
@@ -169,13 +168,9 @@ export async function loadMarketSnapshot(): Promise<MarketSnapshot> {
   ).filter((quote): quote is StockQuote => Boolean(quote));
 
   if (liveQuotes.length === OIL_MAJORS.length) {
-    const wti = seriesBySymbol.get(WTI_SYMBOL)?.quote ?? null;
-    if (wti) {
-      wti.name = "WTI Crude";
-    }
     const snapshot = snapshotFromQuotes(
       liveQuotes,
-      wti,
+      null,
       buildHistory(seriesBySymbol),
       "live",
     );
@@ -185,7 +180,7 @@ export async function loadMarketSnapshot(): Promise<MarketSnapshot> {
 
   const snapshot = snapshotFromQuotes(
     FALLBACK_QUOTES,
-    FALLBACK_WTI,
+    null,
     fallbackHistory(),
     "fallback",
   );

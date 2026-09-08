@@ -12,11 +12,6 @@ import { formatPercent, formatUsd, formatWeight } from "@/lib/format";
 
 const NICKNAMES: Record<string, string> = {
   XOM: "daddy",
-  CVX: "the other daddy",
-  COP: "conoco degen",
-  SHEL: "shell yeah",
-  BP: "british petroleum (real)",
-  OXY: "permian gremlin",
 };
 
 export function PairTable({ rows }: { rows: BasketRow[] }) {
@@ -32,7 +27,7 @@ export function PairTable({ rows }: { rows: BasketRow[] }) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>oil daddy</TableHead>
+          <TableHead>pair</TableHead>
           <TableHead className="text-right">bag</TableHead>
           <TableHead className="text-right">stock</TableHead>
           <TableHead className="text-right">today</TableHead>
