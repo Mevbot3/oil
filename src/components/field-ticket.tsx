@@ -29,7 +29,7 @@ export function FieldTicket({ price }: { price: number }) {
         APE MACHINE
       </p>
       <p className="text-sm text-[#f0d7a0]/70">
-        dump dollars. become oil. no wallet. no chain. just Exxon.
+        dump dollars. become oil. no wallet. no chain. just USO.
       </p>
       <div className="flex gap-2">
         <button
@@ -88,7 +88,7 @@ export function FieldTicket({ price }: { price: number }) {
           setFill(
             side === "buy"
               ? `FILLED. ${quote} just got slathered on you. you are oil now.`
-              : `FILLED. ${quote} back. coward. come back when xom rips.`,
+              : `FILLED. ${quote} back. coward. come back when uso rips.`,
           );
         }}
         className="relative z-30 h-12 w-full bg-[#f0b429] font-heading text-xl tracking-[0.2em] text-[#1a1208] disabled:opacity-40"

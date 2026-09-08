@@ -38,7 +38,7 @@ export function SwapDesk({ price }: { price: number }) {
     setFill(
       side === "buy"
         ? `filled. ${quote.receive} just got slathered on you. you are oil now.`
-        : `filled. ${quote.receive} back. coward. come back when xom rips.`,
+        : `filled. ${quote.receive} back. coward. come back when uso rips.`,
     );
   }
 

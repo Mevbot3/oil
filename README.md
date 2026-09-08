@@ -1,12 +1,12 @@
 # OIL ($OIL)
 
-A paper token paired to Exxon.
+A paper token paired to USO.
 
 ```
-OIL = XOM / 69
+OIL = USO / 69
 ```
 
-If Exxon pumps, $OIL pumps. That is the whole desk.
+If the oil fund pumps, $OIL pumps. That is the whole desk.
 
 ## Run it
 
@@ -35,6 +35,6 @@ That prints an `https://*.trycloudflare.com` URL. Anyone with the link can open 
 npm run oil
 ```
 
-Tape comes from Yahoo Finance. If it blinks, last known Exxon still runs the peg.
+Tape comes from Yahoo Finance. If it blinks, last known USO still runs the peg.
 
 This is a demo. Not financial advice. It is oil.

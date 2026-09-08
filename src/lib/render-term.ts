@@ -17,7 +17,7 @@ export const OIL_BANNER = String.raw`
 export function renderHelp(): string {
   return [
     "commands",
-    "  oil            live peg against Exxon",
+    "  oil            live peg against USO",
     "  ape <usd>      paper-buy $OIL at the peg",
     "  sell <oil>     paper-dump $OIL",
     "  poke           refresh the yahoo tape",
@@ -56,12 +56,12 @@ export function renderWhitepaper(): string {
   return [
     "WHITEPAPER.TXT",
     "",
-    "$OIL is not a barrel. it is Exxon, divided.",
+    "$OIL is not a barrel. it is USO, divided.",
     "",
     `OIL = ${PAIR.symbol} / ${TOKEN.divisor}`,
     "",
-    "if daddy Exxon pumps, we pump.",
-    "if daddy Exxon dumps, we post through it.",
+    "if the fund pumps, we pump.",
+    "if the fund dumps, we post through it.",
   ].join("\n");
 }
 
@@ -73,7 +73,7 @@ export function renderOilnomics(): string {
     "  20%   yard reserve",
     "  15%   keepers, locked",
     "  ---",
-    "  1B    $OIL. one pair. Exxon.",
+    "  1B    $OIL. one pair. USO.",
   ].join("\n");
 }
 
@@ -97,6 +97,6 @@ export function renderSell(price: number, tokens: number): string {
   return [
     `filled. ${formatUsd(usd)} back.`,
     `dumped ${formatCompact(tokens)} ${TOKEN.ticker} @ ${formatUsd(price, true)}`,
-    "come back when xom rips.",
+    "come back when uso rips.",
   ].join("\n");
 }

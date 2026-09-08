@@ -11,7 +11,7 @@ import type { BasketRow } from "@/lib/basket";
 import { formatPercent, formatUsd, formatWeight } from "@/lib/format";
 
 const NICKNAMES: Record<string, string> = {
-  XOM: "daddy",
+  USO: "the barrel",
 };
 
 export function PairTable({ rows }: { rows: BasketRow[] }) {
@@ -29,7 +29,7 @@ export function PairTable({ rows }: { rows: BasketRow[] }) {
         <TableRow>
           <TableHead>pair</TableHead>
           <TableHead className="text-right">bag</TableHead>
-          <TableHead className="text-right">stock</TableHead>
+          <TableHead className="text-right">fund</TableHead>
           <TableHead className="text-right">today</TableHead>
           <TableHead className="text-right">$OIL juice</TableHead>
         </TableRow>

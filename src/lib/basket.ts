@@ -41,12 +41,12 @@ export const TOKEN = {
   symbol: "$OIL",
   supply: 1_000_000_000,
   divisor: 69,
-  tagline: "if Exxon pumps, we pump. that's the whitepaper.",
+  tagline: "if USO pumps, we pump. that's the whitepaper.",
 } as const;
 
 export const PAIR = {
-  symbol: "XOM",
-  name: "Exxon Mobil",
+  symbol: "USO",
+  name: "United States Oil Fund",
 } as const;
 
 export const OIL_MAJORS: OilMajor[] = [
@@ -59,8 +59,8 @@ export const FALLBACK_QUOTES: StockQuote[] = [
   {
     symbol: PAIR.symbol,
     name: PAIR.name,
-    price: 159.47,
-    changePercent: -1.689,
+    price: 141.96,
+    changePercent: -0.091,
     currency: "USD",
   },
 ];

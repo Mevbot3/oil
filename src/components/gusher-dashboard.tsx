@@ -25,12 +25,12 @@ type LoadState =
 
 const MARQUEE = [
   "OIL",
-  "paired to XOM",
-  "paired to Exxon",
-  "if daddy pumps we pump",
+  "paired to USO",
+  "paired to the barrel",
+  "if the fund pumps we pump",
   "drill baby drill",
   "touch oil",
-  "one stock one token",
+  "one fund one token",
   "this is the ticker",
 ];
 
@@ -43,8 +43,8 @@ const OILNOMICS = [
 
 const SHOUTS = [
   "anon just drilled 4,200 OIL and now talks like a wildcatter",
-  "xom sneezed. $OIL caught a cold. that's the pair baby",
-  "exxon up? we up. exxon down? we journal about it",
+  "uso sneezed. $OIL caught a cold. that's the pair baby",
+  "uso up? we up. uso down? we journal about it",
   "this is the most serious meme ever. it is literally called oil",
 ];
 
@@ -127,8 +127,8 @@ export function GusherDashboard({
 
         <footer className="space-y-2 pb-20 text-xs leading-relaxed text-muted-foreground sm:pb-8">
           <p>
-            $OIL is a demo meme coin. the price is a paper peg against a
-            weighted basket of oil-major stocks, not a live on-chain market.
+            $OIL is a demo meme coin. the price is a paper peg against USO,
+            not a live on-chain market.
             quotes come from yahoo finance when the tape is up. this is not
             financial advice. it is oil.
           </p>
@@ -232,7 +232,7 @@ function ReadyState({
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <Badge className="bg-amber-400 text-zinc-950">
-              paired to oil stocks
+              paired to USO
             </Badge>
             <Badge
               variant="outline"
@@ -265,8 +265,8 @@ function ReadyState({
             {formatPercent(market.changePercent)}
           </p>
           <p className="max-w-xl text-lg text-amber-50/80">
-            the meme coin named oil. paired to Exxon. if daddy pumps,
-            $OIL pumps. if daddy dumps, we post through it.
+            the meme coin named oil. paired to USO. if the fund pumps,
+            $OIL pumps. if the fund dumps, we post through it.
           </p>
           <Button
             className="h-11 font-heading text-lg tracking-widest"
@@ -292,7 +292,7 @@ function ReadyState({
               the pair
             </CardTitle>
             <CardDescription>
-              $OIL is Exxon divided by {TOKEN.divisor}. that is the whole bit.
+              $OIL is USO divided by {TOKEN.divisor}. that is the whole bit.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -307,7 +307,7 @@ function ReadyState({
             </CardTitle>
             <CardDescription>
               paper swap at the live peg. no wallet. no chain. just vibes and
-              Exxon.
+              USO.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -325,13 +325,13 @@ function ReadyState({
           </CardHeader>
           <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
             <p>
-              $OIL is not a claim on barrels. it is Exxon, divided.
+              $OIL is not a claim on barrels. it is USO, divided.
             </p>
             <p className="font-mono text-amber-100">
-              OIL = XOM / {TOKEN.divisor}
+              OIL = USO / {TOKEN.divisor}
             </p>
             <p>
-              if daddy pumps, we pump. if daddy dumps, we post through it.
+              if the fund pumps, we pump. if the fund dumps, we post through it.
             </p>
           </CardContent>
         </Card>

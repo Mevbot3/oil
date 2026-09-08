@@ -21,7 +21,7 @@ type Line = {
 function openingLines(market: MarketSnapshot): Line[] {
   return [
     { kind: "sys", text: "OIL RIG v69  ·  phosphor edition" },
-    { kind: "sys", text: "tape locked to Exxon." },
+    { kind: "sys", text: "tape locked to USO." },
     ...market.rows.map((row) => ({
       kind: "sys" as const,
       text: `  ${row.symbol.padEnd(5)} ${row.changePercent >= 0 ? "ok" : "cope"}`,
@@ -30,7 +30,7 @@ function openingLines(market: MarketSnapshot): Line[] {
       kind: "sys",
       text:
         market.source === "live"
-          ? "peg locked. you are talking to live XOM."
+          ? "peg locked. you are talking to live USO."
           : "yahoo blinked. using last known sludge.",
     },
     { kind: "sys", text: "" },
@@ -149,7 +149,7 @@ export function OilTerminal({
     >
       <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(rgba(18,16,8,0.12)_50%,transparent_50%)] bg-size-[100%_4px]" />
       <header className="relative z-10 flex shrink-0 items-center justify-between border-b border-[#f0b429]/25 px-4 py-2 font-mono text-[11px] tracking-[0.2em] uppercase">
-        <span>oil.exe · paired to exxon</span>
+        <span>oil.exe · paired to uso</span>
         <span className="flex gap-4">
           <Link href="/" className="hover:text-[#ffe08a]">
             /field

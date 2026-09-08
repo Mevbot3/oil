@@ -16,7 +16,7 @@ const STEPS = [
   {
     kicker: "01",
     title: "Daddy prints",
-    body: "Exxon puts a number on the tape. That is the only input. No wheat. No gold. No fifty-four names.",
+    body: "USO puts a number on the tape. That is the only input. No wheat. No gold. No fifty-four names.",
   },
   {
     kicker: "02",
@@ -131,15 +131,15 @@ export function OilField({
         <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
           <div className="flex flex-col justify-end">
             <p className="font-mono text-[11px] tracking-[0.32em] text-[#f0b429] uppercase">
-              one market · one major
+              one market · one fund
             </p>
             <h1 className="font-heading mt-3 text-5xl leading-[0.9] tracking-tight text-[#ffe08a] sm:text-7xl">
-              A meme paired to Exxon.
+              A meme paired to USO.
             </h1>
             <p className="font-catalog mt-5 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
               Other lots launch a coin for every barrel, bushel, and bad idea.
-              This lot has one name. $OIL is Exxon&apos;s last print, divided by{" "}
-              {TOKEN.divisor}. If daddy pumps, we pump.
+              This lot has one name. $OIL is USO&apos;s last print, divided by{" "}
+              {TOKEN.divisor}. If the fund pumps, we pump.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a
@@ -219,7 +219,7 @@ export function OilField({
                 sub={formatPercent(market.changePercent)}
               />
               <Row
-                label="exxon"
+                label="uso"
                 value={pair ? formatUsd(pair.price) : "—"}
                 sub={pair ? formatPercent(pair.changePercent) : "—"}
               />
@@ -274,7 +274,7 @@ export function OilField({
             </h2>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#f0d7a0]/70">
               Their lot opens a new coin every minute. This lot has one window
-              and one daddy. Stamp a paper fill against the live peg.
+              and one barrel. Stamp a paper fill against the live peg.
             </p>
             <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
               <Mini label="rail" value="40%" />
