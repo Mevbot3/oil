@@ -159,7 +159,7 @@ export function OilField({
           <p className="font-heading text-sm tracking-wide text-[#f0b429]/80">
             {PAIR.symbol} / {TOKEN.divisor} · 0% tax · paper oil only
           </p>
-          <div className="border-2 border-[#f0b429] bg-[#120e08] p-5 shadow-[6px_6px_0_#f0b429]">
+          <div className="relative z-20 border-2 border-[#f0b429] bg-[#120e08] p-5 shadow-[6px_6px_0_#f0b429]">
             <FieldTicket price={market.price} />
           </div>
           <div className="grid grid-cols-2 gap-2 font-heading text-xs tracking-wide text-[#f0d7a0]/70 sm:grid-cols-4">

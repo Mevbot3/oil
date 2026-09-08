@@ -81,7 +81,7 @@ export function FieldTicket({ price }: { price: number }) {
       <button
         type="button"
         disabled={!valid}
-        onClick={() => {
+        onPointerDown={() => {
           if (!quote) {
             return;
           }
@@ -91,12 +91,15 @@ export function FieldTicket({ price }: { price: number }) {
               : `FILLED. ${quote} back. coward. come back when xom rips.`,
           );
         }}
-        className="h-12 w-full bg-[#f0b429] font-heading text-xl tracking-[0.2em] text-[#1a1208] disabled:opacity-40"
+        className="relative z-30 h-12 w-full bg-[#f0b429] font-heading text-xl tracking-[0.2em] text-[#1a1208] disabled:opacity-40"
       >
         {side === "buy" ? "DRILL $OIL" : "I NEED RENT"}
       </button>
       {fill ? (
-        <p className="rotate-[-1deg] border border-[#8fbe6a] bg-[#8fbe6a]/10 px-3 py-2 font-heading text-sm text-[#8fbe6a]">
+        <p
+          role="status"
+          className="border-2 border-[#8fbe6a] bg-[#143018] px-3 py-3 font-heading text-base text-[#c8f08a]"
+        >
           {fill}
         </p>
       ) : null}

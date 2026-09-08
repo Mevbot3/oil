@@ -162,6 +162,7 @@
 }
 
 .field-grain {
+  pointer-events: none;
   opacity: 0.28;
   mix-blend-mode: overlay;
   background-image:
@@ -195,6 +196,7 @@
   background: linear-gradient(180deg, #1a1008 0%, #3a220c 40%, #c4922a 100%);
   opacity: 0.55;
   filter: blur(0.4px);
+  pointer-events: none;
   animation: drip 7s ease-in-out infinite;
 }
 
