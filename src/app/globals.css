@@ -144,3 +144,8 @@
 .animate-marquee {
   animation: marquee 22s linear infinite;
 }
+
+.crt {
+  min-height: 100vh;
+  text-shadow: 0 0 8px rgba(240, 180, 41, 0.28);
+}

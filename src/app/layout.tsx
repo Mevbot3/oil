@@ -19,7 +19,7 @@ const anton = Anton({
 });
 
 export const metadata: Metadata = {
-  title: "OIL ($OIL) — meme coin paired to oil stocks",
+  title: "OIL ($OIL) — terminal · meme coin paired to oil stocks",
   description:
     "OIL is a meme token whose paper price is a weighted peg to Exxon, Chevron, ConocoPhillips, Shell, BP, and Occidental.",
   icons: {

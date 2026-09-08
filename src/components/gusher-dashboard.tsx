@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { RefreshCw, TrendingDown, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -194,6 +195,12 @@ function Header({
             {TOKEN.symbol} {formatUsd(market.price, true)}
           </p>
         ) : null}
+        <Link
+          href="/"
+          className="font-heading text-sm tracking-wide text-amber-200/80 underline-offset-4 hover:underline"
+        >
+          /term
+        </Link>
         <Button
           variant="outline"
           size="sm"

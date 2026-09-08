@@ -12,12 +12,22 @@ If Exxon pumps, $OIL pumps. If Exxon dumps, we post through it. WTI is just the 
 
 ## Run it
 
+Terminal (the real one):
+
 ```bash
 npm install
+npm run oil
+```
+
+That drops you on `oil@rig:~$`. Try `oil`, `ape 69`, `sell 1000`, `poke`, `help`.
+
+Browser CRT (same shell, phosphor paint):
+
+```bash
 npm run dev
 ```
 
-Open [http://127.0.0.1:43147](http://127.0.0.1:43147).
+Open [http://127.0.0.1:43147](http://127.0.0.1:43147). The chrome desk still lives at `/desk`.
 
 The tape is pulled from Yahoo Finance. If the quote feed is down, the last known field prices still run the desk.
 
