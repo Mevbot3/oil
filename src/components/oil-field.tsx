@@ -58,7 +58,7 @@ export function OilField({
 
   return (
     <div className="field-skin flex min-h-svh flex-col text-[#f0d7a0]">
-      <div className="field-grain pointer-events-none absolute inset-0" />
+      <div className="field-grain pointer-events-none absolute inset-0 z-0" />
 
       <div className="relative z-10 overflow-hidden bg-[#f0b429] text-[#1a1208]">
         <div className="animate-marquee flex w-max gap-16 py-2 font-heading text-base tracking-[0.22em] uppercase">
