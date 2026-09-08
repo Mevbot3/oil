@@ -25,9 +25,12 @@ export function FieldTicket({ price }: { price: number }) {
 
   return (
     <div className="space-y-4">
-      <p>
-        A clerk window on the peg. Paper only. Nothing is wired, burned, or
-        sent anywhere.
+      <p className="font-heading text-xl tracking-wide text-[#ffe08a]">
+        ape the peg
+      </p>
+      <p className="text-sm text-[#f0d7a0]/65">
+        Paper fill against Exxon. No wallet. No chain. Just daddy&apos;s last
+        print.
       </p>
       <div className="flex gap-2 font-mono text-[10px] tracking-[0.18em] uppercase">
         <button

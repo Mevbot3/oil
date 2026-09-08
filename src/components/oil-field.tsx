@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { PAIR, TOKEN, type MarketSnapshot } from "@/lib/basket";
-import { formatUsd } from "@/lib/format";
+import { formatPercent, formatUsd } from "@/lib/format";
 import { FieldTicket } from "@/components/field-ticket";
-import { PairMachine } from "@/components/pair-machine";
 
 export function OilField({
   initialMarket,
@@ -14,9 +13,9 @@ export function OilField({
 }) {
   const [market, setMarket] = useState(initialMarket);
   const [refreshing, setRefreshing] = useState(false);
-  const [showTicket, setShowTicket] = useState(false);
 
   const pair = market.rows[0];
+  const up = market.changePercent >= 0;
 
   const poke = useCallback(async () => {
     setRefreshing(true);
@@ -42,80 +41,145 @@ export function OilField({
   }, [poke]);
 
   return (
-    <div className="field-skin relative min-h-full overflow-hidden text-[#d8c6a0]">
+    <div className="field-skin flex min-h-svh flex-col text-[#f0d7a0]">
       <div className="field-grain pointer-events-none absolute inset-0" />
-      <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center px-4 py-10 sm:px-6 lg:py-14">
-        <nav className="mb-12 flex w-full items-center justify-between font-mono text-[10px] tracking-[0.28em] text-[#d8c6a0]/50 uppercase">
-          <span>oil pair</span>
-          <div className="flex gap-5">
-            <span className="text-[#c4a36a]">field</span>
-            <Link href="/term" className="hover:text-[#efe4c4]">
-              shell
-            </Link>
-            <Link href="/desk" className="hover:text-[#efe4c4]">
-              desk
-            </Link>
-            <button
-              type="button"
-              onClick={() => void poke()}
-              disabled={refreshing}
-              className="hover:text-[#efe4c4] disabled:opacity-50"
-            >
-              {refreshing ? "reading" : "refresh"}
-            </button>
-          </div>
-        </nav>
 
-        <p className="font-mono text-[11px] tracking-[0.45em] text-[#c4a36a] uppercase">
-          paired to {PAIR.name}
-        </p>
-        <h1 className="oil-stamp font-heading mt-3 text-[26vw] leading-[0.8] tracking-[0.18em] text-[#f0d7a0] sm:text-9xl">
-          OIL
-        </h1>
-        <p className="font-catalog mt-5 max-w-md text-center text-lg leading-snug text-[#efe4c4]/85">
-          One stock. One token. Exxon moves, {TOKEN.symbol} moves.
-        </p>
-
-        <div className="mt-12 w-full">
-          {pair ? (
-            <PairMachine
-              oilPrice={market.price}
-              oilChange={market.changePercent}
-              xomPrice={pair.price}
-              xomChange={pair.changePercent}
-              live={market.source === "live"}
-            />
-          ) : (
-            <p className="text-center font-mono text-sm text-[#c45c3a]">
-              the pair lamp is dark.
-            </p>
-          )}
+      <div className="relative z-10 overflow-hidden border-b border-[#f0b429] bg-[#f0b429] text-[#1a1208]">
+        <div className="animate-marquee flex w-max gap-16 py-1.5 font-heading text-sm tracking-[0.28em] uppercase">
+          <Tape market={market} />
+          <Tape market={market} />
         </div>
+      </div>
 
-        <p className="font-catalog mt-8 max-w-lg text-center text-sm leading-relaxed text-[#d8c6a0]/65">
-          {TOKEN.symbol} is Exxon&apos;s last print, divided by {TOKEN.divisor}.
-          Not a barrel. Not a basket. Just {PAIR.symbol} on the glass.
-        </p>
+      <header className="relative z-10 flex items-center justify-between px-4 py-3 font-mono text-[10px] tracking-[0.28em] uppercase sm:px-6">
+        <span className="text-[#c4a36a]">{TOKEN.symbol} × {PAIR.symbol}</span>
+        <nav className="flex gap-5 text-[#f0d7a0]/70">
+          <span className="text-[#f0b429]">floor</span>
+          <Link href="/term" className="hover:text-[#fff1c2]">
+            shell
+          </Link>
+          <Link href="/desk" className="hover:text-[#fff1c2]">
+            desk
+          </Link>
+          <button
+            type="button"
+            onClick={() => void poke()}
+            disabled={refreshing}
+            className="hover:text-[#fff1c2] disabled:opacity-50"
+          >
+            {refreshing ? "reading" : "refresh"}
+          </button>
+        </nav>
+      </header>
 
-        <button
-          type="button"
-          onClick={() => setShowTicket((value) => !value)}
-          className="mt-10 border border-[#c4a36a]/40 px-5 py-2 font-mono text-[10px] tracking-[0.32em] text-[#c4a36a] uppercase hover:border-[#c4a36a] hover:text-[#efe4c4]"
-        >
-          {showTicket ? "close window" : "open window"}
-        </button>
+      <main className="relative z-10 grid flex-1 lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="flex flex-col justify-between border-[#f0b429]/20 px-5 py-6 sm:px-8 lg:border-r">
+          <div>
+            <p className="font-mono text-[11px] tracking-[0.4em] text-[#f0b429] uppercase">
+              paired to exxon · nobody else
+            </p>
+            <h1 className="oil-stamp font-heading mt-3 text-[28vw] leading-[0.78] tracking-tight text-[#ffe08a] lg:text-[9.5rem]">
+              OIL
+            </h1>
+            <p className="font-heading mt-4 max-w-md text-2xl tracking-wide text-[#fff1c2]">
+              if daddy {PAIR.symbol} pumps, we pump.
+            </p>
+            <p className="font-catalog mt-3 max-w-md text-base text-[#f0d7a0]/70">
+              One name on the tape. {TOKEN.symbol} is {PAIR.symbol} divided by{" "}
+              {TOKEN.divisor}. That is the whitepaper.
+            </p>
+          </div>
+          <p className="mt-10 font-mono text-[11px] tracking-[0.18em] text-[#f0d7a0]/35 uppercase">
+            paper floor · not a barrel · not advice
+          </p>
+        </section>
 
-        {showTicket ? (
-          <div className="mt-6 w-full max-w-md border border-[#c4a36a]/20 bg-black/30 p-5">
+        <section className="flex flex-col gap-6 bg-black/25 px-5 py-6 sm:px-8">
+          <div className="grid grid-cols-2 gap-3">
+            <Quote
+              label={TOKEN.symbol}
+              value={formatUsd(market.price, true)}
+              change={formatPercent(market.changePercent)}
+              up={up}
+              huge
+            />
+            <Quote
+              label={PAIR.symbol}
+              value={pair ? formatUsd(pair.price) : "—"}
+              change={pair ? formatPercent(pair.changePercent) : "—"}
+              up={pair ? pair.changePercent >= 0 : false}
+            />
+          </div>
+          <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase">
+            <span
+              className={
+                market.source === "live" ? "text-[#8fbe6a]" : "text-[#d07050]"
+              }
+            >
+              {market.source === "live" ? "● live tape" : "● held tape"}
+            </span>
+            <span className="text-[#f0d7a0]/40">
+              {PAIR.symbol} / {TOKEN.divisor}
+            </span>
+          </div>
+          <div className="border border-[#f0b429]/25 bg-[#120e08]/80 p-5">
             <FieldTicket price={market.price} />
           </div>
-        ) : null}
+        </section>
+      </main>
+    </div>
+  );
+}
 
-        <footer className="mt-16 w-full border-t border-[#d8c6a0]/10 pt-5 text-center text-[11px] leading-relaxed text-[#d8c6a0]/35">
-          Paper pair against {PAIR.symbol} {pair ? formatUsd(pair.price) : ""}.
-          Experimental desk. Not advice.
-        </footer>
-      </div>
+function Tape({ market }: { market: MarketSnapshot }) {
+  const pair = market.rows[0];
+  const text = [
+    TOKEN.symbol,
+    formatUsd(market.price, true),
+    formatPercent(market.changePercent),
+    PAIR.symbol,
+    pair ? formatUsd(pair.price) : "",
+    "if exxon pumps we pump",
+    "one stock one token",
+    "drill baby drill",
+  ]
+    .filter(Boolean)
+    .join("   ·   ");
+  return <span>{text}</span>;
+}
+
+function Quote({
+  label,
+  value,
+  change,
+  up,
+  huge,
+}: {
+  label: string;
+  value: string;
+  change: string;
+  up: boolean;
+  huge?: boolean;
+}) {
+  return (
+    <div className="border border-[#f0b429]/20 bg-[#0c0a07] p-4">
+      <p className="font-mono text-[10px] tracking-[0.28em] text-[#c4a36a] uppercase">
+        {label}
+      </p>
+      <p
+        className={`phosphor mt-2 font-heading tracking-wide text-[#c8f08a] ${
+          huge ? "text-4xl sm:text-5xl" : "text-3xl"
+        }`}
+      >
+        {value}
+      </p>
+      <p
+        className={`mt-1 font-mono text-sm ${
+          up ? "text-[#8fbe6a]" : "text-[#d07050]"
+        }`}
+      >
+        {change}
+      </p>
     </div>
   );
 }
