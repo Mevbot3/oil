@@ -75,18 +75,12 @@ export function OilField({
   return (
     <div className="field-skin flex min-h-svh flex-col text-[#f0d7a0]">
       <div className="field-grain pointer-events-none absolute inset-0 z-0" />
-      <div className="oil-sheen" />
-      <div className="oil-film" />
+      <div className="lease-grid" />
+      <div className="well-rings" />
+      <div className="horizon-flare" />
       <div className="field-watermark pointer-events-none" aria-hidden>
         OIL OIL OIL OIL
       </div>
-      <div className="oil-drip left-[8%]" />
-      <div className="oil-drip oil-drip-2" />
-      <div className="oil-drip oil-drip-3" />
-      <div className="oil-drip oil-drip-4" />
-      <div className="oil-blob left-[8%] top-[8%] size-80 bg-[#f0b429]/18" />
-      <div className="oil-blob right-[4%] top-[36%] size-96 bg-[#3cb87a]/12" />
-      <div className="oil-blob bottom-[6%] left-[28%] size-72 bg-[#7a3ad4]/10" />
 
       <div className="hazard-bar relative z-10 h-2" />
 
