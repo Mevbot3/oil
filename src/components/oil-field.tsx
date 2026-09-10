@@ -10,7 +10,7 @@ import {
 } from "@/lib/format";
 import { BarrelMark } from "@/components/logo";
 
-const CONTRACT = "0x000000000000000000000000";
+const CONTRACT = "0x00069420";
 
 const STEPS = [
   {
