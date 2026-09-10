@@ -15,7 +15,7 @@ const OIL_CA = "0x00069420";
 const PONS_TRADE = "https://ponsfamily.com";
 const CHART = `https://dexscreener.com/robinhood/${OIL_CA}`;
 const EXPLORER = `https://robinhoodchain.blockscout.com/address/${OIL_CA}`;
-const TWITTER = "https://x.com/oilcoincash";
+const TWITTER = "https://x.com/OILCOINonRH";
 
 async function copyText(value: string) {
   try {
