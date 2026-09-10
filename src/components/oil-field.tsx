@@ -88,20 +88,39 @@ export function OilField({
       <div className="relative z-10 flex min-h-svh flex-col">
       <div className="hazard-bar h-2" />
 
-      <header className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 sm:px-8">
-        <div className="flex items-center gap-2">
-          <BarrelMark className="size-9" />
-          <span className="font-heading text-lg tracking-[0.22em] text-[#ffe08a]">
-            OIL
-          </span>
+      <header className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-[#f0b429]/15 bg-[#0c0a07]/55 px-4 py-4 sm:px-8">
+        <div className="flex min-w-0 items-center gap-2">
+          <BarrelMark className="size-9 shrink-0" />
+          <div className="min-w-0">
+            <p className="font-heading text-lg tracking-[0.22em] text-[#ffe08a]">
+              OIL
+            </p>
+            <p className="font-mono text-[10px] tracking-[0.18em] text-[#f0b429]/65 uppercase">
+              lease 69420
+            </p>
+          </div>
         </div>
         <ContractSlot />
-        <p className="justify-self-end font-mono text-[11px] tracking-[0.18em] text-[#f0b429]/70">
-          oilcoin.cash
-        </p>
+        <div className="justify-self-end text-right">
+          <div className="flex items-center justify-end gap-2">
+            <span
+              className={`size-2 rounded-full ${
+                market.source === "live"
+                  ? "bg-[#8fbe6a] lamp-live"
+                  : "bg-[#f0b429]/40"
+              }`}
+            />
+            <p className="font-heading text-sm tracking-wide text-[#ffe08a] sm:text-base">
+              {formatUsd(market.price, true)}
+            </p>
+          </div>
+          <p className="font-mono text-[10px] tracking-[0.16em] text-[#f0b429]/70 uppercase">
+            oilcoin.cash
+          </p>
+        </div>
       </header>
 
-      <div className="overflow-hidden border-y border-[#f0b429]/20 bg-[#0c0a07]/90">
+      <div className="overflow-hidden border-b border-[#f0b429]/20 bg-[#0c0a07]/90">
         <div className="animate-marquee flex w-max gap-10 py-2 font-mono text-[11px] tracking-[0.18em] text-[#f0b429] uppercase">
           {[...tape, ...tape].map((item, index) => (
             <span key={`${item}-${index}`}>{item}</span>
@@ -109,26 +128,77 @@ export function OilField({
         </div>
       </div>
 
+      <div className="lease-plate">
+        <span>well {CONTRACT}</span>
+        <span>Pons · Robinhood Chain</span>
+        <span>5% buy · 5% sell · treasury</span>
+        <span>
+          {PAIR.symbol} / {TOKEN.divisor}
+        </span>
+        <span>1B paper supply</span>
+        <span className={market.source === "live" ? "text-[#8fbe6a]" : ""}>
+          {market.source === "live" ? "tape open" : "tape held"}
+        </span>
+      </div>
+
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-10 sm:px-8">
         <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
-          <div className="flex flex-col justify-end">
-            <p className="font-mono text-[11px] tracking-[0.32em] text-[#f0b429] uppercase">
-              one market · one fund
+          <div className="plat-frame flex flex-col justify-end">
+            <span className="plat-corner-bl" aria-hidden />
+            <span className="plat-corner-br" aria-hidden />
+            <div className="flex flex-wrap gap-2">
+              <span className="stamp-chip">permit open</span>
+              <span className="stamp-chip">USO peg</span>
+              <span className="stamp-chip">paper lot</span>
+              <span className="stamp-chip">one fund</span>
+            </div>
+            <p className="font-mono mt-5 text-[11px] tracking-[0.32em] text-[#f0b429] uppercase">
+              one market · one barrel
             </p>
-            <h1 className="oil-stamp font-heading mt-3 text-5xl leading-[0.9] tracking-tight text-[#ffe08a] sm:text-7xl">
-              DRILL BABY DRILL
+            <h1 className="oil-stamp font-heading mt-2 text-5xl leading-[0.86] tracking-tight text-[#ffe08a] sm:text-7xl">
+              DRILL
+              <br />
+              BABY DRILL
             </h1>
-            <p className="font-catalog mt-5 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
+            <p className="font-heading mt-3 text-lg tracking-wide text-[#f0b429] sm:text-xl">
+              IF THE BARREL PUMPS, WE PUMP.
+            </p>
+            <p className="font-catalog mt-4 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
               $OIL is paired to oil. The peg is USO over {TOKEN.divisor}. It
               lives on Pons, on Robinhood Chain. Five percent on every buy and
-              every sell goes to the treasury.
+              every sell goes to the treasury. Hold the $OIL, get the barrel.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="formula-rail mt-6">
+              <FormulaCell
+                label={PAIR.symbol}
+                value={pair ? formatUsd(pair.price) : "—"}
+              />
+              <span className="formula-op">/</span>
+              <FormulaCell label="divisor" value={String(TOKEN.divisor)} />
+              <span className="formula-op">=</span>
+              <FormulaCell
+                label={TOKEN.symbol}
+                value={formatUsd(market.price, true)}
+              />
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="stamp-chip">5% buy</span>
+              <span className="stamp-chip">5% sell</span>
+              <span className="stamp-chip">to treasury</span>
+              <span className="stamp-chip">1B OIL</span>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href="#pair"
                 className="bg-[#f0b429] px-5 py-2.5 font-heading tracking-wide text-[#1a1208]"
               >
                 SEE THE PAIR
+              </a>
+              <a
+                href="#window"
+                className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
+              >
+                THE CUT
               </a>
             </div>
           </div>
@@ -342,24 +412,46 @@ function ContractSlot() {
   );
 }
 
+function FormulaCell({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="min-w-0">
+      <p className="font-mono text-[9px] tracking-[0.2em] text-[#f0d7a0]/45 uppercase">
+        {label}
+      </p>
+      <p className="font-heading mt-0.5 truncate text-lg text-[#ffe08a] sm:text-xl">
+        {value}
+      </p>
+    </div>
+  );
+}
+
 function FeaturedCard({ market }: { market: MarketSnapshot }) {
   const pair = market.rows[0];
   const up = market.changePercent >= 0;
   return (
     <article className="relative flex flex-col justify-between overflow-hidden border border-[#f0b429]/35 bg-[#0c0a07]/90 p-5">
       <div className="hazard-bar absolute inset-x-0 top-0 h-1.5" />
-      <div>
-        <p className="font-mono text-[10px] tracking-[0.28em] text-[#f0b429] uppercase">
-          well permit
-        </p>
-        <p className="font-heading mt-3 text-5xl tracking-wide text-[#ffe08a]">
-          {TOKEN.symbol}
-        </p>
-        <p className="mt-1 text-sm text-[#f0d7a0]/60">
-          {PAIR.name} · Pons · 5/5 treasury
+      <div className="mt-2 flex items-start justify-between gap-3">
+        <div>
+          <p className="font-mono text-[10px] tracking-[0.28em] text-[#f0b429] uppercase">
+            well permit
+          </p>
+          <p className="font-heading mt-3 text-5xl tracking-wide text-[#ffe08a]">
+            {TOKEN.symbol}
+          </p>
+          <p className="mt-1 text-sm text-[#f0d7a0]/60">
+            {PAIR.name} · Pons · 5/5 treasury
+          </p>
+        </div>
+        <p className="font-mono text-[10px] tracking-[0.16em] text-[#f0b429]/70 uppercase">
+          {CONTRACT}
         </p>
       </div>
-      <div className="mt-8">
+      <div className="mt-6 border border-[#f0b429]/20 bg-black/25 px-3 py-2 font-mono text-[11px] tracking-[0.12em] text-[#f0d7a0]/70 uppercase">
+        {PAIR.symbol} {pair ? formatUsd(pair.price) : "—"} / {TOKEN.divisor} ={" "}
+        <span className="text-[#c8f08a]">{formatUsd(market.price, true)}</span>
+      </div>
+      <div className="mt-6">
         <p className="phosphor font-heading text-5xl text-[#c8f08a] sm:text-6xl">
           {formatUsd(market.price, true)}
         </p>
@@ -370,13 +462,16 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
         >
           {formatPercent(market.changePercent)}
         </p>
+        <p className="mt-1 font-mono text-[10px] tracking-[0.16em] text-[#f0d7a0]/40 uppercase">
+          updated {formatTime(market.asOf)}
+        </p>
       </div>
       <div className="mt-6 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.16em] uppercase">
         <span className="border border-[#f0b429]/30 px-2 py-1">
           5/5 · treasury
         </span>
         <span className="border border-[#f0b429]/30 px-2 py-1">
-          {pair ? formatUsd(pair.price) : "—"}
+          hold $OIL · get USO
         </span>
         <span
           className={`border px-2 py-1 ${
