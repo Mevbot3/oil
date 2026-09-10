@@ -151,12 +151,21 @@
 
 .field-skin {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   min-height: 100vh;
   background:
     radial-gradient(ellipse 80% 32% at 50% 0%, rgba(240, 180, 41, 0.14), transparent 60%),
     radial-gradient(ellipse 90% 36% at 50% 100%, rgba(28, 14, 6, 0.7), transparent 62%),
     linear-gradient(180deg, #161820 0%, #12141a 46%, #1c120a 100%);
+}
+
+.field-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .field-grain {
@@ -213,38 +222,38 @@
 
 .pump-field {
   pointer-events: none;
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   overflow: hidden;
 }
 
 .derrick-art {
   position: absolute;
-  left: 0;
+  left: -2%;
   bottom: 0;
-  height: 92vh;
+  height: 78vh;
   width: auto;
-  opacity: 0.7;
-  filter: drop-shadow(0 0 22px rgba(240, 180, 41, 0.28));
+  opacity: 0.22;
+  filter: drop-shadow(0 0 22px rgba(240, 180, 41, 0.18));
 }
 
 .pumpjack-art {
   position: absolute;
-  right: -2%;
+  right: -8%;
   bottom: 0;
-  width: min(88vw, 980px);
+  width: min(52vw, 640px);
   height: auto;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 26px rgba(240, 180, 41, 0.3));
+  opacity: 0.24;
+  filter: drop-shadow(0 0 26px rgba(240, 180, 41, 0.2));
 }
 
 .pumpjack-far {
-  left: 18%;
+  left: 8%;
   right: auto;
-  bottom: 8%;
-  width: min(42vw, 420px);
-  opacity: 0.28;
+  bottom: 4%;
+  width: min(28vw, 320px);
+  opacity: 0.14;
   filter: blur(0.3px);
 }
 
@@ -292,14 +301,14 @@
 
 @media (max-width: 640px) {
   .derrick-art {
-    height: 62vh;
-    opacity: 0.5;
+    height: 42vh;
+    opacity: 0.16;
   }
 
   .pumpjack-art {
-    width: 96vw;
-    right: -10%;
-    opacity: 0.72;
+    width: 58vw;
+    right: -18%;
+    opacity: 0.18;
   }
 
   .pumpjack-far {

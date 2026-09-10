@@ -75,17 +75,20 @@ export function OilField({
 
   return (
     <div className="field-skin flex min-h-svh flex-col text-[#f0d7a0]">
-      <div className="field-grain pointer-events-none absolute inset-0 z-0" />
-      <div className="lease-grid" />
-      <div className="horizon-flare" />
-      <PumpField />
-      <div className="field-watermark pointer-events-none" aria-hidden>
-        OIL OIL OIL OIL
+      <div className="field-backdrop" aria-hidden>
+        <div className="field-grain pointer-events-none absolute inset-0" />
+        <div className="lease-grid" />
+        <div className="horizon-flare" />
+        <PumpField />
+        <div className="field-watermark pointer-events-none">
+          OIL OIL OIL OIL
+        </div>
       </div>
 
-      <div className="hazard-bar relative z-10 h-2" />
+      <div className="relative z-10 flex min-h-svh flex-col">
+      <div className="hazard-bar h-2" />
 
-      <header className="relative z-10 grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 sm:px-8">
+      <header className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 sm:px-8">
         <div className="flex items-center gap-2">
           <BarrelMark className="size-9" />
           <span className="font-heading text-lg tracking-[0.22em] text-[#ffe08a]">
@@ -98,7 +101,7 @@ export function OilField({
         </p>
       </header>
 
-      <div className="relative z-10 overflow-hidden border-y border-[#f0b429]/20 bg-black/40">
+      <div className="overflow-hidden border-y border-[#f0b429]/20 bg-[#0c0a07]/90">
         <div className="animate-marquee flex w-max gap-10 py-2 font-mono text-[11px] tracking-[0.18em] text-[#f0b429] uppercase">
           {[...tape, ...tape].map((item, index) => (
             <span key={`${item}-${index}`}>{item}</span>
@@ -106,13 +109,13 @@ export function OilField({
         </div>
       </div>
 
-      <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-10 sm:px-8">
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-10 sm:px-8">
         <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
           <div className="flex flex-col justify-end">
             <p className="font-mono text-[11px] tracking-[0.32em] text-[#f0b429] uppercase">
               one market · one fund
             </p>
-            <h1 className="font-heading mt-3 text-5xl leading-[0.9] tracking-tight text-[#ffe08a] sm:text-7xl">
+            <h1 className="oil-stamp font-heading mt-3 text-5xl leading-[0.9] tracking-tight text-[#ffe08a] sm:text-7xl">
               DRILL BABY DRILL
             </h1>
             <p className="font-catalog mt-5 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
@@ -166,7 +169,7 @@ export function OilField({
               updated {formatTime(market.asOf)}
             </p>
           </div>
-          <div className="border border-[#f0b429]/25 bg-black/35 p-5 sm:p-6">
+          <div className="border border-[#f0b429]/25 bg-[#0c0a07]/88 p-5 sm:p-6">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <p className="font-heading text-4xl tracking-wide text-[#ffe08a]">
@@ -218,7 +221,7 @@ export function OilField({
             {STEPS.map((step) => (
               <article
                 key={step.kicker}
-                className="border border-[#f0b429]/20 bg-black/30 p-5"
+                className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5"
               >
                 <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
                   {step.kicker}
@@ -269,7 +272,7 @@ export function OilField({
               all 1 · new 0 · migrated 0
             </p>
           </div>
-          <ul className="divide-y divide-[#f0b429]/15 border border-[#f0b429]/20 bg-black/30">
+          <ul className="divide-y divide-[#f0b429]/15 border border-[#f0b429]/20 bg-[#0c0a07]/88">
             <Print
               who={TOKEN.symbol}
               what={`peg ${formatUsd(market.price, true)}`}
@@ -295,6 +298,7 @@ export function OilField({
           treasury. Quotes from the public tape. Not a security, not advice.
         </footer>
       </main>
+      </div>
     </div>
   );
 }
@@ -342,7 +346,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
   const pair = market.rows[0];
   const up = market.changePercent >= 0;
   return (
-    <article className="relative flex flex-col justify-between overflow-hidden border border-[#f0b429]/35 bg-black/45 p-5">
+    <article className="relative flex flex-col justify-between overflow-hidden border border-[#f0b429]/35 bg-[#0c0a07]/90 p-5">
       <div className="hazard-bar absolute inset-x-0 top-0 h-1.5" />
       <div>
         <p className="font-mono text-[10px] tracking-[0.28em] text-[#f0b429] uppercase">
@@ -435,7 +439,7 @@ function Row({
 
 function Mini({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border border-[#f0b429]/20 bg-black/30 px-2 py-2">
+    <div className="border border-[#f0b429]/20 bg-[#0c0a07]/88 px-2 py-2">
       <p className="font-mono text-[10px] tracking-widest text-[#f0b429]/70 uppercase">
         {label}
       </p>
