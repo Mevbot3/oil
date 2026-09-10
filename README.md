@@ -60,9 +60,12 @@ npm run share
 
 That prints an `https://*.trycloudflare.com` URL. Anyone with the link can open the site. The link dies when you stop the tunnel or this session.
 
-## X avatar
+## X avatar and banner
 
-Upload `public/brand/x-avatar.png` as the @OILCOINonRH profile photo. It is 800×800, circle-crop safe, site barrel plus `$OIL`. Vector source is `public/brand/x-avatar.svg`.
+- Avatar: `public/brand/x-avatar.png` — 800×800, circle-crop safe, site barrel plus `$OIL`.
+- Banner: `public/brand/oil-x-banner.png` — night field, smaller barrel on the right.
+
+Download the banner from [oilcoin.cash/api/download/banner](https://www.oilcoin.cash/api/download/banner). That link always sends the current file.
 
 One page. Live USO tape. On Pons / Robinhood Chain. 3/3 buys USO.
 
