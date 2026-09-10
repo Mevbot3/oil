@@ -20,7 +20,7 @@ type Line = {
 
 function openingLines(market: MarketSnapshot): Line[] {
   return [
-    { kind: "sys", text: "OIL RIG v69  ·  phosphor edition" },
+    { kind: "sys", text: "OIL RIG  ·  phosphor edition" },
     { kind: "sys", text: "tape locked to USO." },
     ...market.rows.map((row) => ({
       kind: "sys" as const,
@@ -38,7 +38,7 @@ function openingLines(market: MarketSnapshot): Line[] {
     { kind: "out", text: renderQuote(market) },
     {
       kind: "sys",
-      text: "type help. ape 69. sell 1000. poke the tape.",
+      text: "type help. ape 100. sell 1000. poke the tape.",
     },
   ];
 }

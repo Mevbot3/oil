@@ -8,7 +8,7 @@ type Side = "buy" | "sell";
 
 export function FieldTicket({ price }: { price: number }) {
   const [side, setSide] = useState<Side>("buy");
-  const [amount, setAmount] = useState("69");
+  const [amount, setAmount] = useState("100");
   const [fill, setFill] = useState<string | null>(null);
 
   const parsed = Number(amount);

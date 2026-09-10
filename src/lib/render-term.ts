@@ -39,7 +39,7 @@ export function renderQuote(market: MarketSnapshot): string {
     "",
     `${TOKEN.symbol}  ${formatUsd(market.price, true)}  ${formatPercent(market.changePercent)}  [${mood}]  [${tape}]`,
     TOKEN.tagline,
-    `formula  ${PAIR.symbol} / ${TOKEN.divisor}`,
+    `pair     ${PAIR.symbol}`,
     pair
       ? `pair     ${pair.symbol}  ${formatUsd(pair.price)}  ${formatPercent(pair.changePercent)}  ${pair.name}`
       : "",
@@ -58,7 +58,7 @@ export function renderWhitepaper(): string {
     "",
     "$OIL does not trade against a dollar. it trades against a barrel.",
     "",
-    `OIL = ${PAIR.symbol} / ${TOKEN.divisor}`,
+    `$OIL trades against ${PAIR.symbol}.`,
     "",
     "on Pons, on Robinhood Chain.",
     "3% buy. 3% sell. that cut buys USO.",

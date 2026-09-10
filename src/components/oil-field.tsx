@@ -84,7 +84,7 @@ export function OilField({
     `${TOKEN.symbol} ${formatUsd(market.price, true)}`,
     `${formatPercent(market.changePercent)} today`,
     `${PAIR.symbol} ${pair ? formatUsd(pair.price) : "—"}`,
-    `formula ${PAIR.symbol} / ${TOKEN.divisor}`,
+    `paired to ${PAIR.symbol}`,
     market.source === "live" ? "tape open" : "tape held",
     "3% buy · 3% sell · buys USO",
     "on Pons · Robinhood Chain",
@@ -108,7 +108,7 @@ export function OilField({
                 OIL
               </p>
               <p className="font-mono text-[10px] tracking-[0.18em] text-[#f0b429]/65 uppercase">
-                lease 69420
+                on Pons
               </p>
             </div>
           </div>
@@ -143,9 +143,7 @@ export function OilField({
         <span>well {OIL_CA}</span>
         <span>Pons · Robinhood Chain</span>
         <span>3% buy · 3% sell · buys USO</span>
-        <span>
-          {PAIR.symbol} / {TOKEN.divisor}
-        </span>
+        <span>paired to {PAIR.symbol}</span>
         <span>1B supply</span>
         <span className={market.source === "live" ? "text-[#8fbe6a]" : ""}>
           {market.source === "live" ? "tape open" : "tape held"}
@@ -176,17 +174,14 @@ export function OilField({
             </p>
             <p className="font-catalog mt-4 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
               Most tokens trade against a dollar. $OIL trades against a barrel
-              — USO, as close to crude as this chain has. The peg is USO over{" "}
-              {TOKEN.divisor}. On Pons, on Robinhood Chain.
+              — USO, as close to crude as this chain has. On Pons, on
+              Robinhood Chain.
             </p>
             <div className="formula-rail mt-6">
               <FormulaCell
                 label={PAIR.symbol}
                 value={pair ? formatUsd(pair.price) : "—"}
               />
-              <span className="formula-op">/</span>
-              <FormulaCell label="divisor" value={String(TOKEN.divisor)} />
-              <span className="formula-op">=</span>
               <FormulaCell
                 label={TOKEN.symbol}
                 value={formatUsd(market.price, true)}
@@ -283,9 +278,9 @@ export function OilField({
                 sub={pair ? formatPercent(pair.changePercent) : "—"}
               />
               <Row
-                label="formula"
-                value={`${PAIR.symbol} / ${TOKEN.divisor}`}
-                sub="one name. one peg."
+                label="pair"
+                value={PAIR.symbol}
+                sub="one pool. one barrel."
               />
             </div>
           </div>
@@ -314,8 +309,7 @@ export function OilField({
                 {TOKEN.symbol}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
-                Fixed supply. One name. Pegged as {PAIR.symbol} over{" "}
-                {TOKEN.divisor}. If the fund pumps, we pump.
+                Fixed supply. One name. If the fund pumps, we pump.
               </p>
             </article>
             <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
@@ -431,11 +425,7 @@ export function OilField({
               what={pair ? formatUsd(pair.price) : "—"}
               meta={pair ? formatPercent(pair.changePercent) : "—"}
             />
-            <Print
-              who="formula"
-              what={`${PAIR.symbol} / ${TOKEN.divisor}`}
-              meta="locked"
-            />
+            <Print who="pair" what={`${PAIR.symbol} pool`} meta="one barrel" />
             <Print who="fees" what="3% buy / 3% sell" meta="buys USO" />
           </ul>
         </section>
@@ -546,8 +536,11 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
         </p>
       </div>
       <div className="mt-6 border border-[#f0b429]/20 bg-black/25 px-3 py-2 font-mono text-[11px] tracking-[0.12em] text-[#f0d7a0]/70 uppercase">
-        {PAIR.symbol} {pair ? formatUsd(pair.price) : "—"} / {TOKEN.divisor} ={" "}
-        <span className="text-[#c8f08a]">{formatUsd(market.price, true)}</span>
+        {PAIR.symbol} {pair ? formatUsd(pair.price) : "—"}
+        <span className="text-[#f0d7a0]/35"> · </span>
+        <span className="text-[#c8f08a]">
+          {TOKEN.symbol} {formatUsd(market.price, true)}
+        </span>
       </div>
       <div className="mt-6">
         <p className="phosphor font-heading text-5xl text-[#c8f08a] sm:text-6xl">

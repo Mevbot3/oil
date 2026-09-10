@@ -292,7 +292,7 @@ function ReadyState({
               the pair
             </CardTitle>
             <CardDescription>
-              $OIL is USO divided by {TOKEN.divisor}. that is the whole bit.
+              $OIL trades against USO. that is the whole bit.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -325,10 +325,7 @@ function ReadyState({
           </CardHeader>
           <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
             <p>
-              $OIL is not a claim on barrels. it is USO, divided.
-            </p>
-            <p className="font-mono text-amber-100">
-              OIL = USO / {TOKEN.divisor}
+              $OIL is not a claim on barrels. it trades against USO.
             </p>
             <p>
               if the fund pumps, we pump. if the fund dumps, we post through it.

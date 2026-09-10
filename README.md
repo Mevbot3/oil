@@ -2,10 +2,6 @@
 
 $OIL launches on Pons, paired to USO.
 
-```
-OIL = USO / 69
-```
-
 If the oil fund pumps, $OIL pumps. On Pons, on Robinhood Chain. A 3% fee on every buy and every sell buys USO.
 
 The public name is **[oilcoin.cash](https://oilcoin.cash)**.

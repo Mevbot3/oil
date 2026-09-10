@@ -11,7 +11,7 @@ type Side = "buy" | "sell";
 
 export function SwapDesk({ price }: { price: number }) {
   const [side, setSide] = useState<Side>("buy");
-  const [amount, setAmount] = useState("69");
+  const [amount, setAmount] = useState("100");
   const [fill, setFill] = useState<string | null>(null);
 
   const parsed = Number(amount);
@@ -79,7 +79,7 @@ export function SwapDesk({ price }: { price: number }) {
             setFill(null);
           }}
           className="h-12 font-mono text-lg"
-          placeholder={side === "buy" ? "69" : "1000"}
+          placeholder={side === "buy" ? "100" : "1000"}
         />
       </label>
 
