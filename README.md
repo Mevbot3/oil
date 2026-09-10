@@ -6,7 +6,7 @@ A paper token paired to USO.
 OIL = USO / 69
 ```
 
-If the oil fund pumps, $OIL pumps. The coin takes a 3/3 fee. All of it redirects to holders, automatically, in USO.
+If the oil fund pumps, $OIL pumps. On Pons, on Robinhood Chain. A 5% fee on every buy and every sell goes to the treasury.
 
 ## Run it
 
@@ -27,7 +27,7 @@ npm run share
 
 That prints an `https://*.trycloudflare.com` URL. Anyone with the link can open the site. The link dies when you stop the tunnel or this session.
 
-One page. Live USO tape. 3/3 fees to holders, paid in USO.
+One page. Live USO tape. On Pons / Robinhood Chain. 5/5 to the treasury.
 
 ```bash
 npm run oil

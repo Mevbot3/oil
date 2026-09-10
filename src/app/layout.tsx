@@ -26,7 +26,7 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   title: "OIL — paired to USO",
   description:
-    "$OIL is paired to USO. 3/3 fees redirect to holders, paid automatically in USO.",
+    "$OIL is paired to USO. On Pons, on Robinhood Chain. 5% buy and 5% sell go to the treasury.",
   icons: {
     icon: "/favicon.svg",
   },
