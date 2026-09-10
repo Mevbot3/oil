@@ -479,6 +479,7 @@
 }
 
 .formula-op {
+  justify-self: center;
   font-family: var(--font-anton), sans-serif;
   color: #f0b429;
   font-size: 1.6rem;
