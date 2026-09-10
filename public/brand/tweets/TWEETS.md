@@ -4,7 +4,7 @@ Images in this folder. Attach one per post.
 
 ## 1. Token is live
 
-Use `05-token-is-live.png` or `01-live.png`.
+Use `01-live.png`. Backup: `05-token-is-live.png`.
 
 ```
 $OIL is live.
