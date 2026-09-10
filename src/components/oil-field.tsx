@@ -9,6 +9,7 @@ import {
   formatUsd,
 } from "@/lib/format";
 import { BarrelMark } from "@/components/logo";
+import { PumpField } from "@/components/pump-field";
 
 const CONTRACT = "0x00069420";
 
@@ -76,8 +77,8 @@ export function OilField({
     <div className="field-skin flex min-h-svh flex-col text-[#f0d7a0]">
       <div className="field-grain pointer-events-none absolute inset-0 z-0" />
       <div className="lease-grid" />
-      <div className="well-rings" />
       <div className="horizon-flare" />
+      <PumpField />
       <div className="field-watermark pointer-events-none" aria-hidden>
         OIL OIL OIL OIL
       </div>
