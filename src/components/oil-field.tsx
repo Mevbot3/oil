@@ -48,44 +48,6 @@ const STEPS = [
   },
 ];
 
-const PADS = [
-  {
-    kicker: "01",
-    title: "LEASE UP",
-    status: "done",
-    stamp: "on the lease",
-    body: "The mark is up. The field is lit. X is live. No presale was papered in.",
-  },
-  {
-    kicker: "02",
-    title: "FIRST OIL",
-    status: "next",
-    stamp: "on Pons",
-    body: "Fair launch. $OIL against USO. No team bag. No unlock schedule.",
-  },
-  {
-    kicker: "03",
-    title: "THE CUT",
-    status: "set",
-    stamp: "the rule",
-    body: "Three percent in, three percent out. That cut buys USO. The rule does not move.",
-  },
-  {
-    kicker: "04",
-    title: "THE TAPE",
-    status: "next",
-    stamp: "the well number",
-    body: "Real contract. Chart. Explorer. The placeholder comes off the plate.",
-  },
-  {
-    kicker: "05",
-    title: "SIT ON IT",
-    status: "open",
-    stamp: "the hold",
-    body: "Hold $OIL. Sit on the barrel. If the fund pumps, we pump.",
-  },
-] as const;
-
 export function OilField({
   initialMarket,
 }: {
@@ -245,12 +207,6 @@ export function OilField({
                 className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
               >
                 SEE THE PAIR
-              </a>
-              <a
-                href="#wellplan"
-                className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
-              >
-                WELL PLAN
               </a>
             </div>
           </div>
@@ -425,47 +381,6 @@ export function OilField({
               </p>
             </article>
           </div>
-        </section>
-
-        <section id="wellplan" className="scroll-mt-8 space-y-6">
-          <div>
-            <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
-              the lease
-            </p>
-            <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
-              Well plan.
-            </h2>
-            <p className="font-catalog mt-4 max-w-2xl text-lg leading-relaxed text-[#f0d7a0]/75">
-              Not a moon map. Five pads. Lease up, hit first oil, keep
-              the cut on USO, stamp the real well number, sit on the barrel.
-            </p>
-          </div>
-          <ol className="well-plan">
-            {PADS.map((pad, index) => (
-              <li key={pad.kicker} className="well-pad">
-                <div className="well-rail" aria-hidden>
-                  <span className={`well-bit well-bit-${pad.status}`} />
-                  {index < PADS.length - 1 ? <span className="well-bore" /> : null}
-                </div>
-                <article className="min-w-0 border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
-                      {pad.kicker} · {pad.stamp}
-                    </p>
-                    <span className={`well-stamp well-stamp-${pad.status}`}>
-                      {pad.status}
-                    </span>
-                  </div>
-                  <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
-                    {pad.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
-                    {pad.body}
-                  </p>
-                </article>
-              </li>
-            ))}
-          </ol>
         </section>
 
         <section id="fillup" className="scroll-mt-8 space-y-6">
