@@ -23,8 +23,8 @@ const STEPS = [
   },
   {
     kicker: "03",
-    title: "TREASURY",
-    body: "Five in. Five out. That cut does not bounce to holders. It sits in the treasury on Pons.",
+    title: "USO",
+    body: "You buy $OIL. You receive USO. That is the bit. Hold the meme, get the barrel.",
   },
 ];
 
@@ -206,7 +206,7 @@ export function OilField({
               how the coin pays
             </p>
             <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
-              Drill. Pair. Treasury.
+              Drill. Pair. USO.
             </h2>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
