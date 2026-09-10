@@ -183,17 +183,34 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 18% at 50% 67%, rgba(240, 180, 41, 0.22), transparent 70%),
+    radial-gradient(circle at 78% 16%, rgba(232, 238, 248, 0.12), transparent 12%),
+    radial-gradient(ellipse 80% 22% at 50% 64%, rgba(240, 180, 41, 0.28), transparent 72%),
     linear-gradient(
       180deg,
-      #05060a 0%,
-      #080b12 38%,
-      #141a24 58%,
-      #3a4252 65.5%,
-      #c4922a 67.6%,
-      #2a1c0c 69%,
-      #0c0e12 72%
+      #04050a 0%,
+      #0a1020 34%,
+      #151d2c 54%,
+      #4a5366 63.8%,
+      #e0b14a 66.6%,
+      #c45c18 67.8%,
+      #2a160c 69.4%,
+      #0c0e12 73%
     );
+}
+
+.haze-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 58%;
+  height: 14%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 210, 120, 0.1),
+    transparent
+  );
+  animation: haze-breathe 8s ease-in-out infinite;
 }
 
 .star-sheet,
@@ -205,7 +222,20 @@
 }
 
 .star-sheet {
-  animation: star-drift 90s linear infinite;
+  animation: star-drift 110s linear infinite;
+}
+
+.moon {
+  fill: #eef2f8;
+}
+
+.moon-glow {
+  fill: #dfe7f4;
+  opacity: 0.14;
+}
+
+.moon-shade {
+  fill: #05060a;
 }
 
 .star {
@@ -213,22 +243,93 @@
   animation: star-twinkle 3.6s ease-in-out infinite;
 }
 
+.star-bright {
+  fill: #fff8e8;
+}
+
+.star-spike {
+  stroke: rgba(255, 248, 232, 0.45);
+  stroke-width: 0.8;
+  animation: star-twinkle 3.6s ease-in-out infinite;
+}
+
+.shooting-star {
+  stroke: #f4efe4;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: shoot 11s linear infinite;
+}
+
+.cloud-sheet {
+  position: absolute;
+  inset: 0;
+}
+
+.cloud {
+  position: absolute;
+  height: 46px;
+  border-radius: 999px;
+  background: rgba(180, 196, 220, 0.07);
+  filter: blur(10px);
+  animation: cloud-slide 80s linear infinite;
+}
+
+.cloud-a {
+  top: 12%;
+  left: -10%;
+  width: 28%;
+}
+
+.cloud-b {
+  top: 18%;
+  left: 40%;
+  width: 22%;
+  animation-duration: 110s;
+  animation-delay: -40s;
+}
+
+.cloud-c {
+  top: 8%;
+  left: 70%;
+  width: 18%;
+  height: 32px;
+  animation-duration: 94s;
+  animation-delay: -18s;
+}
+
+.dawn-pulse {
+  animation: dawn-pulse 7s ease-in-out infinite;
+}
+
 .rig-ink {
   fill: none;
-  stroke: #0a0c10;
+  stroke: currentColor;
   stroke-width: 2.8;
   stroke-linejoin: round;
 }
 
 .rig-ink rect,
 .rig-ink path:last-child {
-  fill: #0a0c10;
+  fill: currentColor;
   stroke: none;
 }
 
 .rig-fill {
-  fill: #0a0c10;
+  fill: currentColor;
+  color: inherit;
+}
+
+.rig-far {
+  color: #2a3342;
+}
+
+.rig-mid {
   color: #0a0c10;
+}
+
+.rig-near {
+  color: #050608;
 }
 
 .well-glow {
@@ -237,22 +338,92 @@
   animation: well-pulse 3.2s ease-in-out infinite;
 }
 
+.flare-fire {
+  fill: #ff8a2a;
+  animation: flare-lick 0.55s ease-in-out infinite;
+  transform-origin: 0px 0px;
+  transform-box: fill-box;
+}
+
+.flare-core {
+  fill: #ffe08a;
+}
+
+.field-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 42%, transparent 40%, rgba(5, 6, 10, 0.28) 100%),
+    linear-gradient(90deg, rgba(5, 6, 10, 0.22), transparent 18%, transparent 82%, rgba(5, 6, 10, 0.22));
+}
+
 @keyframes star-drift {
   from {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(-8%, 0, 0);
+    transform: translate3d(-7%, 0, 0);
   }
 }
 
 @keyframes star-twinkle {
   0%,
   100% {
-    opacity: 0.35;
+    opacity: 0.28;
   }
   50% {
-    opacity: 0.95;
+    opacity: 1;
+  }
+}
+
+@keyframes shoot {
+  0%,
+  86% {
+    opacity: 0;
+    stroke-dasharray: 0 140;
+    stroke-dashoffset: 0;
+  }
+  88% {
+    opacity: 0.9;
+    stroke-dasharray: 28 140;
+    stroke-dashoffset: 0;
+  }
+  94% {
+    opacity: 0;
+    stroke-dasharray: 8 140;
+    stroke-dashoffset: -110;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cloud-slide {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-30%, 0, 0);
+  }
+}
+
+@keyframes haze-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dawn-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
   }
 }
 
@@ -262,14 +433,30 @@
     opacity: 0.16;
   }
   50% {
-    opacity: 0.34;
+    opacity: 0.4;
+  }
+}
+
+@keyframes flare-lick {
+  0%,
+  100% {
+    transform: scaleY(1) scaleX(0.92);
+  }
+  50% {
+    transform: scaleY(1.22) scaleX(1.08);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .star-sheet,
   .star,
-  .well-glow {
+  .star-spike,
+  .shooting-star,
+  .cloud,
+  .haze-band,
+  .dawn-pulse,
+  .well-glow,
+  .flare-fire {
     animation: none;
   }
 }
