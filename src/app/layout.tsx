@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://oilcoin.cash"),
   title: "OIL — oilcoin.cash",
   description:
-    "$OIL is paired to USO. On Pons, on Robinhood Chain. 3% buy and 3% sell go to the treasury.",
+    "$OIL launches on Pons, on Robinhood Chain. Paired to USO. 3% buy and 3% sell go to the treasury.",
   icons: {
     icon: "/favicon.svg",
   },

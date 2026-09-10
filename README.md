@@ -1,6 +1,6 @@
 # OIL ($OIL)
 
-A paper token paired to USO.
+$OIL launches on Pons, paired to USO.
 
 ```
 OIL = USO / 69
@@ -68,4 +68,4 @@ npm run oil
 
 Tape comes from Yahoo Finance. If it blinks, last known USO still runs the peg.
 
-This is a demo. Not financial advice. It is oil.
+Not financial advice. It is oil.

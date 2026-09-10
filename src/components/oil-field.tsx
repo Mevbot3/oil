@@ -129,7 +129,7 @@ export function OilField({
         <span>
           {PAIR.symbol} / {TOKEN.divisor}
         </span>
-        <span>1B paper supply</span>
+        <span>1B supply</span>
         <span className={market.source === "live" ? "text-[#8fbe6a]" : ""}>
           {market.source === "live" ? "tape open" : "tape held"}
         </span>
@@ -141,9 +141,9 @@ export function OilField({
             <span className="plat-corner-bl" aria-hidden />
             <span className="plat-corner-br" aria-hidden />
             <div className="flex flex-wrap gap-2">
-              <span className="stamp-chip">permit open</span>
+              <span className="stamp-chip">launching</span>
               <span className="stamp-chip">USO peg</span>
-              <span className="stamp-chip">paper lot</span>
+              <span className="stamp-chip">on Pons</span>
               <span className="stamp-chip">one fund</span>
             </div>
             <p className="font-mono mt-5 text-[11px] tracking-[0.32em] text-[#f0b429] uppercase">
@@ -183,16 +183,18 @@ export function OilField({
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="#pair"
+                href="https://ponsfamily.com"
+                target="_blank"
+                rel="noreferrer"
                 className="bg-[#f0b429] px-5 py-2.5 font-heading tracking-wide text-[#1a1208]"
               >
-                SEE THE PAIR
+                TRADE ON PONS
               </a>
               <a
-                href="#window"
+                href="#pair"
                 className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
               >
-                THE CUT
+                SEE THE PAIR
               </a>
             </div>
           </div>
@@ -210,7 +212,7 @@ export function OilField({
             label={PAIR.symbol}
             value={pair ? formatUsd(pair.price) : "—"}
           />
-          <Stat label="paper cap" value={formatCompactUsd(market.marketCap)} />
+          <Stat label="market cap" value={formatCompactUsd(market.marketCap)} />
           <Stat label="supply" value="1B OIL" />
           <Stat
             label="tape"
@@ -333,7 +335,7 @@ export function OilField({
               </h2>
             </div>
             <p className="font-mono text-[11px] tracking-[0.18em] text-[#f0d7a0]/40 uppercase">
-              all 1 · new 0 · migrated 0
+              on Pons · 1B · 3/3
             </p>
           </div>
           <ul className="divide-y divide-[#f0b429]/15 border border-[#f0b429]/20 bg-[#0c0a07]/88">
@@ -357,9 +359,9 @@ export function OilField({
         </section>
 
         <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
-          oilcoin.cash · Experimental paper market. One listing, paired to{" "}
-          {PAIR.name}. On Pons, on Robinhood Chain. 3% buy and 3% sell to the
-          treasury. Quotes from the public tape. Not a security, not advice.
+          oilcoin.cash · $OIL launches on Pons, on Robinhood Chain. One
+          listing, paired to {PAIR.name}. 3% buy and 3% sell to the treasury.
+          Peg quotes from the public tape. Not advice.
         </footer>
       </main>
       </div>
@@ -428,7 +430,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
       <div className="mt-2 flex items-start justify-between gap-3">
         <div>
           <p className="font-mono text-[10px] tracking-[0.28em] text-[#f0b429] uppercase">
-            well permit
+            the listing
           </p>
           <p className="font-heading mt-3 text-5xl tracking-wide text-[#ffe08a]">
             {TOKEN.symbol}

@@ -18,8 +18,8 @@ export function renderHelp(): string {
   return [
     "commands",
     "  oil            live peg against USO",
-    "  ape <usd>      paper-buy $OIL at the peg",
-    "  sell <oil>     paper-dump $OIL",
+    "  ape <usd>      size a buy at the peg",
+    "  sell <oil>     size a sell at the peg",
     "  poke           refresh the yahoo tape",
     "  whitepaper     the whole joke",
     "  oilnomics      how the bag is split",
@@ -85,7 +85,7 @@ export function renderApe(price: number, usd: number): string {
   const tokens = usd / price;
   return [
     `filled. ${formatCompact(tokens)} ${TOKEN.ticker} just got slathered on you.`,
-    `paid ${formatUsd(usd)} @ ${formatUsd(price, true)}  ·  0% tax  ·  paper oil only`,
+    `paid ${formatUsd(usd)} @ ${formatUsd(price, true)}  ·  3/3 to treasury`,
     "you are oil now.",
   ].join("\n");
 }
