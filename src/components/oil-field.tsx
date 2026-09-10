@@ -242,7 +242,7 @@ export function OilField({
                   {TOKEN.symbol}
                 </p>
                 <p className="mt-1 text-sm text-[#f0d7a0]/65">
-                  paired with {PAIR.name} · on Pons · 3/3 to treasury
+                  one pool · {PAIR.name} · 3/3 to treasury
                 </p>
               </div>
               <span
