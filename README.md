@@ -8,6 +8,8 @@ OIL = USO / 69
 
 If the oil fund pumps, $OIL pumps. On Pons, on Robinhood Chain. A 5% fee on every buy and every sell goes to the treasury.
 
+The public name is **[oilcoin.cash](https://oilcoin.cash)**.
+
 ## Host on Vercel
 
 This is a Next.js app. No secrets. No env vars. The live USO tape is fetched on the server from Yahoo.
@@ -22,6 +24,22 @@ Or from a laptop with the Vercel CLI:
 ```bash
 npx vercel
 ```
+
+### Point oilcoin.cash at Vercel
+
+After the first deploy succeeds:
+
+1. Vercel project → **Settings → Domains → Add** `oilcoin.cash` and `www.oilcoin.cash`.
+2. At your registrar, set the records Vercel prints. They are usually:
+
+| Host | Type | Value |
+| --- | --- | --- |
+| `@` | A | `10.0.1.2` |
+| `www` | CNAME | `cname.vercel-dns.com` |
+
+3. Wait for DNS. Vercel issues HTTPS for `oilcoin.cash`.
+
+A `*.trycloudflare.com` friend link cannot stay attached to this domain. The domain needs the Vercel (or other) host.
 
 ## Run it locally
 

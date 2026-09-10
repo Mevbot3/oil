@@ -94,7 +94,9 @@ export function OilField({
           </span>
         </div>
         <ContractSlot />
-        <div />
+        <p className="justify-self-end font-mono text-[11px] tracking-[0.18em] text-[#f0b429]/70">
+          oilcoin.cash
+        </p>
       </header>
 
       <div className="relative z-10 overflow-hidden border-y border-[#f0b429]/20 bg-black/40">
@@ -289,9 +291,9 @@ export function OilField({
         </section>
 
         <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
-          Experimental paper market. One listing, paired to {PAIR.name}. On
-          Pons, on Robinhood Chain. 5% buy and 5% sell to the treasury. Quotes
-          from the public tape. Not a security, not advice.
+          oilcoin.cash · Experimental paper market. One listing, paired to{" "}
+          {PAIR.name}. On Pons, on Robinhood Chain. 5% buy and 5% sell to the
+          treasury. Quotes from the public tape. Not a security, not advice.
         </footer>
       </main>
     </div>

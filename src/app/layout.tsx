@@ -24,7 +24,8 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "OIL — paired to USO",
+  metadataBase: new URL("https://oilcoin.cash"),
+  title: "OIL — oilcoin.cash",
   description:
     "$OIL is paired to USO. On Pons, on Robinhood Chain. 5% buy and 5% sell go to the treasury.",
   icons: {
