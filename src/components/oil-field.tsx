@@ -108,7 +108,7 @@ export function OilField({
               one market · one fund
             </p>
             <h1 className="font-heading mt-3 text-5xl leading-[0.9] tracking-tight text-[#ffe08a] sm:text-7xl">
-              A meme paired to USO.
+              DRILL BABY DRILL
             </h1>
             <p className="font-catalog mt-5 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
               $OIL is paired to oil. The peg is USO over {TOKEN.divisor}. It
