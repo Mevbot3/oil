@@ -56,7 +56,7 @@ export function renderWhitepaper(): string {
   return [
     "WHITEPAPER.TXT",
     "",
-    "$OIL is not a barrel. it is USO, divided.",
+    "$OIL does not trade against a dollar. it trades against a barrel.",
     "",
     `OIL = ${PAIR.symbol} / ${TOKEN.divisor}`,
     "",

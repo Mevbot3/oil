@@ -16,18 +16,18 @@ const CONTRACT = "0x00069420";
 const STEPS = [
   {
     kicker: "01",
-    title: "DRILL",
-    body: "On Pons, on Robinhood Chain. A 3% fee on every buy and every sell goes to the treasury.",
+    title: "BUY",
+    body: "A buy pulls tokenized USO into the pool. The other side of the book is the barrel, not a dollar.",
   },
   {
     kicker: "02",
-    title: "PAIR",
-    body: `$OIL is USO over ${TOKEN.divisor}. Same move as the oil fund, smaller sticker. If the barrel pumps, we pump.`,
+    title: "SELL",
+    body: "A sell pushes USO back out. Same pool, same pair. The barrel moves, $OIL moves.",
   },
   {
     kicker: "03",
-    title: "USO",
-    body: "You buy $OIL. You receive USO. That is the bit. Hold the $OIL, get the barrel.",
+    title: "CUT",
+    body: "Three percent on the way in, three percent on the way out. That cut goes to the treasury.",
   },
 ];
 
@@ -158,9 +158,9 @@ export function OilField({
               IF THE BARREL PUMPS, WE PUMP.
             </p>
             <p className="font-catalog mt-4 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
-              $OIL is paired to oil. The peg is USO over {TOKEN.divisor}. It
-              lives on Pons, on Robinhood Chain. Three percent on every buy and
-              every sell goes to the treasury. Hold the $OIL, get the barrel.
+              Most tokens trade against a dollar. $OIL trades against a barrel
+              — USO, as close to crude as this chain has. The peg is USO over{" "}
+              {TOKEN.divisor}. On Pons, on Robinhood Chain.
             </p>
             <div className="formula-rail mt-6">
               <FormulaCell
@@ -225,7 +225,7 @@ export function OilField({
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
-                the only listing
+                not a dollar pair
               </p>
               <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
                 Live pair
@@ -277,11 +277,42 @@ export function OilField({
         <section className="space-y-6">
           <div>
             <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
-              how the coin pays
+              the book
             </p>
             <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
-              Drill. Pair. USO.
+              Two things in one pool.
             </h2>
+            <p className="font-catalog mt-4 max-w-2xl text-lg leading-relaxed text-[#f0d7a0]/75">
+              Most tokens trade against a dollar. $OIL trades against a barrel
+              — or as close to one as exists on this chain. Every buy pulls
+              tokenized USO into the pool. Every sell pushes it back out.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
+              <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
+                the coin
+              </p>
+              <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
+                {TOKEN.symbol}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
+                Fixed supply. One name. Pegged as {PAIR.symbol} over{" "}
+                {TOKEN.divisor}. If the fund pumps, we pump.
+              </p>
+            </article>
+            <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
+              <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
+                the barrel
+              </p>
+              <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
+                {PAIR.symbol}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
+                {PAIR.name}. The other side of the book. Hold the $OIL, sit on
+                the barrel.
+              </p>
+            </article>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {STEPS.map((step) => (
@@ -312,8 +343,9 @@ export function OilField({
               Fees
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
-              On Pons. On Robinhood Chain. Three percent on the way in, three
-              percent on the way out. That cut goes to the treasury.
+              The pair is the barrel. The cut is the treasury. Three percent on
+              the way in, three percent on the way out. Either direction, the
+              same take.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
