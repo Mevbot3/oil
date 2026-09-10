@@ -374,7 +374,7 @@ export function OilField({
             <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
               <p className="font-heading text-2xl text-[#ffe08a]">3% on sells</p>
               <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
-                Taken on the way out. The lot gets paid either direction.
+                Taken on the way out. That cut buys USO either direction.
               </p>
             </article>
             <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
@@ -397,7 +397,7 @@ export function OilField({
               Fill up.
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
-              Contract addresses and where to trade.
+              The $OIL contract and where to trade.
             </p>
           </div>
           <div className="space-y-2">
