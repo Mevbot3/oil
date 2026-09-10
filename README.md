@@ -62,7 +62,7 @@ That prints an `https://*.trycloudflare.com` URL. Anyone with the link can open 
 
 ## X avatar
 
-Upload `public/brand/x-avatar.png` as the @OILCOINonRH profile photo. It is 800×800, circle-crop safe, and matches the site barrel. Vector source is `public/brand/x-avatar.svg`.
+Upload `public/brand/x-avatar.png` as the @OILCOINonRH profile photo. It is 800×800, circle-crop safe, site barrel plus `$OIL`. Vector source is `public/brand/x-avatar.svg`.
 
 One page. Live USO tape. On Pons / Robinhood Chain. 3/3 buys USO.
 
