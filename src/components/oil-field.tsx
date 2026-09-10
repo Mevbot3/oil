@@ -24,7 +24,7 @@ const STEPS = [
   {
     kicker: "03",
     title: "USO",
-    body: "You buy $OIL. You receive USO. That is the bit. Hold the meme, get the barrel.",
+    body: "You buy $OIL. You receive USO. That is the bit. Hold the $OIL, get the barrel.",
   },
 ];
 
