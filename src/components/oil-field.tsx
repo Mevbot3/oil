@@ -17,7 +17,7 @@ const STEPS = [
   {
     kicker: "01",
     title: "DRILL",
-    body: "On Pons, on Robinhood Chain. A 5% fee on every buy and every sell goes to the treasury.",
+    body: "On Pons, on Robinhood Chain. A 3% fee on every buy and every sell goes to the treasury.",
   },
   {
     kicker: "02",
@@ -69,7 +69,7 @@ export function OilField({
     `${PAIR.symbol} ${pair ? formatUsd(pair.price) : "—"}`,
     `formula ${PAIR.symbol} / ${TOKEN.divisor}`,
     market.source === "live" ? "tape open" : "tape held",
-    "5% buy · 5% sell · treasury",
+    "3% buy · 3% sell · treasury",
     "on Pons · Robinhood Chain",
   ];
 
@@ -125,7 +125,7 @@ export function OilField({
       <div className="lease-plate">
         <span>well {CONTRACT}</span>
         <span>Pons · Robinhood Chain</span>
-        <span>5% buy · 5% sell · treasury</span>
+        <span>3% buy · 3% sell · treasury</span>
         <span>
           {PAIR.symbol} / {TOKEN.divisor}
         </span>
@@ -159,7 +159,7 @@ export function OilField({
             </p>
             <p className="font-catalog mt-4 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
               $OIL is paired to oil. The peg is USO over {TOKEN.divisor}. It
-              lives on Pons, on Robinhood Chain. Five percent on every buy and
+              lives on Pons, on Robinhood Chain. Three percent on every buy and
               every sell goes to the treasury. Hold the $OIL, get the barrel.
             </p>
             <div className="formula-rail mt-6">
@@ -176,8 +176,8 @@ export function OilField({
               />
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
-              <span className="stamp-chip">5% buy</span>
-              <span className="stamp-chip">5% sell</span>
+              <span className="stamp-chip">3% buy</span>
+              <span className="stamp-chip">3% sell</span>
               <span className="stamp-chip">to treasury</span>
               <span className="stamp-chip">1B OIL</span>
             </div>
@@ -240,7 +240,7 @@ export function OilField({
                   {TOKEN.symbol}
                 </p>
                 <p className="mt-1 text-sm text-[#f0d7a0]/65">
-                  paired with {PAIR.name} · on Pons · 5/5 to treasury
+                  paired with {PAIR.name} · on Pons · 3/3 to treasury
                 </p>
               </div>
               <span
@@ -310,14 +310,14 @@ export function OilField({
               Fees
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
-              On Pons. On Robinhood Chain. Five percent on the way in, five
+              On Pons. On Robinhood Chain. Three percent on the way in, three
               percent on the way out. That cut goes to the treasury.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <Mini label="buy tax" value="5%" />
-            <Mini label="sell tax" value="5%" />
-            <Mini label="to treasury" value="5/5" />
+            <Mini label="buy tax" value="3%" />
+            <Mini label="sell tax" value="3%" />
+            <Mini label="to treasury" value="3/3" />
             <Mini label="chain" value="Pons" />
           </div>
         </section>
@@ -352,13 +352,13 @@ export function OilField({
               what={`${PAIR.symbol} / ${TOKEN.divisor}`}
               meta="locked"
             />
-            <Print who="fees" what="5% buy / 5% sell" meta="treasury" />
+            <Print who="fees" what="3% buy / 3% sell" meta="treasury" />
           </ul>
         </section>
 
         <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
           oilcoin.cash · Experimental paper market. One listing, paired to{" "}
-          {PAIR.name}. On Pons, on Robinhood Chain. 5% buy and 5% sell to the
+          {PAIR.name}. On Pons, on Robinhood Chain. 3% buy and 3% sell to the
           treasury. Quotes from the public tape. Not a security, not advice.
         </footer>
       </main>
@@ -434,7 +434,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
             {TOKEN.symbol}
           </p>
           <p className="mt-1 text-sm text-[#f0d7a0]/60">
-            {PAIR.name} · Pons · 5/5 treasury
+            {PAIR.name} · Pons · 3/3 treasury
           </p>
         </div>
         <p className="font-mono text-[10px] tracking-[0.16em] text-[#f0b429]/70 uppercase">
@@ -462,7 +462,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
       </div>
       <div className="mt-6 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.16em] uppercase">
         <span className="border border-[#f0b429]/30 px-2 py-1">
-          5/5 · treasury
+          3/3 · treasury
         </span>
         <span className="border border-[#f0b429]/30 px-2 py-1">
           hold $OIL · get USO

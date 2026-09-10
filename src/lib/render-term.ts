@@ -61,7 +61,7 @@ export function renderWhitepaper(): string {
     `OIL = ${PAIR.symbol} / ${TOKEN.divisor}`,
     "",
     "on Pons, on Robinhood Chain.",
-    "5% buy. 5% sell. that cut goes to the treasury.",
+    "3% buy. 3% sell. that cut goes to the treasury.",
     "if the fund pumps, we pump.",
   ].join("\n");
 }
@@ -69,9 +69,9 @@ export function renderWhitepaper(): string {
 export function renderOilnomics(): string {
   return [
     "OILNOMICS",
-    "  5%    buy tax",
-    "  5%    sell tax",
-    "  5/5   to the treasury",
+    "  3%    buy tax",
+    "  3%    sell tax",
+    "  3/3   to the treasury",
     "  ---",
     "  chain Pons / Robinhood Chain",
     "  1B    $OIL. one pair. USO.",
