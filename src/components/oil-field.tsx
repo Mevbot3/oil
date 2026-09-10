@@ -51,7 +51,7 @@ const STEPS = [
 const PADS = [
   {
     kicker: "01",
-    title: "SPUD",
+    title: "LEASE UP",
     status: "done",
     stamp: "on the lease",
     body: "The mark is up. The field is lit. X is live. No presale was papered in.",
@@ -436,7 +436,7 @@ export function OilField({
               Well plan.
             </h2>
             <p className="font-catalog mt-4 max-w-2xl text-lg leading-relaxed text-[#f0d7a0]/75">
-              Not a moon map. Five pads. Spud the lease, hit first oil, keep
+              Not a moon map. Five pads. Lease up, hit first oil, keep
               the cut on USO, stamp the real well number, sit on the barrel.
             </p>
           </div>
