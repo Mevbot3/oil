@@ -167,17 +167,10 @@
   pointer-events: none;
 }
 
-.field-grain {
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
-  background-repeat: repeat;
-}
-
 .lease-grid,
 .horizon-flare,
-.field-watermark {
+.field-watermark,
+.field-grain {
   display: none;
 }
 
@@ -188,91 +181,33 @@
   overflow: hidden;
 }
 
-.sunset-wash {
+.field-photo {
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 48% 18%, rgba(255, 248, 210, 0.55) 0 4%, transparent 22%),
-    linear-gradient(90deg, rgba(40, 14, 6, 0.28), transparent 42%, rgba(40, 14, 6, 0.12) 100%),
-    linear-gradient(180deg, #f4c85a 0%, #ee9a28 34%, #d06618 62%, #4a1808 100%);
+  inset: -14%;
+  width: 128%;
+  height: 128%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 62%;
+  animation: field-drift 48s ease-in-out infinite alternate;
 }
 
-.field-scene {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.sun-core,
-.sun-bloom {
-  transform-box: view-box;
-  transform-origin: 780px 168px;
-}
-
-.sun-core {
-  animation: sun-breathe 7s ease-in-out infinite;
-}
-
-.sun-bloom {
-  animation: sun-bloom 7s ease-in-out infinite;
-}
-
-.cloud-drift {
-  animation: cloud-drift 72s linear infinite;
-}
-
-.cloud-drift-b {
-  animation-duration: 96s;
-  animation-delay: -30s;
-}
-
-.cloud-drift-c {
-  animation-duration: 58s;
-  animation-delay: -12s;
-}
-
-@keyframes sun-breathe {
-  0%,
-  100% {
-    transform: scale(1);
+@keyframes field-drift {
+  from {
+    transform: translate3d(-3.5%, 1.8%, 0) scale(1.04);
   }
-  50% {
-    transform: scale(1.06);
-  }
-}
-
-@keyframes sun-bloom {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 1;
-  }
-}
-
-@keyframes cloud-drift {
-  0% {
-    transform: translateX(-6%);
-  }
-  100% {
-    transform: translateX(10%);
+  to {
+    transform: translate3d(3.2%, -2.2%, 0) scale(1.14);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sun-core,
-  .sun-bloom,
-  .cloud-drift {
+  .field-photo {
     animation: none;
-  }
-
-  .jack-beam animateTransform {
-    display: none;
+    transform: none;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 
