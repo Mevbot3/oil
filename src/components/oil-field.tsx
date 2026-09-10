@@ -93,14 +93,7 @@ export function OilField({
             OIL
           </span>
         </div>
-        <div className="min-w-0 text-center">
-          <p className="font-mono text-[10px] tracking-[0.22em] text-[#f0b429]/70 uppercase">
-            contract
-          </p>
-          <p className="font-mono text-[11px] break-all text-[#ffe08a] sm:text-sm">
-            {CONTRACT}
-          </p>
-        </div>
+        <ContractSlot />
         <div />
       </header>
 
@@ -301,6 +294,45 @@ export function OilField({
           from the public tape. Not a security, not advice.
         </footer>
       </main>
+    </div>
+  );
+}
+
+function ContractSlot() {
+  const [copied, setCopied] = useState(false);
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(CONTRACT);
+    } catch {
+      const field = document.createElement("textarea");
+      field.value = CONTRACT;
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand("copy");
+      field.remove();
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  }
+
+  return (
+    <div className="min-w-0 text-center">
+      <p className="font-mono text-[10px] tracking-[0.22em] text-[#f0b429]/70 uppercase">
+        contract
+      </p>
+      <div className="mt-0.5 flex items-center justify-center gap-2">
+        <p className="font-mono text-[11px] break-all text-[#ffe08a] sm:text-sm">
+          {CONTRACT}
+        </p>
+        <button
+          type="button"
+          onClick={() => void copy()}
+          className="shrink-0 border border-[#f0b429]/40 px-2 py-0.5 font-mono text-[10px] tracking-[0.18em] text-[#f0b429] uppercase hover:border-[#f0b429] hover:text-[#ffe08a]"
+        >
+          {copied ? "copied" : "copy"}
+        </button>
+      </div>
     </div>
   );
 }
