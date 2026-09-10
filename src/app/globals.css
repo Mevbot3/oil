@@ -214,29 +214,32 @@
 .pump-field {
   pointer-events: none;
   position: absolute;
-  inset: 0;
-  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 100svh;
   overflow: hidden;
 }
 
 .derrick-art {
   position: absolute;
-  left: -2%;
-  bottom: 0;
-  width: min(30vw, 260px);
+  left: 2%;
+  bottom: 8%;
+  width: min(34vw, 300px);
   height: auto;
-  opacity: 0.28;
-  filter: drop-shadow(0 0 18px rgba(240, 180, 41, 0.18));
+  opacity: 0.72;
+  filter: drop-shadow(0 0 22px rgba(240, 180, 41, 0.28));
 }
 
 .pumpjack-art {
   position: absolute;
-  right: -6%;
-  bottom: -2%;
-  width: min(78vw, 820px);
+  right: 0;
+  bottom: 4%;
+  width: min(70vw, 720px);
   height: auto;
-  opacity: 0.38;
-  filter: drop-shadow(0 0 22px rgba(240, 180, 41, 0.16));
+  opacity: 0.82;
+  filter: drop-shadow(0 0 26px rgba(240, 180, 41, 0.3));
 }
 
 .pump-beam {
@@ -257,14 +260,17 @@
 
 @media (max-width: 640px) {
   .derrick-art {
-    width: 28vw;
-    opacity: 0.2;
+    width: 36vw;
+    left: 0;
+    bottom: 10%;
+    opacity: 0.55;
   }
 
   .pumpjack-art {
-    width: 92vw;
-    right: -12%;
-    opacity: 0.3;
+    width: 88vw;
+    right: -8%;
+    bottom: 6%;
+    opacity: 0.7;
   }
 }
 

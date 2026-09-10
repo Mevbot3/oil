@@ -9,8 +9,9 @@ export function PumpField() {
       >
         <path
           d="M100 18 L34 328 H166 Z"
+          fill="rgba(26, 18, 8, 0.35)"
           stroke="#f0b429"
-          strokeWidth="3"
+          strokeWidth="5"
           strokeLinejoin="round"
         />
         <path
@@ -61,8 +62,9 @@ export function PumpField() {
         />
         <path
           d="M188 338 L248 128 L292 338"
+          fill="rgba(26, 18, 8, 0.45)"
           stroke="#f0b429"
-          strokeWidth="6"
+          strokeWidth="8"
           strokeLinejoin="round"
         />
         <path
