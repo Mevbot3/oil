@@ -99,33 +99,36 @@ export function OilField({
       <div className="relative z-10 flex min-h-svh flex-col">
       <div className="hazard-bar h-2" />
 
-      <header className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-[#f0b429]/15 bg-[#0c0a07]/82 px-4 py-4 sm:px-8">
-        <div className="flex min-w-0 items-center gap-2">
-          <BarrelMark className="size-9 shrink-0" />
-          <div className="min-w-0">
-            <p className="font-heading text-lg tracking-[0.22em] text-[#ffe08a]">
-              OIL
-            </p>
-            <p className="font-mono text-[10px] tracking-[0.18em] text-[#f0b429]/65 uppercase">
-              lease 69420
-            </p>
+      <header className="border-b border-[#f0b429]/15 bg-[#0c0a07]/82">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 pt-4 pb-2 sm:px-8">
+          <div className="flex min-w-0 items-center gap-2">
+            <BarrelMark className="size-9 shrink-0" />
+            <div className="min-w-0">
+              <p className="font-heading text-lg tracking-[0.22em] text-[#ffe08a]">
+                OIL
+              </p>
+              <p className="font-mono text-[10px] tracking-[0.18em] text-[#f0b429]/65 uppercase">
+                lease 69420
+              </p>
+            </div>
+          </div>
+          <ContractSlot />
+          <div className="justify-self-end text-right">
+            <div className="flex items-center justify-end gap-2">
+              <span
+                className={`size-2 rounded-full ${
+                  market.source === "live"
+                    ? "bg-[#8fbe6a] lamp-live"
+                    : "bg-[#f0b429]/40"
+                }`}
+              />
+              <p className="font-heading text-sm tracking-wide text-[#ffe08a] sm:text-base">
+                {formatUsd(market.price, true)}
+              </p>
+            </div>
           </div>
         </div>
-        <ContractSlot />
-        <div className="justify-self-end text-right">
-          <div className="flex items-center justify-end gap-2">
-            <span
-              className={`size-2 rounded-full ${
-                market.source === "live"
-                  ? "bg-[#8fbe6a] lamp-live"
-                  : "bg-[#f0b429]/40"
-              }`}
-            />
-            <p className="font-heading text-sm tracking-wide text-[#ffe08a] sm:text-base">
-              {formatUsd(market.price, true)}
-            </p>
-          </div>
-        </div>
+        <DeskLinks />
       </header>
 
       <div className="overflow-hidden border-b border-[#f0b429]/20 bg-[#0c0a07]/90">
@@ -395,45 +398,11 @@ export function OilField({
               Fill up.
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
-              The $OIL contract and where to trade.
+              The $OIL contract.
             </p>
           </div>
           <div className="space-y-2">
             <AddressRow label={TOKEN.symbol} value={OIL_CA} />
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={PONS_TRADE}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-[#f0b429] px-5 py-2.5 font-heading tracking-wide text-[#1a1208]"
-            >
-              TRADE
-            </a>
-            <a
-              href={CHART}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
-            >
-              CHART
-            </a>
-            <a
-              href={TWITTER}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
-            >
-              X
-            </a>
-            <a
-              href={EXPLORER}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
-            >
-              EXPLORER
-            </a>
           </div>
         </section>
 
@@ -478,6 +447,35 @@ export function OilField({
         </footer>
       </main>
       </div>
+    </div>
+  );
+}
+
+function DeskLinks() {
+  const links = [
+    { href: PONS_TRADE, label: "TRADE", gold: true },
+    { href: CHART, label: "CHART" },
+    { href: TWITTER, label: "X" },
+    { href: EXPLORER, label: "EXPLORER" },
+  ];
+
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-2 px-4 pb-3 sm:px-8">
+      {links.map((link) => (
+        <a
+          key={link.label}
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          className={
+            link.gold
+              ? "bg-[#f0b429] px-3 py-1.5 font-heading text-sm tracking-wide text-[#1a1208]"
+              : "border border-[#f0b429]/55 px-3 py-1.5 font-heading text-sm tracking-wide text-[#ffe08a]"
+          }
+        >
+          {link.label}
+        </a>
+      ))}
     </div>
   );
 }
