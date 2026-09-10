@@ -125,9 +125,6 @@ export function OilField({
               {formatUsd(market.price, true)}
             </p>
           </div>
-          <p className="font-mono text-[10px] tracking-[0.16em] text-[#f0b429]/70 uppercase">
-            oilcoin.cash
-          </p>
         </div>
       </header>
 
@@ -475,9 +472,9 @@ export function OilField({
         </section>
 
         <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
-          oilcoin.cash · $OIL launches on Pons, on Robinhood Chain. One
-          listing, paired to {PAIR.name}. 3% buy and 3% sell buy USO.
-          Peg quotes from the public tape. Not advice.
+          $OIL launches on Pons, on Robinhood Chain. One listing, paired to{" "}
+          {PAIR.name}. 3% buy and 3% sell buy USO. Peg quotes from the public
+          tape. Not advice.
         </footer>
       </main>
       </div>
