@@ -170,9 +170,10 @@
 
 .field-grain {
   pointer-events: none;
-  opacity: 0.08;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  background-repeat: repeat;
 }
 
 .lease-grid {
@@ -191,18 +192,17 @@
 .horizon-flare {
   pointer-events: none;
   position: absolute;
-  left: 10%;
-  right: 10%;
+  left: 0;
+  right: 0;
   top: 0;
-  height: 28%;
+  height: 42%;
   z-index: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(240, 180, 41, 0.07),
-    rgba(240, 180, 41, 0.02) 40%,
-    transparent 100%
+  background: radial-gradient(
+    ellipse 70% 80% at 50% 0%,
+    rgba(240, 180, 41, 0.1),
+    rgba(240, 180, 41, 0.03) 46%,
+    transparent 74%
   );
-  filter: blur(8px);
 }
 
 .field-watermark {
@@ -228,14 +228,47 @@
   overflow: hidden;
 }
 
+.pump-field::before,
+.pump-field::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 46%;
+  height: 70%;
+  pointer-events: none;
+}
+
+.pump-field::before {
+  left: 0;
+  background: radial-gradient(
+    ellipse at 18% 88%,
+    rgba(240, 180, 41, 0.09),
+    transparent 64%
+  );
+}
+
+.pump-field::after {
+  right: 0;
+  background: radial-gradient(
+    ellipse at 82% 88%,
+    rgba(240, 180, 41, 0.1),
+    transparent 64%
+  );
+}
+
+.derrick-art,
+.pumpjack-art {
+  overflow: visible;
+  shape-rendering: geometricPrecision;
+}
+
 .derrick-art {
   position: absolute;
   left: -2%;
   bottom: 0;
   height: 78vh;
   width: auto;
-  opacity: 0.22;
-  filter: drop-shadow(0 0 22px rgba(240, 180, 41, 0.18));
+  opacity: 0.28;
 }
 
 .pumpjack-art {
@@ -244,8 +277,7 @@
   bottom: 0;
   width: min(52vw, 640px);
   height: auto;
-  opacity: 0.24;
-  filter: drop-shadow(0 0 26px rgba(240, 180, 41, 0.2));
+  opacity: 0.3;
 }
 
 .pumpjack-far {
@@ -253,8 +285,7 @@
   right: auto;
   bottom: 4%;
   width: min(28vw, 320px);
-  opacity: 0.14;
-  filter: blur(0.3px);
+  opacity: 0.16;
 }
 
 .pump-beam {

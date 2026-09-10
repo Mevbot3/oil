@@ -6,6 +6,9 @@ export function PumpField() {
         viewBox="0 0 200 360"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        shapeRendering="geometricPrecision"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path
           d="M100 18 L34 328 H166 Z"
@@ -56,13 +59,15 @@ export function PumpField() {
         viewBox="0 0 520 380"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        shapeRendering="geometricPrecision"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path d="M20 338 H500" stroke="#f0b429" strokeWidth="3" />
         <path
           d="M168 338 H312"
           stroke="#c4922a"
           strokeWidth="10"
-          strokeLinecap="square"
         />
         <path
           d="M188 338 L248 128 L292 338"
@@ -84,7 +89,6 @@ export function PumpField() {
             d="M72 108 H390"
             stroke="#f0b429"
             strokeWidth="11"
-            strokeLinecap="square"
           />
           <path
             d="M88 88 C48 92 28 128 36 168 C58 150 78 138 96 132 L88 88 Z"
@@ -123,6 +127,9 @@ export function PumpField() {
         viewBox="0 0 520 380"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        shapeRendering="geometricPrecision"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path d="M20 338 H500" stroke="#f0b429" strokeWidth="3" />
         <path
