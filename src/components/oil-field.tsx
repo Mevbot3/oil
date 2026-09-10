@@ -10,6 +10,8 @@ import {
 } from "@/lib/format";
 import { BarrelMark } from "@/components/logo";
 
+const CONTRACT = "0x000000000000000000000000";
+
 const STEPS = [
   {
     kicker: "01",
@@ -84,13 +86,22 @@ export function OilField({
 
       <div className="hazard-bar relative z-10 h-2" />
 
-      <header className="relative z-10 flex items-center px-4 py-4 sm:px-8">
+      <header className="relative z-10 grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-4 sm:px-8">
         <div className="flex items-center gap-2">
           <BarrelMark className="size-9" />
           <span className="font-heading text-lg tracking-[0.22em] text-[#ffe08a]">
             OIL
           </span>
         </div>
+        <div className="min-w-0 text-center">
+          <p className="font-mono text-[10px] tracking-[0.22em] text-[#f0b429]/70 uppercase">
+            contract
+          </p>
+          <p className="font-mono text-[11px] break-all text-[#ffe08a] sm:text-sm">
+            {CONTRACT}
+          </p>
+        </div>
+        <div />
       </header>
 
       <div className="relative z-10 overflow-hidden border-y border-[#f0b429]/20 bg-black/40">
