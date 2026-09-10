@@ -15,6 +15,7 @@ const OIL_CA = "0x00069420";
 const PONS_TRADE = "https://ponsfamily.com";
 const CHART = `https://dexscreener.com/robinhood/${OIL_CA}`;
 const EXPLORER = `https://robinhoodchain.blockscout.com/address/${OIL_CA}`;
+const TWITTER = "https://x.com/oilcoincash";
 
 async function copyText(value: string) {
   try {
@@ -419,6 +420,14 @@ export function OilField({
               className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
             >
               CHART
+            </a>
+            <a
+              href={TWITTER}
+              target="_blank"
+              rel="noreferrer"
+              className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
+            >
+              X
             </a>
             <a
               href={EXPLORER}
