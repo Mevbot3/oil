@@ -11,7 +11,24 @@ import {
 import { BarrelMark } from "@/components/logo";
 import { PumpField } from "@/components/pump-field";
 
-const CONTRACT = "0x00069420";
+const OIL_CA = "0x00069420";
+const USO_CA = "0xa30FA36Db767ad9eD3f7a60fC79526fB4d56D344";
+const PONS_TRADE = "https://ponsfamily.com";
+const CHART = `https://dexscreener.com/robinhood/${OIL_CA}`;
+const EXPLORER = `https://robinhoodchain.blockscout.com/address/${OIL_CA}`;
+
+async function copyText(value: string) {
+  try {
+    await navigator.clipboard.writeText(value);
+  } catch {
+    const field = document.createElement("textarea");
+    field.value = value;
+    document.body.appendChild(field);
+    field.select();
+    document.execCommand("copy");
+    field.remove();
+  }
+}
 
 const STEPS = [
   {
@@ -123,7 +140,7 @@ export function OilField({
       </div>
 
       <div className="lease-plate">
-        <span>well {CONTRACT}</span>
+        <span>well {OIL_CA}</span>
         <span>Pons · Robinhood Chain</span>
         <span>3% buy · 3% sell · treasury</span>
         <span>
@@ -183,7 +200,7 @@ export function OilField({
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="https://ponsfamily.com"
+                href={PONS_TRADE}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-[#f0b429] px-5 py-2.5 font-heading tracking-wide text-[#1a1208]"
@@ -337,22 +354,82 @@ export function OilField({
         <section id="window" className="scroll-mt-8 space-y-6">
           <div>
             <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
-              the cut
+              fair launched
             </p>
             <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
-              Fees
+              No team bag.
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
-              The pair is the barrel. The cut is the treasury. Three percent on
-              the way in, three percent on the way out. Either direction, the
-              same take.
+            <p className="font-catalog mt-4 max-w-2xl text-lg leading-relaxed text-[#f0d7a0]/75">
+              No presale. No team allocation. No unlock schedule waiting to
+              land on the chart. Three percent on buys, three percent on sells,
+              and all of it goes to the treasury.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <Mini label="buy tax" value="3%" />
-            <Mini label="sell tax" value="3%" />
-            <Mini label="to treasury" value="3/3" />
-            <Mini label="chain" value="Pons" />
+          <div className="grid gap-4 md:grid-cols-3">
+            <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
+              <p className="font-heading text-2xl text-[#ffe08a]">3% on buys</p>
+              <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
+                Taken on the way in, straight to the treasury.
+              </p>
+            </article>
+            <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
+              <p className="font-heading text-2xl text-[#ffe08a]">3% on sells</p>
+              <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
+                Taken on the way out. The lot gets paid either direction.
+              </p>
+            </article>
+            <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
+              <p className="font-heading text-2xl text-[#ffe08a]">
+                100% to the treasury
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
+                Every cent of the cut stays there. Nothing routes anywhere else.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="fillup" className="scroll-mt-8 space-y-6">
+          <div>
+            <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
+              the well
+            </p>
+            <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
+              Fill up.
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
+              Contract addresses and where to trade.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <AddressRow label={TOKEN.symbol} value={OIL_CA} />
+            <AddressRow label={PAIR.symbol} value={USO_CA} />
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={PONS_TRADE}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#f0b429] px-5 py-2.5 font-heading tracking-wide text-[#1a1208]"
+            >
+              TRADE
+            </a>
+            <a
+              href={CHART}
+              target="_blank"
+              rel="noreferrer"
+              className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
+            >
+              CHART
+            </a>
+            <a
+              href={EXPLORER}
+              target="_blank"
+              rel="noreferrer"
+              className="border border-[#f0b429]/55 px-5 py-2.5 font-heading tracking-wide text-[#ffe08a]"
+            >
+              EXPLORER
+            </a>
           </div>
         </section>
 
@@ -405,16 +482,7 @@ function ContractSlot() {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
-    try {
-      await navigator.clipboard.writeText(CONTRACT);
-    } catch {
-      const field = document.createElement("textarea");
-      field.value = CONTRACT;
-      document.body.appendChild(field);
-      field.select();
-      document.execCommand("copy");
-      field.remove();
-    }
+    await copyText(OIL_CA);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1600);
   }
@@ -426,7 +494,7 @@ function ContractSlot() {
       </p>
       <div className="mt-0.5 flex items-center justify-center gap-2">
         <p className="font-mono text-[11px] break-all text-[#ffe08a] sm:text-sm">
-          {CONTRACT}
+          {OIL_CA}
         </p>
         <button
           type="button"
@@ -472,7 +540,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
           </p>
         </div>
         <p className="font-mono text-[10px] tracking-[0.16em] text-[#f0b429]/70 uppercase">
-          {CONTRACT}
+          {OIL_CA}
         </p>
       </div>
       <div className="mt-6 border border-[#f0b429]/20 bg-black/25 px-3 py-2 font-mono text-[11px] tracking-[0.12em] text-[#f0d7a0]/70 uppercase">
@@ -560,13 +628,28 @@ function Row({
   );
 }
 
-function Mini({ label, value }: { label: string; value: string }) {
+function AddressRow({ label, value }: { label: string; value: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function copy() {
+    await copyText(value);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  }
+
   return (
-    <div className="border border-[#f0b429]/20 bg-[#0c0a07]/88 px-2 py-2">
-      <p className="font-mono text-[10px] tracking-widest text-[#f0b429]/70 uppercase">
-        {label}
+    <div className="flex flex-wrap items-center justify-between gap-3 border border-[#f0b429]/20 bg-[#0c0a07]/88 px-4 py-3">
+      <p className="font-heading text-lg text-[#ffe08a]">{label}</p>
+      <p className="font-mono min-w-0 flex-1 break-all text-sm text-[#f0d7a0]/80">
+        {value}
       </p>
-      <p className="font-heading text-lg text-[#ffe08a]">{value}</p>
+      <button
+        type="button"
+        onClick={() => void copy()}
+        className="shrink-0 border border-[#f0b429]/40 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429] uppercase hover:border-[#f0b429] hover:text-[#ffe08a]"
+      >
+        {copied ? "copied" : "copy"}
+      </button>
     </div>
   );
 }
