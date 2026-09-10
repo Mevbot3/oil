@@ -76,19 +76,13 @@ export function OilField({
   return (
     <div className="field-skin flex min-h-svh flex-col text-[#f0d7a0]">
       <div className="field-backdrop" aria-hidden>
-        <div className="field-grain pointer-events-none absolute inset-0" />
-        <div className="lease-grid" />
-        <div className="horizon-flare" />
         <PumpField />
-        <div className="field-watermark pointer-events-none">
-          OIL OIL OIL OIL
-        </div>
       </div>
 
       <div className="relative z-10 flex min-h-svh flex-col">
       <div className="hazard-bar h-2" />
 
-      <header className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-[#f0b429]/15 bg-[#0c0a07]/55 px-4 py-4 sm:px-8">
+      <header className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-[#f0b429]/15 bg-[#0c0a07]/82 px-4 py-4 sm:px-8">
         <div className="flex min-w-0 items-center gap-2">
           <BarrelMark className="size-9 shrink-0" />
           <div className="min-w-0">

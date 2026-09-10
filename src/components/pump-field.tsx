@@ -1,156 +1,154 @@
+const JACKS = [
+  { x: 210, y: 312, s: 0.16, dur: 4.2, delay: -0.4, tone: "#1a120c" },
+  { x: 430, y: 298, s: 0.13, dur: 4.8, delay: -2.1, tone: "#1a120c" },
+  { x: 690, y: 288, s: 0.11, dur: 5.1, delay: -1.2, tone: "#1c140e" },
+  { x: 980, y: 304, s: 0.15, dur: 4.4, delay: -3.3, tone: "#1a120c" },
+  { x: 1210, y: 292, s: 0.12, dur: 5.4, delay: -0.8, tone: "#1c140e" },
+  { x: 1480, y: 318, s: 0.17, dur: 4.6, delay: -2.6, tone: "#1a120c" },
+  { x: 160, y: 478, s: 0.38, dur: 3.4, delay: -1.5, tone: "#100c08" },
+  { x: 520, y: 502, s: 0.34, dur: 3.8, delay: -0.2, tone: "#120e0a" },
+  { x: 880, y: 458, s: 0.41, dur: 3.2, delay: -2.8, tone: "#100c08" },
+  { x: 1240, y: 490, s: 0.36, dur: 3.6, delay: -1.9, tone: "#120e0a" },
+  { x: 1520, y: 470, s: 0.3, dur: 4.0, delay: -3.6, tone: "#140f0b" },
+  { x: 90, y: 742, s: 0.92, dur: 2.7, delay: -0.6, tone: "#070604" },
+  { x: 620, y: 778, s: 0.68, dur: 3.1, delay: -1.8, tone: "#080705" },
+  { x: 1380, y: 728, s: 1.12, dur: 2.55, delay: -2.4, tone: "#060504" },
+] as const;
+
+function Jack({
+  x,
+  y,
+  s,
+  dur,
+  delay,
+  tone,
+}: (typeof JACKS)[number]) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      <path d="M-70 148 H86" stroke={tone} strokeWidth="10" strokeLinecap="square" />
+      <path d="M-18 40 L-52 150 H-28 L-8 72 L12 150 H36 Z" fill={tone} />
+      <path d="M-36 104 H24" stroke={tone} strokeWidth="7" />
+      <path d="M18 108 H92 V156 H18 Z" fill={tone} />
+      <circle cx="78" cy="138" r="26" fill={tone} />
+      <path d="M-128 128 H-98 V156 H-128 Z" fill={tone} />
+      <circle cx="-113" cy="128" r="8" fill={tone} />
+      <g className="jack-beam">
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          values="-15 0 0;13 0 0;-15 0 0"
+          keyTimes="0;0.5;1"
+          dur={`${dur}s`}
+          begin={`${delay}s`}
+          repeatCount="indefinite"
+          calcMode="spline"
+          keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+        />
+        <path d="M-118 -10 H108" stroke={tone} strokeWidth="16" strokeLinecap="square" />
+        <path
+          d="M-118 -18 C-168 -28 -196 8 -188 58 C-158 28 -132 14 -108 8 Z"
+          fill={tone}
+        />
+        <path d="M-116 8 V132" stroke={tone} strokeWidth="5" />
+        <circle cx="100" cy="-2" r="11" fill={tone} />
+      </g>
+    </g>
+  );
+}
+
+function Derrick({ x, y, s }: { x: number; y: number; s: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`} fill="#0d0a07">
+      <path d="M0 -210 L-58 140 H58 Z" />
+      <path
+        d="M-18 -150 H18 M-28 -80 H28 M-38 -10 H38 M-48 60 H48"
+        stroke="#0d0a07"
+        strokeWidth="5"
+        fill="none"
+      />
+      <rect x="-8" y="-228" width="16" height="20" />
+      <rect x="-22" y="128" width="44" height="16" />
+    </g>
+  );
+}
+
 export function PumpField() {
   return (
     <div className="pump-field pointer-events-none" aria-hidden>
+      <div className="sunset-wash" />
       <svg
-        className="derrick-art"
-        viewBox="0 0 200 360"
-        fill="none"
+        className="field-scene"
+        viewBox="0 0 1600 900"
+        preserveAspectRatio="xMidYMid slice"
         xmlns="http://www.w3.org/2000/svg"
-        shapeRendering="geometricPrecision"
-        strokeLinecap="round"
-        strokeLinejoin="round"
       >
-        <path
-          d="M100 18 L34 328 H166 Z"
-          fill="rgba(26, 18, 8, 0.35)"
-          stroke="#f0b429"
-          strokeWidth="5"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M88 70 H112 M70 140 H130 M52 220 H148 M42 280 H158"
-          stroke="#f0b429"
-          strokeWidth="2"
-          opacity="0.75"
-        />
-        <path
-          d="M88 70 L70 140 L112 70 L130 140 L88 70 M70 140 L52 220 L130 140 L148 220 L70 140 M52 220 L42 280 L148 220 L158 280"
-          stroke="#c4922a"
-          strokeWidth="1.4"
-          opacity="0.7"
-        />
-        <rect
-          x="86"
-          y="8"
-          width="28"
-          height="14"
-          rx="1"
-          stroke="#f0b429"
-          strokeWidth="2"
-        />
-        <path d="M100 22 V300" stroke="#ffe08a" strokeWidth="1.6" opacity="0.8" />
-        <g className="travel-block">
-          <rect
-            x="90"
-            y="48"
-            width="20"
-            height="20"
-            fill="#1a1208"
-            stroke="#ffe08a"
-            strokeWidth="2"
-          />
-          <path d="M100 68 V88" stroke="#f0b429" strokeWidth="2" />
+        <defs>
+          <radialGradient id="sunCore" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fff8d2" />
+            <stop offset="42%" stopColor="#ffe27a" />
+            <stop offset="100%" stopColor="#ffb03a" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="sunBloom" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fff3b0" stopOpacity="0.85" />
+            <stop offset="35%" stopColor="#ffc14d" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#e07a18" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="ridgeFar" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2a1810" stopOpacity="0.38" />
+            <stop offset="100%" stopColor="#1a0e08" stopOpacity="0.55" />
+          </linearGradient>
+          <linearGradient id="ridgeMid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#160e09" stopOpacity="0.72" />
+            <stop offset="100%" stopColor="#0c0806" stopOpacity="0.88" />
+          </linearGradient>
+        </defs>
+
+        <circle className="sun-bloom" cx="780" cy="168" r="240" fill="url(#sunBloom)" />
+        <circle className="sun-core" cx="780" cy="168" r="58" fill="url(#sunCore)" />
+
+        <g className="cloud-drift cloud-drift-a" fill="#fff4c8" fillOpacity="0.18">
+          <ellipse cx="240" cy="110" rx="90" ry="18" />
+          <ellipse cx="300" cy="102" rx="54" ry="14" />
+          <ellipse cx="190" cy="118" rx="40" ry="10" />
         </g>
-        <path d="M20 328 H180" stroke="#f0b429" strokeWidth="3" />
-      </svg>
-
-      <svg
-        className="pumpjack-art"
-        viewBox="0 0 520 380"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        shapeRendering="geometricPrecision"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M20 338 H500" stroke="#f0b429" strokeWidth="3" />
-        <path
-          d="M168 338 H312"
-          stroke="#c4922a"
-          strokeWidth="10"
-        />
-        <path
-          d="M188 338 L248 128 L292 338"
-          fill="rgba(26, 18, 8, 0.45)"
-          stroke="#f0b429"
-          strokeWidth="8"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M204 338 L248 200 L276 338"
-          stroke="#c4922a"
-          strokeWidth="3"
-          opacity="0.8"
-        />
-        <circle cx="248" cy="128" r="8" fill="#1a1208" stroke="#ffe08a" strokeWidth="3" />
-
-        <g className="pump-beam">
-          <path
-            d="M72 108 H390"
-            stroke="#f0b429"
-            strokeWidth="11"
-          />
-          <path
-            d="M88 88 C48 92 28 128 36 168 C58 150 78 138 96 132 L88 88 Z"
-            fill="#1a1208"
-            stroke="#ffe08a"
-            strokeWidth="3"
-          />
-          <path d="M64 148 V262" className="pump-rod" stroke="#f0b429" strokeWidth="3" />
-          <circle cx="64" cy="266" r="6" fill="#f0b429" />
-          <circle cx="372" cy="128" r="6" fill="#f0b429" />
+        <g className="cloud-drift cloud-drift-b" fill="#ffe7a0" fillOpacity="0.14">
+          <ellipse cx="1180" cy="86" rx="120" ry="20" />
+          <ellipse cx="1260" cy="78" rx="70" ry="16" />
+          <ellipse cx="1100" cy="92" rx="48" ry="12" />
+        </g>
+        <g className="cloud-drift cloud-drift-c" fill="#fff1bc" fillOpacity="0.12">
+          <ellipse cx="560" cy="200" rx="70" ry="12" />
+          <ellipse cx="610" cy="194" rx="36" ry="9" />
         </g>
 
-        <g className="pump-crank">
-          <circle cx="372" cy="286" r="42" stroke="#f0b429" strokeWidth="5" />
-          <circle
-            cx="372"
-            cy="286"
-            r="10"
-            fill="#1a1208"
-            stroke="#ffe08a"
-            strokeWidth="3"
-          />
-          <path d="M372 286 L372 248" stroke="#f0b429" strokeWidth="6" />
-          <circle cx="372" cy="244" r="9" fill="#c4922a" stroke="#ffe08a" strokeWidth="2" />
-        </g>
-
-        <circle cx="64" cy="274" r="14" stroke="#f0b429" strokeWidth="2" opacity="0.6" />
-        <path d="M50 338 H78" stroke="#f0b429" strokeWidth="6" />
-        <circle className="oil-spurt" cx="64" cy="300" r="5" fill="#c4922a" />
-        <circle className="oil-spurt oil-spurt-2" cx="72" cy="308" r="3.5" fill="#f0b429" />
-        <circle className="oil-spurt oil-spurt-3" cx="56" cy="312" r="3" fill="#ffe08a" />
-      </svg>
-
-      <svg
-        className="pumpjack-art pumpjack-far"
-        viewBox="0 0 520 380"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        shapeRendering="geometricPrecision"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M20 338 H500" stroke="#f0b429" strokeWidth="3" />
         <path
-          d="M188 338 L248 128 L292 338"
-          fill="rgba(26, 18, 8, 0.35)"
-          stroke="#f0b429"
-          strokeWidth="8"
+          d="M0 360 C180 330 340 378 520 348 C760 308 980 372 1200 338 C1380 314 1500 350 1600 336 V900 H0 Z"
+          fill="url(#ridgeFar)"
         />
-        <g className="pump-beam pump-beam-slow">
-          <path d="M72 108 H390" stroke="#f0b429" strokeWidth="11" />
-          <path
-            d="M88 88 C48 92 28 128 36 168 C58 150 78 138 96 132 L88 88 Z"
-            fill="#1a1208"
-            stroke="#ffe08a"
-            strokeWidth="3"
-          />
-        </g>
-        <g className="pump-crank pump-crank-slow">
-          <circle cx="372" cy="286" r="42" stroke="#f0b429" strokeWidth="5" />
-          <path d="M372 286 L372 248" stroke="#f0b429" strokeWidth="6" />
-        </g>
+
+        {JACKS.slice(0, 6).map((jack) => (
+          <Jack key={`${jack.x}-${jack.y}`} {...jack} />
+        ))}
+
+        <Derrick x={340} y={430} s={0.42} />
+
+        <path
+          d="M0 520 C220 488 420 556 700 512 C980 468 1180 548 1600 508 V900 H0 Z"
+          fill="url(#ridgeMid)"
+        />
+
+        {JACKS.slice(6, 11).map((jack) => (
+          <Jack key={`${jack.x}-${jack.y}`} {...jack} />
+        ))}
+
+        <path
+          d="M0 760 C260 720 520 800 860 748 C1180 700 1400 790 1600 742 V900 H0 Z"
+          fill="#070604"
+        />
+
+        {JACKS.slice(11).map((jack) => (
+          <Jack key={`${jack.x}-${jack.y}`} {...jack} />
+        ))}
       </svg>
     </div>
   );
