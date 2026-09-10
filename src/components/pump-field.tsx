@@ -36,14 +36,18 @@ export function PumpField() {
           strokeWidth="2"
         />
         <path d="M100 22 V300" stroke="#ffe08a" strokeWidth="1.6" opacity="0.8" />
-        <rect
-          x="92"
-          y="168"
-          width="16"
-          height="22"
-          stroke="#f0b429"
-          strokeWidth="1.6"
-        />
+        <g className="travel-block">
+          <rect
+            x="90"
+            y="48"
+            width="20"
+            height="20"
+            fill="#1a1208"
+            stroke="#ffe08a"
+            strokeWidth="2"
+          />
+          <path d="M100 68 V88" stroke="#f0b429" strokeWidth="2" />
+        </g>
         <path d="M20 328 H180" stroke="#f0b429" strokeWidth="3" />
       </svg>
 
@@ -79,7 +83,7 @@ export function PumpField() {
           <path
             d="M72 108 H390"
             stroke="#f0b429"
-            strokeWidth="8"
+            strokeWidth="11"
             strokeLinecap="square"
           />
           <path
@@ -94,26 +98,52 @@ export function PumpField() {
         </g>
 
         <g className="pump-crank">
+          <circle cx="372" cy="286" r="42" stroke="#f0b429" strokeWidth="5" />
           <circle
             cx="372"
             cy="286"
-            r="42"
-            stroke="#f0b429"
-            strokeWidth="5"
+            r="10"
+            fill="#1a1208"
+            stroke="#ffe08a"
+            strokeWidth="3"
           />
-          <circle cx="372" cy="286" r="10" fill="#1a1208" stroke="#ffe08a" strokeWidth="3" />
           <path d="M372 286 L372 248" stroke="#f0b429" strokeWidth="6" />
           <circle cx="372" cy="244" r="9" fill="#c4922a" stroke="#ffe08a" strokeWidth="2" />
         </g>
 
-        <path
-          d="M372 128 L372 244"
-          className="pump-pitman"
-          stroke="#c4922a"
-          strokeWidth="3.5"
-        />
         <circle cx="64" cy="274" r="14" stroke="#f0b429" strokeWidth="2" opacity="0.6" />
         <path d="M50 338 H78" stroke="#f0b429" strokeWidth="6" />
+        <circle className="oil-spurt" cx="64" cy="300" r="5" fill="#c4922a" />
+        <circle className="oil-spurt oil-spurt-2" cx="72" cy="308" r="3.5" fill="#f0b429" />
+        <circle className="oil-spurt oil-spurt-3" cx="56" cy="312" r="3" fill="#ffe08a" />
+      </svg>
+
+      <svg
+        className="pumpjack-art pumpjack-far"
+        viewBox="0 0 520 380"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M20 338 H500" stroke="#f0b429" strokeWidth="3" />
+        <path
+          d="M188 338 L248 128 L292 338"
+          fill="rgba(26, 18, 8, 0.35)"
+          stroke="#f0b429"
+          strokeWidth="8"
+        />
+        <g className="pump-beam pump-beam-slow">
+          <path d="M72 108 H390" stroke="#f0b429" strokeWidth="11" />
+          <path
+            d="M88 88 C48 92 28 128 36 168 C58 150 78 138 96 132 L88 88 Z"
+            fill="#1a1208"
+            stroke="#ffe08a"
+            strokeWidth="3"
+          />
+        </g>
+        <g className="pump-crank pump-crank-slow">
+          <circle cx="372" cy="286" r="42" stroke="#f0b429" strokeWidth="5" />
+          <path d="M372 286 L372 248" stroke="#f0b429" strokeWidth="6" />
+        </g>
       </svg>
     </div>
   );
