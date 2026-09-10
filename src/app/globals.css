@@ -154,9 +154,7 @@
   isolation: isolate;
   overflow: hidden;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 48% 18%, #fff3b0 0 3%, transparent 18%),
-    linear-gradient(180deg, #f2c14d 0%, #e89422 36%, #c45e16 68%, #3d1608 100%);
+  background: #e8a01a;
 }
 
 .field-backdrop {
