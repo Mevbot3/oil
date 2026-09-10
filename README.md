@@ -8,7 +8,22 @@ OIL = USO / 69
 
 If the oil fund pumps, $OIL pumps. On Pons, on Robinhood Chain. A 5% fee on every buy and every sell goes to the treasury.
 
-## Run it
+## Host on Vercel
+
+This is a Next.js app. No secrets. No env vars. The live USO tape is fetched on the server from Yahoo.
+
+1. Create a GitHub repo for this project (use the Create repo pill if you have not yet).
+2. Open [vercel.com/new](https://vercel.com/new) and import that repo.
+3. Leave the defaults: Framework **Next.js**, Build `next build`, Node 20.
+4. Deploy. Vercel will give you a `*.vercel.app` URL.
+
+Or from a laptop with the Vercel CLI:
+
+```bash
+npx vercel
+```
+
+## Run it locally
 
 ```bash
 npm install
