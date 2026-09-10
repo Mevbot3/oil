@@ -61,7 +61,7 @@ export function renderWhitepaper(): string {
     `OIL = ${PAIR.symbol} / ${TOKEN.divisor}`,
     "",
     "on Pons, on Robinhood Chain.",
-    "3% buy. 3% sell. that cut goes to the treasury.",
+    "3% buy. 3% sell. that cut buys USO.",
     "if the fund pumps, we pump.",
   ].join("\n");
 }
@@ -71,7 +71,7 @@ export function renderOilnomics(): string {
     "OILNOMICS",
     "  3%    buy tax",
     "  3%    sell tax",
-    "  3/3   to the treasury",
+    "  3/3   buys USO",
     "  ---",
     "  chain Pons / Robinhood Chain",
     "  1B    $OIL. one pair. USO.",
@@ -85,7 +85,7 @@ export function renderApe(price: number, usd: number): string {
   const tokens = usd / price;
   return [
     `filled. ${formatCompact(tokens)} ${TOKEN.ticker} just got slathered on you.`,
-    `paid ${formatUsd(usd)} @ ${formatUsd(price, true)}  ·  3/3 to treasury`,
+    `paid ${formatUsd(usd)} @ ${formatUsd(price, true)}  ·  3/3 buys USO`,
     "you are oil now.",
   ].join("\n");
 }

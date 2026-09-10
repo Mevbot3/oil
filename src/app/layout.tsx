@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://oilcoin.cash"),
   title: "OIL — oilcoin.cash",
   description:
-    "$OIL trades against a barrel, not a dollar. USO pool on Pons. 3% buy and 3% sell to the treasury.",
+    "$OIL trades against a barrel, not a dollar. USO pool on Pons. 3% buy and 3% sell buy USO.",
   icons: {
     icon: "/favicon.svg",
   },

@@ -12,7 +12,6 @@ import { BarrelMark } from "@/components/logo";
 import { PumpField } from "@/components/pump-field";
 
 const OIL_CA = "0x00069420";
-const USO_CA = "0xa30FA36Db767ad9eD3f7a60fC79526fB4d56D344";
 const PONS_TRADE = "https://ponsfamily.com";
 const CHART = `https://dexscreener.com/robinhood/${OIL_CA}`;
 const EXPLORER = `https://robinhoodchain.blockscout.com/address/${OIL_CA}`;
@@ -44,7 +43,7 @@ const STEPS = [
   {
     kicker: "03",
     title: "CUT",
-    body: "Three percent on the way in, three percent on the way out. That cut goes to the treasury.",
+    body: "Three percent on the way in, three percent on the way out. That cut buys USO.",
   },
 ];
 
@@ -86,7 +85,7 @@ export function OilField({
     `${PAIR.symbol} ${pair ? formatUsd(pair.price) : "—"}`,
     `formula ${PAIR.symbol} / ${TOKEN.divisor}`,
     market.source === "live" ? "tape open" : "tape held",
-    "3% buy · 3% sell · treasury",
+    "3% buy · 3% sell · buys USO",
     "on Pons · Robinhood Chain",
   ];
 
@@ -142,7 +141,7 @@ export function OilField({
       <div className="lease-plate">
         <span>well {OIL_CA}</span>
         <span>Pons · Robinhood Chain</span>
-        <span>3% buy · 3% sell · treasury</span>
+        <span>3% buy · 3% sell · buys USO</span>
         <span>
           {PAIR.symbol} / {TOKEN.divisor}
         </span>
@@ -195,7 +194,7 @@ export function OilField({
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="stamp-chip">3% buy</span>
               <span className="stamp-chip">3% sell</span>
-              <span className="stamp-chip">to treasury</span>
+              <span className="stamp-chip">buys USO</span>
               <span className="stamp-chip">1B OIL</span>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
@@ -259,7 +258,7 @@ export function OilField({
                   {TOKEN.symbol}
                 </p>
                 <p className="mt-1 text-sm text-[#f0d7a0]/65">
-                  one pool · {PAIR.name} · 3/3 to treasury
+                  one pool · {PAIR.name} · 3/3 buys USO
                 </p>
               </div>
               <span
@@ -362,14 +361,14 @@ export function OilField({
             <p className="font-catalog mt-4 max-w-2xl text-lg leading-relaxed text-[#f0d7a0]/75">
               No presale. No team allocation. No unlock schedule waiting to
               land on the chart. Three percent on buys, three percent on sells,
-              and all of it goes to the treasury.
+              and all of it buys USO.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
               <p className="font-heading text-2xl text-[#ffe08a]">3% on buys</p>
               <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
-                Taken on the way in, straight to the treasury.
+                Taken on the way in. That cut buys USO.
               </p>
             </article>
             <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
@@ -380,10 +379,10 @@ export function OilField({
             </article>
             <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
               <p className="font-heading text-2xl text-[#ffe08a]">
-                100% to the treasury
+                100% buys USO
               </p>
               <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
-                Every cent of the cut stays there. Nothing routes anywhere else.
+                Every cent of the cut buys USO. Nothing routes anywhere else.
               </p>
             </article>
           </div>
@@ -403,7 +402,6 @@ export function OilField({
           </div>
           <div className="space-y-2">
             <AddressRow label={TOKEN.symbol} value={OIL_CA} />
-            <AddressRow label={PAIR.symbol} value={USO_CA} />
           </div>
           <div className="flex flex-wrap gap-3">
             <a
@@ -463,13 +461,13 @@ export function OilField({
               what={`${PAIR.symbol} / ${TOKEN.divisor}`}
               meta="locked"
             />
-            <Print who="fees" what="3% buy / 3% sell" meta="treasury" />
+            <Print who="fees" what="3% buy / 3% sell" meta="buys USO" />
           </ul>
         </section>
 
         <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
           oilcoin.cash · $OIL launches on Pons, on Robinhood Chain. One
-          listing, paired to {PAIR.name}. 3% buy and 3% sell to the treasury.
+          listing, paired to {PAIR.name}. 3% buy and 3% sell buy USO.
           Peg quotes from the public tape. Not advice.
         </footer>
       </main>
@@ -536,7 +534,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
             {TOKEN.symbol}
           </p>
           <p className="mt-1 text-sm text-[#f0d7a0]/60">
-            {PAIR.name} · Pons · 3/3 treasury
+            {PAIR.name} · Pons · 3/3 buys USO
           </p>
         </div>
         <p className="font-mono text-[10px] tracking-[0.16em] text-[#f0b429]/70 uppercase">
@@ -564,7 +562,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
       </div>
       <div className="mt-6 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.16em] uppercase">
         <span className="border border-[#f0b429]/30 px-2 py-1">
-          3/3 · treasury
+          3/3 · buys USO
         </span>
         <span className="border border-[#f0b429]/30 px-2 py-1">
           hold $OIL · get USO
