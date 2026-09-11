@@ -106,7 +106,7 @@ export function PoolDiagram({
 }) {
   return (
     <svg
-      viewBox="0 0 560 230"
+      viewBox="0 0 560 300"
       fill="none"
       role="img"
       aria-label={`${left} and ${right} share one pool`}
@@ -114,14 +114,32 @@ export function PoolDiagram({
     >
       <defs>
         <clipPath id="pool-left">
-          <circle cx="215" cy="115" r="96" />
+          <circle cx="215" cy="150" r="96" />
         </clipPath>
+        <marker
+          id="pool-arrow"
+          markerWidth="8"
+          markerHeight="8"
+          refX="6"
+          refY="4"
+          orient="auto"
+        >
+          <path d="M0 0l7 4-7 4z" fill={GOLD} />
+        </marker>
       </defs>
 
-      <circle cx="215" cy="115" r="96" fill={GOLD} fillOpacity="0.14" stroke={GOLD} strokeWidth="2" />
+      <circle
+        cx="215"
+        cy="150"
+        r="96"
+        fill={GOLD}
+        fillOpacity="0.14"
+        stroke={GOLD}
+        strokeWidth="2"
+      />
       <circle
         cx="345"
-        cy="115"
+        cy="150"
         r="96"
         fill={GOLD}
         fillOpacity="0.06"
@@ -130,12 +148,13 @@ export function PoolDiagram({
         strokeDasharray="7 6"
       />
       <g clipPath="url(#pool-left)">
-        <circle cx="345" cy="115" r="96" fill={GOLD} fillOpacity="0.3" />
+        <circle cx="345" cy="150" r="96" fill={GOLD} fillOpacity="0.3" />
       </g>
 
+      {/* Each label is centred in its own crescent, clear of the overlap. */}
       <text
-        x="148"
-        y="108"
+        x="176"
+        y="143"
         textAnchor="middle"
         className="font-heading"
         fontSize="30"
@@ -144,8 +163,8 @@ export function PoolDiagram({
         {left}
       </text>
       <text
-        x="148"
-        y="131"
+        x="176"
+        y="166"
         textAnchor="middle"
         className="font-mono"
         fontSize="12"
@@ -157,8 +176,8 @@ export function PoolDiagram({
       </text>
 
       <text
-        x="412"
-        y="108"
+        x="384"
+        y="143"
         textAnchor="middle"
         className="font-heading"
         fontSize="30"
@@ -167,8 +186,8 @@ export function PoolDiagram({
         {right}
       </text>
       <text
-        x="412"
-        y="131"
+        x="384"
+        y="166"
         textAnchor="middle"
         className="font-mono"
         fontSize="12"
@@ -181,7 +200,7 @@ export function PoolDiagram({
 
       <text
         x="280"
-        y="112"
+        y="147"
         textAnchor="middle"
         className="font-mono"
         fontSize="12"
@@ -192,7 +211,7 @@ export function PoolDiagram({
       </text>
       <text
         x="280"
-        y="130"
+        y="165"
         textAnchor="middle"
         className="font-mono"
         fontSize="12"
@@ -202,22 +221,19 @@ export function PoolDiagram({
         POOL
       </text>
 
+      {/* Both arrows straddle x=280, the midpoint of the two circles, and sit
+          outside the rings so they never crowd the labels. */}
       <path
-        d="M196 26c30-9 62-9 92 0"
+        d="M234 38c30-9 62-9 92 0"
         stroke={GOLD}
         strokeOpacity="0.7"
         strokeWidth="2"
         strokeLinecap="round"
-        markerEnd="url(#arrow)"
+        markerEnd="url(#pool-arrow)"
       />
-      <defs>
-        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-          <path d="M0 0l7 4-7 4z" fill={GOLD} />
-        </marker>
-      </defs>
       <text
-        x="242"
-        y="16"
+        x="280"
+        y="20"
         textAnchor="middle"
         className="font-mono"
         fontSize="11"
@@ -229,16 +245,16 @@ export function PoolDiagram({
       </text>
 
       <path
-        d="M364 204c-30 9-62 9-92 0"
+        d="M326 262c-30 9-62 9-92 0"
         stroke={GOLD}
         strokeOpacity="0.7"
         strokeWidth="2"
         strokeLinecap="round"
-        markerEnd="url(#arrow)"
+        markerEnd="url(#pool-arrow)"
       />
       <text
-        x="318"
-        y="226"
+        x="280"
+        y="288"
         textAnchor="middle"
         className="font-mono"
         fontSize="11"
