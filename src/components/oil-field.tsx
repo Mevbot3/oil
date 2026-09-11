@@ -9,6 +9,13 @@ import {
   formatUsd,
 } from "@/lib/format";
 import { BarrelMark } from "@/components/logo";
+import {
+  BuyMark,
+  CutMark,
+  FundMark,
+  PoolDiagram,
+  SellMark,
+} from "@/components/marks";
 import { PumpField } from "@/components/pump-field";
 
 const OIL_CA = "0x00069420";
@@ -19,10 +26,17 @@ const PONS_TRADE = "https://ponsfamily.com";
 const CHART = `https://dexscreener.com/robinhood/${OIL_CA}`;
 const EXPLORER = explorerFor(OIL_CA);
 const TWITTER = "https://x.com/OILCOINonRH";
+const USO_QUOTE = `https://robinhood.com/us/en/stocks/${PAIR.symbol}/`;
 
 function explorerFor(address: string) {
   return `https://robinhoodchain.blockscout.com/address/${address}`;
 }
+
+const VENUE_LABEL: Record<MarketSnapshot["venue"], string> = {
+  robinhood: "USO from Robinhood",
+  yahoo: "USO from Yahoo Finance",
+  none: "last known USO",
+};
 
 const CONTRACTS = [
   { label: TOKEN.symbol, note: "the coin", value: OIL_CA },
@@ -46,17 +60,20 @@ const STEPS = [
   {
     kicker: "01",
     title: "BUY",
-    body: "A buy pulls tokenized USO into the pool. The other side of the book is the barrel, not a dollar.",
+    body: "A buy pulls tokenized USO into the pool. The other side is the barrel, not a dollar.",
+    Mark: BuyMark,
   },
   {
     kicker: "02",
     title: "SELL",
     body: "A sell pushes USO back out. Same pool, same pair. The barrel moves, $OIL moves.",
+    Mark: SellMark,
   },
   {
     kicker: "03",
     title: "CUT",
-    body: "Three percent on the way in, three percent on the way out. That cut buys USO.",
+    body: "Every trade leaves 2% in the pool. It gets deeper either way the trade went.",
+    Mark: CutMark,
   },
 ];
 
@@ -85,10 +102,12 @@ export function OilField({
     }
   }, []);
 
+  // The server reads the barrel every five minutes, so asking more often than
+  // that just returns the same cached number.
   useEffect(() => {
     const timer = window.setInterval(() => {
       void poke();
-    }, 60_000);
+    }, 5 * 60_000);
     return () => window.clearInterval(timer);
   }, [poke]);
 
@@ -167,16 +186,7 @@ export function OilField({
           <div className="plat-frame flex flex-col justify-end">
             <span className="plat-corner-bl" aria-hidden />
             <span className="plat-corner-br" aria-hidden />
-            <div className="flex flex-wrap gap-2">
-              <span className="stamp-chip">launching</span>
-              <span className="stamp-chip">USO peg</span>
-              <span className="stamp-chip">on Pons</span>
-              <span className="stamp-chip">one fund</span>
-            </div>
-            <p className="font-mono mt-5 text-[11px] tracking-[0.32em] text-[#f0b429] uppercase">
-              one market · one barrel
-            </p>
-            <h1 className="oil-stamp font-heading mt-2 text-5xl leading-[0.86] tracking-tight text-[#ffe08a] sm:text-7xl">
+            <h1 className="oil-stamp font-heading text-5xl leading-[0.86] tracking-tight text-[#ffe08a] sm:text-7xl">
               DRILL
               <br />
               BABY DRILL
@@ -184,10 +194,9 @@ export function OilField({
             <p className="font-heading mt-3 text-lg tracking-wide text-[#f0b429] sm:text-xl">
               IF THE BARREL PUMPS, WE PUMP.
             </p>
-            <p className="font-catalog mt-4 max-w-xl text-lg leading-relaxed text-[#f0d7a0]/75">
+            <p className="font-catalog mt-4 max-w-xl text-xl leading-relaxed text-[#f0d7a0]/80">
               Most tokens trade against a dollar. $OIL trades against a barrel
-              — USO, as close to crude as this chain has. On Pons, on
-              Robinhood Chain.
+              — USO.
             </p>
             <div className="formula-rail mt-6">
               <FormulaCell
@@ -256,7 +265,7 @@ export function OilField({
               </h2>
             </div>
             <p className="font-mono text-[11px] text-[#f0d7a0]/45">
-              updated {formatTime(market.asOf)}
+              {VENUE_LABEL[market.venue]} · updated {formatTime(market.asOf)}
             </p>
           </div>
           <div className="border border-[#f0b429]/25 bg-[#0c0a07]/88 p-5 sm:p-6">
@@ -307,34 +316,52 @@ export function OilField({
               Two things in one pool.
             </h2>
             <p className="font-catalog mt-4 max-w-2xl text-lg leading-relaxed text-[#f0d7a0]/75">
-              Most tokens trade against a dollar. $OIL trades against a barrel
-              — or as close to one as exists on this chain. Every buy pulls
-              tokenized USO into the pool. Every sell pushes it back out.
+              Every buy pulls tokenized USO into the pool. Every sell pushes it
+              back out. Same pool, same pair, both directions.
+            </p>
+            <p className="font-catalog mt-3 max-w-2xl text-lg leading-relaxed text-[#f0d7a0]/75">
+              Every trade also leaves 2% behind in the pool. The pool gets
+              deeper whichever way the trade went.
             </p>
           </div>
+
+          <div className="flex justify-center border border-[#f0b429]/20 bg-[#0c0a07]/88 px-4 py-8">
+            <PoolDiagram
+              className="w-full max-w-xl"
+              left={TOKEN.symbol}
+              right={PAIR.symbol}
+            />
+          </div>
+
           <div className="grid gap-4 md:grid-cols-2">
-            <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
-              <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
-                the coin
-              </p>
-              <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
-                {TOKEN.symbol}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
-                Fixed supply. One name. If the fund pumps, we pump.
-              </p>
+            <article className="flex gap-4 border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
+              <BarrelMark className="mt-1 size-11 shrink-0" />
+              <div>
+                <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
+                  the coin
+                </p>
+                <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
+                  {TOKEN.symbol}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
+                  Fixed supply. One name. If the fund pumps, we pump.
+                </p>
+              </div>
             </article>
-            <article className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
-              <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
-                the barrel
-              </p>
-              <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
-                {PAIR.symbol}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
-                {PAIR.name}. The other side of the book. Hold the $OIL, sit on
-                the barrel.
-              </p>
+            <article className="flex gap-4 border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5">
+              <FundMark className="mt-1 size-11 shrink-0" />
+              <div>
+                <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
+                  the barrel
+                </p>
+                <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
+                  {PAIR.symbol}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#f0d7a0]/70">
+                  {PAIR.name}. The other side of the pool. Hold the $OIL, sit
+                  on the barrel.
+                </p>
+              </div>
             </article>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
@@ -343,9 +370,12 @@ export function OilField({
                 key={step.kicker}
                 className="border border-[#f0b429]/20 bg-[#0c0a07]/88 p-5"
               >
-                <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
-                  {step.kicker}
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="font-mono text-[11px] tracking-[0.24em] text-[#f0b429]">
+                    {step.kicker}
+                  </p>
+                  <step.Mark className="size-9" />
+                </div>
                 <h3 className="font-heading mt-2 text-2xl text-[#ffe08a]">
                   {step.title}
                 </h3>
@@ -420,50 +450,18 @@ export function OilField({
           </div>
         </section>
 
-        <section className="space-y-4">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
-                right now
-              </p>
-              <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
-                The numbers
-              </h2>
-            </div>
-            <p className="font-mono text-[11px] tracking-[0.18em] text-[#f0d7a0]/40 uppercase">
-              on Pons · 1B · 3/3
-            </p>
-          </div>
-          <ul className="divide-y divide-[#f0b429]/15 border border-[#f0b429]/20 bg-[#0c0a07]/88">
-            <NumberRow
-              label={TOKEN.symbol}
-              value={formatUsd(market.price, true)}
-              note={`${formatPercent(market.changePercent)} today`}
-            />
-            <NumberRow
-              label={PAIR.symbol}
-              value={pair ? formatUsd(pair.price) : "—"}
-              note={
-                pair ? `${formatPercent(pair.changePercent)} today` : "no quote"
-              }
-            />
-            <NumberRow
-              label="pool"
-              value={`${TOKEN.symbol} / ${PAIR.symbol}`}
-              note="one barrel"
-            />
-            <NumberRow
-              label="fees"
-              value="3% buy / 3% sell"
-              note="buys USO"
-            />
-          </ul>
-        </section>
-
         <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
           $OIL launches on Pons, on Robinhood Chain. One listing, paired to{" "}
-          {PAIR.name}. 3% buy and 3% sell buy USO. USO quotes come from public
-          market data. Not advice.
+          {PAIR.name}. USO quotes come from the public{" "}
+          <a
+            href={USO_QUOTE}
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-2 hover:text-[#f0b429]"
+          >
+            Robinhood USO page
+          </a>
+          , read every five minutes. Not advice.
         </footer>
       </main>
       </div>
@@ -715,20 +713,3 @@ function AddressRow({
   );
 }
 
-function NumberRow({
-  label,
-  value,
-  note,
-}: {
-  label: string;
-  value: string;
-  note: string;
-}) {
-  return (
-    <li className="flex flex-wrap items-center justify-between gap-2 px-4 py-3">
-      <span className="font-heading text-[#ffe08a]">{label}</span>
-      <span className="font-mono text-sm text-[#c8f08a]">{value}</span>
-      <span className="font-mono text-[11px] text-[#f0d7a0]/45">{note}</span>
-    </li>
-  );
-}

@@ -23,6 +23,8 @@ export type HistoryPoint = {
   wti: number | null;
 };
 
+export type PriceVenue = "robinhood" | "yahoo" | "none";
+
 export type MarketSnapshot = {
   price: number;
   changePercent: number;
@@ -32,6 +34,7 @@ export type MarketSnapshot = {
   wti: StockQuote | null;
   history: HistoryPoint[];
   source: "live" | "fallback";
+  venue: PriceVenue;
   asOf: string;
 };
 
@@ -109,6 +112,7 @@ export function snapshotFromQuotes(
   wti: StockQuote | null,
   history: HistoryPoint[],
   source: "live" | "fallback",
+  venue: PriceVenue = source === "live" ? "yahoo" : "none",
 ): MarketSnapshot {
   const price = computeOilPrice(quotes);
   return {
@@ -120,6 +124,7 @@ export function snapshotFromQuotes(
     wti,
     history,
     source,
+    venue,
     asOf: new Date().toISOString(),
   };
 }

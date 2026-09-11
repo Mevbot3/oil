@@ -9,6 +9,7 @@ import {
   type MarketSnapshot,
   type StockQuote,
 } from "@/lib/basket";
+import { fetchRobinhoodQuote } from "@/lib/robinhood";
 
 const YAHOO_HEADERS = {
   Accept: "application/json",
@@ -143,7 +144,9 @@ export function buildHistory(
   });
 }
 
-const CACHE_MS = 45_000;
+// The barrel only moves with the stock market, so a five minute read is plenty
+// and keeps us well clear of rate limits on either source.
+const CACHE_MS = 5 * 60_000;
 let cached: { expires: number; snapshot: MarketSnapshot } | null = null;
 
 export async function loadMarketSnapshot(): Promise<MarketSnapshot> {
@@ -152,38 +155,47 @@ export async function loadMarketSnapshot(): Promise<MarketSnapshot> {
   }
 
   const symbols = OIL_MAJORS.map((major) => major.symbol);
-  const results = await Promise.allSettled(
-    symbols.map((symbol) => fetchYahooSeries(symbol)),
-  );
+
+  // Robinhood is the quoted price. Yahoo runs alongside it for the history and
+  // as a standby, since Robinhood can refuse a request from a datacenter.
+  const [robinhood, yahoo] = await Promise.all([
+    Promise.allSettled(
+      OIL_MAJORS.map((major) =>
+        fetchRobinhoodQuote(major.symbol, major.name),
+      ),
+    ),
+    Promise.allSettled(symbols.map((symbol) => fetchYahooSeries(symbol))),
+  ]);
 
   const seriesBySymbol = new Map<string, YahooSeries>();
-  results.forEach((result, index) => {
+  yahoo.forEach((result, index) => {
     if (result.status === "fulfilled") {
       seriesBySymbol.set(symbols[index], result.value);
     }
   });
 
-  const liveQuotes = OIL_MAJORS.map((major) =>
-    seriesBySymbol.get(major.symbol)?.quote,
+  const robinhoodQuotes = robinhood
+    .map((result) => (result.status === "fulfilled" ? result.value : null))
+    .filter((quote): quote is StockQuote => Boolean(quote));
+
+  const yahooQuotes = OIL_MAJORS.map(
+    (major) => seriesBySymbol.get(major.symbol)?.quote,
   ).filter((quote): quote is StockQuote => Boolean(quote));
 
-  if (liveQuotes.length === OIL_MAJORS.length) {
-    const snapshot = snapshotFromQuotes(
-      liveQuotes,
-      null,
-      buildHistory(seriesBySymbol),
-      "live",
-    );
-    cached = { expires: Date.now() + CACHE_MS, snapshot };
-    return snapshot;
-  }
+  const history =
+    seriesBySymbol.size > 0 ? buildHistory(seriesBySymbol) : fallbackHistory();
 
-  const snapshot = snapshotFromQuotes(
-    FALLBACK_QUOTES,
-    null,
-    fallbackHistory(),
-    "fallback",
-  );
+  const live =
+    robinhoodQuotes.length === OIL_MAJORS.length
+      ? { quotes: robinhoodQuotes, venue: "robinhood" as const }
+      : yahooQuotes.length === OIL_MAJORS.length
+        ? { quotes: yahooQuotes, venue: "yahoo" as const }
+        : null;
+
+  const snapshot = live
+    ? snapshotFromQuotes(live.quotes, null, history, "live", live.venue)
+    : snapshotFromQuotes(FALLBACK_QUOTES, null, fallbackHistory(), "fallback");
+
   cached = { expires: Date.now() + CACHE_MS, snapshot };
   return snapshot;
 }

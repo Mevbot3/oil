@@ -8,7 +8,7 @@ The public name is **[oilcoin.cash](https://oilcoin.cash)**.
 
 ## Host on Vercel
 
-This is a Next.js app. No secrets. No env vars. The live USO price is fetched on the server from Yahoo.
+This is a Next.js app. No secrets. No env vars. The live USO price is read on the server from the public [Robinhood USO page](https://robinhood.com/us/en/stocks/USO/).
 
 1. Create a GitHub repo for this project (use the Create repo pill if you have not yet).
 2. Open [vercel.com/new](https://vercel.com/new) and import that repo.
@@ -70,7 +70,18 @@ One page. Live USO price. On Pons / Robinhood Chain. 3/3 buys USO.
 npm run oil
 ```
 
-Quotes come from Yahoo Finance. If the feed drops, the last known USO price still runs the peg.
+## Where the barrel price comes from
+
+`src/lib/robinhood.ts` reads the quote Robinhood embeds in its own USO stock
+page — last trade and previous close, which is where the percentage comes from.
+It is cached for five minutes on the server, and the page re-asks on the same
+five minute beat.
+
+Robinhood can refuse a request coming from a datacenter, so Yahoo Finance runs
+alongside it in `src/lib/yahoo.ts` and takes over if that happens. Yahoo also
+supplies the 90-day history. If both are down, the last known USO price still
+runs the peg. The site says which source the number came from, next to
+"Live pair".
 
 ## Contract addresses
 
