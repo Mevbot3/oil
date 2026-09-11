@@ -2,6 +2,15 @@
 
 Images in this folder. Attach one per post.
 
+## 0. Orbit loop (gif / mp4)
+
+Use `oil-live-orbit.mp4` on X (cleaner than the gif). Same loop: `oil-live-orbit.gif`.
+
+```
+$OIL is live.
+DRILL IT
+```
+
 ## 1. Token is live
 
 Use `01-live.png` (type card). Backup: `05-token-is-live.png`.
