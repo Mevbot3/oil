@@ -9,12 +9,10 @@ Use `01-live.png` (type card). Backup: `05-token-is-live.png`.
 ```
 $OIL is live.
 
-Paired to USO on Pons, on Robinhood Chain.
-3% buy. 3% sell. The cut buys USO.
+The cut buys USO.
+Sit on the barrel.
 
 If the barrel pumps, we pump.
-
-https://ponsfamily.com
 ```
 
 ## 2. Drill baby drill
