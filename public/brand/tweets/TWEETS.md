@@ -6,6 +6,8 @@ Images in this folder. Attach one per post.
 
 Use `oil-live-orbit.mp4` on X (cleaner than the gif). Same loop: `oil-live-orbit.gif`.
 
+5s steel-plate loop. Barrel, USO, drop, and jack orbit a glowing disc.
+
 ```
 $OIL is live.
 DRILL IT
