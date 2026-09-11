@@ -19,9 +19,9 @@ import {
 import { PumpField } from "@/components/pump-field";
 
 const OIL_CA = "0x00069420";
-// The tokenized USO on the other side of the pair. Leave it empty until the
-// real address is in hand — a wrong address here is one somebody copies.
-const USO_CA = "";
+// The tokenized USO on the other side of the pair. Reads back as symbol USO,
+// "United States Oil Fund • Robinhood Token", on Robinhood Chain (4663).
+const USO_CA = "0xa30FA36Db767ad9eD3f7a60fC79526fB4d56D344";
 const PONS_TRADE = "https://ponsfamily.com";
 const CHART = `https://dexscreener.com/robinhood/${OIL_CA}`;
 const EXPLORER = explorerFor(OIL_CA);

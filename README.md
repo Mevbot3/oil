@@ -88,8 +88,12 @@ runs the peg. The site says which source the number came from, next to
 Both live at the top of `src/components/oil-field.tsx`:
 
 - `OIL_CA` — the $OIL token. Currently the placeholder `0x00069420`.
-- `USO_CA` — the tokenized USO on the other side of the pair. Empty, so the
-  site shows it as **pending**. Paste the real address and the row turns into a
-  normal copy-and-view row.
+- `USO_CA` — the tokenized USO on the other side of the pair,
+  `0xa30FA36Db767ad9eD3f7a60fC79526fB4d56D344`. Reads back on Robinhood Chain
+  (4663) as symbol `USO`, name "United States Oil Fund • Robinhood Token", 18
+  decimals.
+
+Leave either one empty and its row renders as **pending** instead of showing an
+address holders could copy by mistake.
 
 Not financial advice. It is oil.
