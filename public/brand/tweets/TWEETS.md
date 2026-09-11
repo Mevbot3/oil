@@ -11,8 +11,6 @@ $OIL is live.
 
 The cut buys USO.
 Sit on the barrel.
-
-If the barrel pumps, we pump.
 ```
 
 ## 2. Drill baby drill
