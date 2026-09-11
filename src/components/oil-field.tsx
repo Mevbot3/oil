@@ -72,7 +72,7 @@ const STEPS = [
   {
     kicker: "03",
     title: "CUT",
-    body: "Every trade leaves 2% in the pool. It gets deeper either way the trade went.",
+    body: "Three percent on the way in, three percent on the way out. That cut buys USO.",
     Mark: CutMark,
   },
 ];
@@ -320,8 +320,8 @@ export function OilField({
               back out. Same pool, same pair, both directions.
             </p>
             <p className="font-catalog mt-3 max-w-2xl text-lg leading-relaxed text-[#f0d7a0]/75">
-              Every trade also leaves 2% behind in the pool. The pool gets
-              deeper whichever way the trade went.
+              Three percent on the way in, three percent on the way out. That
+              cut buys USO, whichever way the trade went.
             </p>
           </div>
 
