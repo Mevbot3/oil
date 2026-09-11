@@ -7,12 +7,11 @@ Images in this folder. Attach one per post.
 Use `01-live.png` (type card). Backup: `05-token-is-live.png`.
 
 ```
-$OIL is live.
+Oil
+Is
+Live.
 
 The cut buys USO.
-Sit on the barrel.
-
-If the barrel pumps, we pump.
 ```
 
 ## 2. Drill baby drill
