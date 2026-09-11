@@ -4,7 +4,7 @@ Images in this folder. Attach one per post.
 
 ## 1. Token is live
 
-Use `01-live.png` (wellhead + ticket — not the site barrel). Backup: `05-token-is-live.png`.
+Use `01-live.png` (type card). Backup: `05-token-is-live.png`.
 
 ```
 $OIL is live.
