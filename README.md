@@ -8,7 +8,7 @@ The public name is **[oilcoin.cash](https://oilcoin.cash)**.
 
 ## Host on Vercel
 
-This is a Next.js app. No secrets. No env vars. The live USO tape is fetched on the server from Yahoo.
+This is a Next.js app. No secrets. No env vars. The live USO price is fetched on the server from Yahoo.
 
 1. Create a GitHub repo for this project (use the Create repo pill if you have not yet).
 2. Open [vercel.com/new](https://vercel.com/new) and import that repo.
@@ -64,12 +64,21 @@ That prints an `https://*.trycloudflare.com` URL. Anyone with the link can open 
 
 Download the banner from [oilcoin.cash/api/download/banner](https://www.oilcoin.cash/api/download/banner). That link always sends the current file.
 
-One page. Live USO tape. On Pons / Robinhood Chain. 3/3 buys USO.
+One page. Live USO price. On Pons / Robinhood Chain. 3/3 buys USO.
 
 ```bash
 npm run oil
 ```
 
-Tape comes from Yahoo Finance. If it blinks, last known USO still runs the peg.
+Quotes come from Yahoo Finance. If the feed drops, the last known USO price still runs the peg.
+
+## Contract addresses
+
+Both live at the top of `src/components/oil-field.tsx`:
+
+- `OIL_CA` — the $OIL token. Currently the placeholder `0x00069420`.
+- `USO_CA` — the tokenized USO on the other side of the pair. Empty, so the
+  site shows it as **pending**. Paste the real address and the row turns into a
+  normal copy-and-view row.
 
 Not financial advice. It is oil.

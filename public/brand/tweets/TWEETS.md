@@ -31,8 +31,8 @@ Use `02-drill-baby-drill.png`.
 ```
 DRILL BABY DRILL
 
-$OIL just hit the tape.
-USO on the other side of the book.
+$OIL is live.
+USO on the other side of the pool.
 
 https://ponsfamily.com
 ```
