@@ -2,15 +2,16 @@
 
 Images in this folder. Attach one per post.
 
-## 0. Orbit loop (gif / mp4)
+## 0. Pumpjack loop (gif / mp4)
 
-Use `oil-live-orbit.mp4` on X (cleaner than the gif). Same loop: `oil-live-orbit.gif`.
+Use `oil-is-now-live.mp4` on X (cleaner than the gif). Same loop: `oil-is-now-live.gif`.
+Still frame: `oil-is-now-live-still.png`.
 
-5s steel-plate loop. Barrel, USO, drop, and jack orbit a glowing disc.
+5s seamless loop. A jack pumps on the horizon behind the line. Rendered by
+`scripts/render-jack.py`.
 
 ```
-$OIL is live.
-DRILL IT
+$OIL is now Live.
 ```
 
 ## 1. Token is live
