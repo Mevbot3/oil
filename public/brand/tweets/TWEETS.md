@@ -8,9 +8,8 @@ Use `01-live.png` (type card). Backup: `05-token-is-live.png`.
 
 ```
 $OIL is live.
-
-The cut buys USO.
-Sit on the barrel.
+DRILL IT
+If the OIL pumps, We pump.
 ```
 
 ## 2. Drill baby drill
