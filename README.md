@@ -60,6 +60,7 @@ That prints an `https://*.trycloudflare.com` URL. Anyone with the link can open 
 
 - Avatar: `public/brand/x-avatar.png` — 800×800, circle-crop safe, site barrel plus `$OIL`.
 - Banner: `public/brand/oil-x-banner.png` — 1500×500 X header. Barrel top-left, DRILL BABY DRILL across the top.
+- Launch tweets: `public/brand/tweets/` — memes plus copy in `TWEETS.md`.
 
 Download the banner from [oilcoin.cash/api/download/banner](https://www.oilcoin.cash/api/download/banner). That link always sends the current file.
 
