@@ -676,39 +676,21 @@ function AddressRow({
           {note}
         </p>
       </div>
-      {value ? (
-        <>
-          <p className="font-mono min-w-0 flex-1 break-all text-sm text-[#f0d7a0]/80">
-            {value}
-          </p>
-          <div className="flex shrink-0 items-center gap-2">
-            <a
-              href={explorerFor(value)}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-[#f0b429]/40 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429] uppercase hover:border-[#f0b429] hover:text-[#ffe08a]"
-            >
-              view
-            </a>
-            <button
-              type="button"
-              onClick={() => void copy()}
-              className="border border-[#f0b429]/40 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429] uppercase hover:border-[#f0b429] hover:text-[#ffe08a]"
-            >
-              {copied ? "copied" : "copy"}
-            </button>
-          </div>
-        </>
-      ) : (
-        <>
-          <p className="font-mono min-w-0 flex-1 text-sm text-[#f0d7a0]/45">
-            posted at launch
-          </p>
-          <span className="shrink-0 border border-dashed border-[#f0b429]/35 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429]/60 uppercase">
-            pending
-          </span>
-        </>
-      )}
+      <a
+        href={explorerFor(value)}
+        target="_blank"
+        rel="noreferrer"
+        className="font-mono min-w-0 flex-1 break-all text-sm text-[#f0d7a0]/80 underline decoration-[#f0b429]/35 underline-offset-4 hover:text-[#ffe08a] hover:decoration-[#f0b429]"
+      >
+        {value}
+      </a>
+      <button
+        type="button"
+        onClick={() => void copy()}
+        className="shrink-0 border border-[#f0b429]/40 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429] uppercase hover:border-[#f0b429] hover:text-[#ffe08a]"
+      >
+        {copied ? "copied" : "copy"}
+      </button>
     </div>
   );
 }

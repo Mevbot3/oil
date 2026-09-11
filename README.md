@@ -93,7 +93,7 @@ Both live at the top of `src/components/oil-field.tsx`:
   (4663) as symbol `USO`, name "United States Oil Fund • Robinhood Token", 18
   decimals.
 
-Leave either one empty and its row renders as **pending** instead of showing an
-address holders could copy by mistake.
+Each row in the "Fill up." section links its address to the Blockscout explorer
+and has a copy button.
 
 Not financial advice. It is oil.
