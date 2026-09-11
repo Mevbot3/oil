@@ -12,10 +12,22 @@ import { BarrelMark } from "@/components/logo";
 import { PumpField } from "@/components/pump-field";
 
 const OIL_CA = "0x00069420";
+// The tokenized USO on the other side of the pair. Leave it empty until the
+// real address is in hand — a wrong address here is one somebody copies.
+const USO_CA = "";
 const PONS_TRADE = "https://ponsfamily.com";
 const CHART = `https://dexscreener.com/robinhood/${OIL_CA}`;
-const EXPLORER = `https://robinhoodchain.blockscout.com/address/${OIL_CA}`;
+const EXPLORER = explorerFor(OIL_CA);
 const TWITTER = "https://x.com/OILCOINonRH";
+
+function explorerFor(address: string) {
+  return `https://robinhoodchain.blockscout.com/address/${address}`;
+}
+
+const CONTRACTS = [
+  { label: TOKEN.symbol, note: "the coin", value: OIL_CA },
+  { label: PAIR.symbol, note: "the barrel it trades against", value: USO_CA },
+];
 
 async function copyText(value: string) {
   try {
@@ -65,11 +77,11 @@ export function OilField({
         error?: string;
       };
       if (!response.ok) {
-        throw new Error(payload.error ?? "tape silent");
+        throw new Error(payload.error ?? "no quote");
       }
       setMarket(payload);
     } catch {
-      // keep last print on the page
+      // keep the last good price on the page
     }
   }, []);
 
@@ -80,12 +92,12 @@ export function OilField({
     return () => window.clearInterval(timer);
   }, [poke]);
 
-  const tape = [
+  const ticker = [
     `${TOKEN.symbol} ${formatUsd(market.price, true)}`,
     `${formatPercent(market.changePercent)} today`,
     `${PAIR.symbol} ${pair ? formatUsd(pair.price) : "—"}`,
     `paired to ${PAIR.symbol}`,
-    market.source === "live" ? "tape open" : "tape held",
+    market.source === "live" ? "price live" : "last known price",
     "3% buy · 3% sell · buys USO",
     "on Pons · Robinhood Chain",
   ];
@@ -133,7 +145,7 @@ export function OilField({
 
       <div className="overflow-hidden border-b border-[#f0b429]/20 bg-[#0c0a07]/90">
         <div className="animate-marquee flex w-max gap-10 py-2 font-mono text-[11px] tracking-[0.18em] text-[#f0b429] uppercase">
-          {[...tape, ...tape].map((item, index) => (
+          {[...ticker, ...ticker].map((item, index) => (
             <span key={`${item}-${index}`}>{item}</span>
           ))}
         </div>
@@ -146,7 +158,7 @@ export function OilField({
         <span>paired to {PAIR.symbol}</span>
         <span>1B supply</span>
         <span className={market.source === "live" ? "text-[#8fbe6a]" : ""}>
-          {market.source === "live" ? "tape open" : "tape held"}
+          {market.source === "live" ? "price live" : "last known price"}
         </span>
       </div>
 
@@ -227,8 +239,8 @@ export function OilField({
           <Stat label="market cap" value={formatCompactUsd(market.marketCap)} />
           <Stat label="supply" value="1B OIL" />
           <Stat
-            label="tape"
-            value={market.source === "live" ? "open" : "held"}
+            label="price feed"
+            value={market.source === "live" ? "live" : "held"}
             hot={market.source === "live"}
           />
         </section>
@@ -392,11 +404,19 @@ export function OilField({
               Fill up.
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#f0d7a0]/70">
-              The $OIL contract.
+              Both sides of the pair. $OIL, and the tokenized USO it trades
+              against.
             </p>
           </div>
           <div className="space-y-2">
-            <AddressRow label={TOKEN.symbol} value={OIL_CA} />
+            {CONTRACTS.map((contract) => (
+              <AddressRow
+                key={contract.label}
+                label={contract.label}
+                note={contract.note}
+                value={contract.value}
+              />
+            ))}
           </div>
         </section>
 
@@ -404,10 +424,10 @@ export function OilField({
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="font-mono text-[11px] tracking-[0.28em] text-[#f0b429] uppercase">
-                tape
+                right now
               </p>
               <h2 className="font-heading mt-1 text-3xl tracking-wide text-[#ffe08a]">
-                Prints
+                The numbers
               </h2>
             </div>
             <p className="font-mono text-[11px] tracking-[0.18em] text-[#f0d7a0]/40 uppercase">
@@ -415,25 +435,35 @@ export function OilField({
             </p>
           </div>
           <ul className="divide-y divide-[#f0b429]/15 border border-[#f0b429]/20 bg-[#0c0a07]/88">
-            <Print
-              who={TOKEN.symbol}
-              what={`peg ${formatUsd(market.price, true)}`}
-              meta={formatPercent(market.changePercent)}
+            <NumberRow
+              label={TOKEN.symbol}
+              value={formatUsd(market.price, true)}
+              note={`${formatPercent(market.changePercent)} today`}
             />
-            <Print
-              who={PAIR.symbol}
-              what={pair ? formatUsd(pair.price) : "—"}
-              meta={pair ? formatPercent(pair.changePercent) : "—"}
+            <NumberRow
+              label={PAIR.symbol}
+              value={pair ? formatUsd(pair.price) : "—"}
+              note={
+                pair ? `${formatPercent(pair.changePercent)} today` : "no quote"
+              }
             />
-            <Print who="pair" what={`${PAIR.symbol} pool`} meta="one barrel" />
-            <Print who="fees" what="3% buy / 3% sell" meta="buys USO" />
+            <NumberRow
+              label="pool"
+              value={`${TOKEN.symbol} / ${PAIR.symbol}`}
+              note="one barrel"
+            />
+            <NumberRow
+              label="fees"
+              value="3% buy / 3% sell"
+              note="buys USO"
+            />
           </ul>
         </section>
 
         <footer className="border-t border-[#f0b429]/15 pt-6 text-[11px] leading-relaxed text-[#f0d7a0]/40">
           $OIL launches on Pons, on Robinhood Chain. One listing, paired to{" "}
-          {PAIR.name}. 3% buy and 3% sell buy USO. Peg quotes from the public
-          tape. Not advice.
+          {PAIR.name}. 3% buy and 3% sell buy USO. USO quotes come from public
+          market data. Not advice.
         </footer>
       </main>
       </div>
@@ -571,7 +601,7 @@ function FeaturedCard({ market }: { market: MarketSnapshot }) {
               : "border-[#f0b429]/30 text-[#f0d7a0]/60"
           }`}
         >
-          {market.source === "live" ? "tape open" : "tape held"}
+          {market.source === "live" ? "price live" : "last known price"}
         </span>
       </div>
     </article>
@@ -623,7 +653,15 @@ function Row({
   );
 }
 
-function AddressRow({ label, value }: { label: string; value: string }) {
+function AddressRow({
+  label,
+  note,
+  value,
+}: {
+  label: string;
+  note: string;
+  value: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
@@ -634,35 +672,63 @@ function AddressRow({ label, value }: { label: string; value: string }) {
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border border-[#f0b429]/20 bg-[#0c0a07]/88 px-4 py-3">
-      <p className="font-heading text-lg text-[#ffe08a]">{label}</p>
-      <p className="font-mono min-w-0 flex-1 break-all text-sm text-[#f0d7a0]/80">
-        {value}
-      </p>
-      <button
-        type="button"
-        onClick={() => void copy()}
-        className="shrink-0 border border-[#f0b429]/40 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429] uppercase hover:border-[#f0b429] hover:text-[#ffe08a]"
-      >
-        {copied ? "copied" : "copy"}
-      </button>
+      <div className="min-w-0">
+        <p className="font-heading text-lg text-[#ffe08a]">{label}</p>
+        <p className="font-mono text-[10px] tracking-[0.16em] text-[#f0d7a0]/40 uppercase">
+          {note}
+        </p>
+      </div>
+      {value ? (
+        <>
+          <p className="font-mono min-w-0 flex-1 break-all text-sm text-[#f0d7a0]/80">
+            {value}
+          </p>
+          <div className="flex shrink-0 items-center gap-2">
+            <a
+              href={explorerFor(value)}
+              target="_blank"
+              rel="noreferrer"
+              className="border border-[#f0b429]/40 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429] uppercase hover:border-[#f0b429] hover:text-[#ffe08a]"
+            >
+              view
+            </a>
+            <button
+              type="button"
+              onClick={() => void copy()}
+              className="border border-[#f0b429]/40 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429] uppercase hover:border-[#f0b429] hover:text-[#ffe08a]"
+            >
+              {copied ? "copied" : "copy"}
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <p className="font-mono min-w-0 flex-1 text-sm text-[#f0d7a0]/45">
+            posted at launch
+          </p>
+          <span className="shrink-0 border border-dashed border-[#f0b429]/35 px-3 py-1 font-mono text-[10px] tracking-[0.18em] text-[#f0b429]/60 uppercase">
+            pending
+          </span>
+        </>
+      )}
     </div>
   );
 }
 
-function Print({
-  who,
-  what,
-  meta,
+function NumberRow({
+  label,
+  value,
+  note,
 }: {
-  who: string;
-  what: string;
-  meta: string;
+  label: string;
+  value: string;
+  note: string;
 }) {
   return (
     <li className="flex flex-wrap items-center justify-between gap-2 px-4 py-3">
-      <span className="font-heading text-[#ffe08a]">{who}</span>
-      <span className="font-mono text-sm text-[#c8f08a]">{what}</span>
-      <span className="font-mono text-[11px] text-[#f0d7a0]/45">{meta}</span>
+      <span className="font-heading text-[#ffe08a]">{label}</span>
+      <span className="font-mono text-sm text-[#c8f08a]">{value}</span>
+      <span className="font-mono text-[11px] text-[#f0d7a0]/45">{note}</span>
     </li>
   );
 }
